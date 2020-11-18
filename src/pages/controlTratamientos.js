@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 
 export default class ControlTratamientos extends React.Component {
 
@@ -40,6 +40,13 @@ export default class ControlTratamientos extends React.Component {
             });
     }
 
+    EliminarTratamientos = async (id) => {
+		const res = await axios.delete('http://localhost:3001/controlTratamientos/' + id);
+		console.log(res);
+		this.listarControlTratamientos();
+    };
+    
+
     render() {
         return (
             <div className="row">
@@ -78,13 +85,22 @@ export default class ControlTratamientos extends React.Component {
                                     <td>{controlTratamientos.bovino}</td>
                                     <td>{controlTratamientos.usuario}</td>
                                     <td><button className="btn btn-primary">Actualizar</button></td>
-                                    <td><button className="btn btn-danger">Eliminar</button></td>
+                                    <td><button className="btn btn-danger" onClick={() => this.EliminarTratamientos(controlTratamientos.id_tratamiento)}>Eliminar</button></td>
+                                    <td><button className="btn btn-primary">Generar Alerta</button></td>
                                 </tr>
                             )
                         })}
 
                     </tbody>
                 </table>
+                <br/>
+                <br/>
+                <center>
+                <Link to="/insertarControlTratamientos">
+                  <button>Insertar</button>
+                </Link>
+                </center>
+                
             </div>
         )
     }
