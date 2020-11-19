@@ -13,7 +13,7 @@ export default class ControlTratamientos extends React.Component {
           hora: "",
           enfermedad: "",
           detalles: "",
-          tipodosis: "Diaria",
+          tipodosis: "",
           bovino: "",
           usuario: ""
         }
@@ -21,6 +21,7 @@ export default class ControlTratamientos extends React.Component {
 
     componentDidMount() {
         this.listarControlTratamientos();
+        localStorage.setItem("edit", "");
     }
 
 
@@ -45,6 +46,21 @@ export default class ControlTratamientos extends React.Component {
 		console.log(res);
 		this.listarControlTratamientos();
     };
+
+   cargarInformacion = (controlTratamientos) => {
+       console.log("ESTE ES"+controlTratamientos);
+       console.log("ESTA ES FECHA"+controlTratamientos.fecha_inicio);
+        localStorage.setItem("id_tratamiento",controlTratamientos.id_tratamiento);
+        localStorage.setItem("fecha_inicio",controlTratamientos.fecha_inicio);
+        localStorage.setItem("fecha_fin",controlTratamientos.fecha_fin);
+        localStorage.setItem("hora",controlTratamientos.hora);
+        localStorage.setItem("enfermedad",controlTratamientos.enfermedad);
+        localStorage.setItem("detalles",controlTratamientos.detalles);
+        localStorage.setItem("tipodosis",controlTratamientos.tipodosis);
+        localStorage.setItem("bovino",controlTratamientos.bovino);
+        localStorage.setItem("usuario",controlTratamientos.usuario);
+        localStorage.setItem("edit","si");
+    }
     
 
     render() {
@@ -72,7 +88,7 @@ export default class ControlTratamientos extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.controldeTratamientos.map(controlTratamientos=> {
+                        {this.state.controldeTratamientos.map((controlTratamientos,i)=> {
                             return (
                                 <tr>
                                     <td>{controlTratamientos.id_tratamiento}</td>
@@ -84,7 +100,9 @@ export default class ControlTratamientos extends React.Component {
                                     <td>{controlTratamientos.tipodosis}</td>
                                     <td>{controlTratamientos.bovino}</td>
                                     <td>{controlTratamientos.usuario}</td>
-                                    <td><button className="btn btn-primary">Actualizar</button></td>
+                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlTratamientos)} to={'/actualizar/' + controlTratamientos.id_tratamiento}>
+									<button>Editar</button>
+								    </Link></td>
                                     <td><button className="btn btn-danger" onClick={() => this.EliminarTratamientos(controlTratamientos.id_tratamiento)}>Eliminar</button></td>
                                     <td><button className="btn btn-primary">Generar Alerta</button></td>
                                 </tr>

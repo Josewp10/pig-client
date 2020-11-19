@@ -75,7 +75,7 @@ export default class ControlRetiros extends React.Component {
                                     <td>{controlRetiro.observaciones}</td>
                                     <td>{controlRetiro.bovino}</td>
                                     <td>{controlRetiro.usuario}</td>
-                                    <td><button className="btn btn-primary">Actualizar</button></td>
+                                    <td><button className="btn btn-primary">Editar</button></td>
                                     <td><button className="btn btn-danger">Eliminar</button></td>
                                 </tr>
                             )

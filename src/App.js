@@ -19,6 +19,7 @@ function App() {
           <Route path='/controlCelo' component={ControlCelo} />
           <Route path='/controlTratamientos' component={ControlTratamientos} />
           <Route path='/insertarControlTratamientos' component={insertarControlTratamientos} />
+          <Route path='/actualizar/:id' component={insertarControlTratamientos} />
         </Switch>
       </Router>
 
