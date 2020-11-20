@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../assets/log.png";
 import Input from "./Input";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
 
 const Sidebar = () => {
   return (
@@ -19,9 +20,9 @@ const Sidebar = () => {
       </center>
       <Form>
         <h3>Ingresa</h3>
-        <Input placeholder="Usuario" />
-        <Input type="password" placeholder="Contraseña" />
-        <Link  to="/home"><button>Ingresar</button></Link>
+        <Input placeholder="Correo" type="email" required />
+        <Input type="password" placeholder="Contraseña"  required/>
+        <Link to="/home"><button>Ingresar</button></Link>
         
       </Form>
       <div>

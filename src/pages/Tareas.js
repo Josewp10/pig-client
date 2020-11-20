@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import tareas from "../assets/tareas.png";
+import {TableContainer, TableBody, Table, TableHead,TableRow, TableCell} from '@material-ui/core';
 
 export default class Tareas extends React.Component {
 
@@ -56,40 +58,41 @@ export default class Tareas extends React.Component {
         return (
             <div className="row">
                 <div className="col-md-12">
-                    <br />
-                    <h1 align="center">PIG Plataforma de Gestion Ganadera</h1>
-                    <br />
-                    <h2 align="center">Eventos o Tareas para realizar en las fincas</h2>
-                    <br />
+                <center>
+                    <img src={tareas} alt=""/>
+                    <h2>Agenda de Tareas a Realizar</h2>
+                    </center>
                 </div>
                 <center>
-                <table className="table" striped bordered hover responsive >
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Nombre Tarea</th>
-                            <th>Nombre Usuario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <TableContainer>
+                <Table >
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Fecha Ingreso</TableCell>
+                            <TableCell>Nombre Tarea</TableCell>
+                            <TableCell>Nombre Usuario</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {this.state.tarea.map((registroTareas,i) => {
                             return (
-                                <tr>
-                                    <td>{registroTareas.id_registro}</td>
-                                    <td>{registroTareas.fecha}</td>
-                                    <td>{registroTareas.tareas}</td>
-                                    <td>{registroTareas.usuario}</td>
-                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,registroTareas)} to={'/actualizarTareas/' + registroTareas.id_registro}>
+                                <TableRow>
+                                    <TableCell>{registroTareas.id_registro}</TableCell>
+                                    <TableCell>{registroTareas.fecha}</TableCell>
+                                    <TableCell>{registroTareas.tareas}</TableCell>
+                                    <TableCell>{registroTareas.usuario}</TableCell>
+                                    <TableCell><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,registroTareas)} to={'/actualizarTareas/' + registroTareas.id_registro}>
 									<button>Editar</button>
-								    </Link></td>
-                                    <td><button className="btn btn-danger" onClick={() => this.EliminarTarea(registroTareas.id_registro)}>Eliminar</button></td>
-                                </tr>
+								    </Link></TableCell>
+                                    <TableCell><button className="btn btn-danger" onClick={() => this.EliminarTarea(registroTareas.id_registro)}>Eliminar</button></TableCell>
+                                </TableRow>
                             )
                         })}
 
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
+                </TableContainer>
                 </center>
                 <br/>
                 <br/>
@@ -98,8 +101,9 @@ export default class Tareas extends React.Component {
                   <button>Insertar</button>
                 </Link>
                 </center>
-                
+             
             </div>
+            
         )
     }
 }

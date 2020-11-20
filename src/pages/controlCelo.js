@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import celo from "../assets/celo.png";
+import {TableContainer, TableBody, Table, TableHead,TableRow, TableCell} from '@material-ui/core';
 
 export default class ControlCelo extends React.Component {
 
@@ -59,43 +61,42 @@ export default class ControlCelo extends React.Component {
         return (
             <div className="row">
                 <div className="col-md-12">
-                    <br />
-                    <h1 align="center">PIG Plataforma de Gestion Ganadera</h1>
-                    <br />
-                    <h2 align="center">Control de Celo</h2>
-                    <br />
+                <br />
+                    <center>
+                    <img src={celo} alt=""/>
+                    <h2>Control de Celo </h2>
+                    </center>
                 </div>
-                <table className="table" striped bordered hover responsive align="center">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Fecha Inicio</th>
-                            <th>Detalles</th>
-                            <th>Nombre Toro</th>
-                            <th>Nombre Vaca</th>
-                            <th>Nombre Usuario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Fecha Inicio</TableCell>
+                            <TableCell>Detalles</TableCell>
+                            <TableCell>Nombre Toro</TableCell>
+                            <TableCell>Nombre Vaca</TableCell>
+                            <TableCell>Nombre Usuario</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {this.state.controldeCelo.map((controlCelo,i)=> {
                             return (
-                                <tr>
-                                    <td>{controlCelo.id_celo}</td>
-                                    <td>{controlCelo.fecha_inicio}</td>
-                                    <td>{controlCelo.detalles}</td>
-                                    <td>{controlCelo.Nombre_Macho}</td>
-                                    <td>{controlCelo.Nombre_Hembra}</td>
-                                    <td>{controlCelo.nombre}</td>
-                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlCelo)} to={'/actualizarCelo/' + controlCelo.id_celo}>
+                                <TableRow>
+                                    <TableCell>{controlCelo.fecha_inicio}</TableCell>
+                                    <TableCell>{controlCelo.detalles}</TableCell>
+                                    <TableCell>{controlCelo.Nombre_Macho}</TableCell>
+                                    <TableCell>{controlCelo.Nombre_Hembra}</TableCell>
+                                    <TableCell>{controlCelo.nombre}</TableCell>
+                                    <TableCell><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlCelo)} to={'/actualizarCelo/' + controlCelo.id_celo}>
 									<button>Editar</button>
-								    </Link></td>
-                                    <td><button className="btn btn-danger" onClick={() => this.EliminarCelo(controlCelo.id_celo)}>Eliminar</button></td>
-                                </tr>
+								    </Link></TableCell>
+                                    <TableCell><button className="btn btn-danger" onClick={() => this.EliminarCelo(controlCelo.id_celo)}>Eliminar</button></TableCell>
+                                </TableRow>
                             )
                         })}
-
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
+                </TableContainer>
                 <br/>
                 <br/>
                 <center>

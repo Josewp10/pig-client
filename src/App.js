@@ -10,6 +10,8 @@ import insertarControlTratamientos from './pages/insertarControlTratamientos';
 import insertarControlRetiro from './pages/insertarControlRetiro';
 import insertarTareas from './pages/insertarTareas';
 import insertarCelo from './pages/insertarCelo';
+import medicamentos from './pages/Medicamentos';
+import bovinos from './pages/Bovinos';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path='/controlRetiros' component={ControlRetiros} />
           <Route path='/controlCelo' component={ControlCelo} />
           <Route path='/controlTratamientos' component={ControlTratamientos} />
+          <Route path='/medicamentos' component={medicamentos} />
+          <Route path='/bovinos' component={bovinos} />
           <Route path='/Tareas' component={Tareas} />
           <Route path='/insertarControlTratamientos' component={insertarControlTratamientos} />
           <Route path='/actualizar/:id' component={insertarControlTratamientos} />

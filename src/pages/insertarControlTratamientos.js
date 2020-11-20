@@ -14,8 +14,10 @@ export default class insertarControlTratamientos extends Component {
             tipo_dosis: '',
             id_bovino: '',
             id_usuario: '',
-            edit: ''
+            edit: '',
+            celularUser: ''
         };
+        
         this.onInputChange = this.onInputChange.bind(this);
     }
 
@@ -25,8 +27,10 @@ export default class insertarControlTratamientos extends Component {
         console.log("Prueba" + this.state.edit);
         this.state.id_tratamiento = localStorage.getItem("id_tratamiento");
         console.log("PARA PROBAR" + this.state.id_tratamiento);
+
+
         const res = await axios.get('http://localhost:3001/controlTratamientos/' + this.state.id_tratamiento);
-        if(this.state.edit === "si"){
+        if (this.state.edit === "si") {
             let fechaInicioModificada = res.data.info[0].fecha_inicio.slice(0, 10);
             let fechaFinModificada = res.data.info[0].fecha_fin.slice(0, 10);
             this.setState({
@@ -40,7 +44,7 @@ export default class insertarControlTratamientos extends Component {
                 id_usuario: res.data.info[0].id_usuario,
                 id_tratamiento: res.data.info[0].id_tratamiento,
             });
-        } 
+        }
         console.log(res);
     }
 
@@ -48,6 +52,20 @@ export default class insertarControlTratamientos extends Component {
 
         console.log(this.state.bovino);
         e.preventDefault();
+
+        const celular = await axios.get('http://localhost:3001/usuarios/celular/' + this.state.id_usuario)
+        .catch(error =>{console.log(error);});
+            this.setState({
+                celularUser : celular.data.info[0].celular
+            });
+            //console.log("ACA COGIO EL CELULAR: " +this.state.celularUser);
+        
+        let mensaje = {
+            to:this.state.celularUser,
+            body: `Se creo el control de tratamiento por el usuario con id: ${this.state.id_usuario} 
+            en la fecha: ${this.state.fecha_inicio}`
+        }
+        const twilio = await axios.post('http://localhost:3001/sms', mensaje).catch(error =>{console.log(error);});
 
         if (this.state.edit) {
             const res = await axios.put('http://localhost:3001/controlTratamientos/' + this.state.id_tratamiento, {
@@ -62,7 +80,7 @@ export default class insertarControlTratamientos extends Component {
                 id_usuario: this.state.id_usuario,
             }).then((response) => {
                 window.location.href = '/controlTratamientos';
-                alert('Control de Tratamiento Actualizado');               
+                alert('Control de Tratamiento Actualizado');
             }); console.log(res);
         } else {
             await axios.post('http://localhost:3001/controlTratamientos', {
@@ -74,7 +92,7 @@ export default class insertarControlTratamientos extends Component {
                 tipo_dosis: this.state.tipo_dosis,
                 id_bovino: this.state.id_bovino,
                 id_usuario: this.state.id_usuario,
-            }).then((response) => {
+            }).then((response) => {              
                 window.location.href = '/controlTratamientos';
                 alert('Control de Tratamiento Insertado');               
             });
@@ -90,11 +108,9 @@ export default class insertarControlTratamientos extends Component {
             id_bovino: '',
             id_usuario: ''
         });
-       
-
-    
     };
 
+    
 
     onInputChange(e) {
         const name = e.target.name;

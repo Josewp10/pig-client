@@ -104,7 +104,7 @@ export default class insertarControlRetiro extends Component {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    {!(this.state.edit === "si") ? <h4>Crear Control Retiro</h4> : <h4>Actualizar Control Retiro Id Control Retiro:{this.state.id_retiro}</h4>}
+                    {!(this.state.edit === "si") ? <h4 align="center">Crear Control Retiro</h4> : <h4 align="center">Actualizar Control Retiro Id Control Retiro:{this.state.id_retiro}</h4>}
                     <form onSubmit={this.onSubmit} align="center">
                         <div className="form-group">
                             <input

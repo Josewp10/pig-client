@@ -1,6 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import retiro from "../assets/retiros.png";
+import {TableContainer, TableBody, Table, TableHead,TableRow, TableCell} from '@material-ui/core';
+
 
 export default class ControlRetiros extends React.Component {
 
@@ -17,6 +20,7 @@ export default class ControlRetiros extends React.Component {
           usuario: ""
         }
     }
+
 
     componentDidMount() {
         this.listarControl();
@@ -58,55 +62,55 @@ export default class ControlRetiros extends React.Component {
          localStorage.setItem("edit","si");
      }
      
-
-
+     
     render() {
         return (
             <div className="row">
                 <div className="col-md-12">
                     <br />
-                    <h1 align="center">PIG Plataforma de Gestion Ganadera</h1>
-                    <br />
-                    <h2 align="center">Control de Retiro de Leche</h2>
+                    <center>
+                    <img src={retiro} alt=""/>
+                    <h2>Control de Retiro de Leche</h2>
+                    </center>
+ 
                     <br />
                 </div>
-                <center>
-                <table className="table" striped bordered hover responsive >
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Hora Ingreso</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Fecha Salida</th>
-                            <th>Número de Ordeños a descartar</th>
-                            <th>Observaciones</th>
-                            <th>Nombre Bovino</th>
-                            <th>Nombre Usuario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.control.map((controlRetiro,i) => {
+                
+                <TableContainer>
+                    <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Hora Ingreso</TableCell>
+                            <TableCell>Fecha Ingreso</TableCell>
+                            <TableCell>Fecha Salida</TableCell>
+                            <TableCell>Número de Ordeños a descartar</TableCell>
+                            <TableCell>Observaciones</TableCell>
+                            <TableCell>Nombre Bovino</TableCell>
+                            <TableCell>Nombre Usuario</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {this.state.control.map((controlRetiro,i) => {
                             return (
-                                <tr>
-                                    <td>{controlRetiro.id_retiro}</td>
-                                    <td>{controlRetiro.hora_ingreso}</td>
-                                    <td>{controlRetiro.fecha_ingreso}</td>
-                                    <td>{controlRetiro.fecha_salida}</td>
-                                    <td align="center">{controlRetiro.num_ordenos_descartar}</td>
-                                    <td>{controlRetiro.observaciones}</td>
-                                    <td>{controlRetiro.bovino}</td>
-                                    <td>{controlRetiro.usuario}</td>
-                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlRetiro)} to={'/actualizarControlRetiro/' + controlRetiro.id_retiro}>
+                                <TableRow>
+                                    <TableCell>{controlRetiro.hora_ingreso}</TableCell>
+                                    <TableCell>{controlRetiro.fecha_ingreso}</TableCell>
+                                    <TableCell>{controlRetiro.fecha_salida}</TableCell>
+                                    <TableCell align="center">{controlRetiro.num_ordenos_descartar}</TableCell>
+                                    <TableCell>{controlRetiro.observaciones}</TableCell>
+                                    <TableCell>{controlRetiro.bovino}</TableCell>
+                                    <TableCell>{controlRetiro.usuario}</TableCell>
+                                    <TableCell><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlRetiro)} to={'/actualizarControlRetiro/' + controlRetiro.id_retiro}>
 									<button>Editar</button>
-								    </Link></td>
-                                    <td><button className="btn btn-danger" onClick={() => this.EliminarControlRetiro(controlRetiro.id_retiro)}>Eliminar</button></td>
-                                </tr>
+								    </Link></TableCell>
+                                    <TableCell><button className="btn btn-danger" onClick={() => this.EliminarControlRetiro(controlRetiro.id_retiro)}>Eliminar</button></TableCell>
+                                </TableRow>
                             )
                         })}
-
-                    </tbody>
-                </table>
-                </center>
+                    </TableBody>
+                    </Table>                  
+                </TableContainer>
+                
                 <br/>
                 <br/>
                 <center>

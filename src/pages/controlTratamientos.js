@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import tratamientos from "../assets/tratamientos.png";
+import {TableContainer, TableBody, Table, TableHead,TableRow, TableCell} from '@material-ui/core';
 
 export default class ControlTratamientos extends React.Component {
 
@@ -67,16 +69,16 @@ export default class ControlTratamientos extends React.Component {
         return (
             <div className="row">
                 <div className="col-md-12">
-                    <br />
-                    <h1 align="center">PIG Plataforma de Gestion Ganadera</h1>
-                    <br />
-                    <h2 align="center">Control de Tratamientos</h2>
-                    <br />
+                <br />
+                    <center>
+                    <img src={tratamientos} alt=""/>
+                    <h2>Control de Tratamientos</h2>
+                    </center>
                 </div>
-                <table className="table" striped bordered hover responsive align="center">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
+                <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
                             <th>Fecha Inicio</th>
                             <th>Fecha Fin</th>
                             <th>Hora</th>
@@ -85,32 +87,32 @@ export default class ControlTratamientos extends React.Component {
                             <th>Tipo dosis</th>
                             <th>Nombre Bovino</th>
                             <th>Nombre Usuario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {this.state.controldeTratamientos.map((controlTratamientos,i)=> {
                             return (
-                                <tr>
-                                    <td>{controlTratamientos.id_tratamiento}</td>
-                                    <td>{controlTratamientos.fecha_inicio}</td>
-                                    <td>{controlTratamientos.fecha_fin}</td>
-                                    <td>{controlTratamientos.hora}</td>
-                                    <td>{controlTratamientos.enfermedad}</td>
-                                    <td>{controlTratamientos.detalles}</td>
-                                    <td>{controlTratamientos.tipodosis}</td>
-                                    <td>{controlTratamientos.bovino}</td>
-                                    <td>{controlTratamientos.usuario}</td>
-                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlTratamientos)} to={'/actualizar/' + controlTratamientos.id_tratamiento}>
+                                <TableRow>
+                                    <TableCell>{controlTratamientos.fecha_inicio}</TableCell>
+                                    <TableCell>{controlTratamientos.fecha_fin}</TableCell>
+                                    <TableCell>{controlTratamientos.hora}</TableCell>
+                                    <TableCell>{controlTratamientos.enfermedad}</TableCell>
+                                    <TableCell>{controlTratamientos.detalles}</TableCell>
+                                    <TableCell>{controlTratamientos.tipodosis}</TableCell>
+                                    <TableCell>{controlTratamientos.bovino}</TableCell>
+                                    <TableCell>{controlTratamientos.usuario}</TableCell>
+                                    <TableCell><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlTratamientos)} to={'/actualizar/' + controlTratamientos.id_tratamiento}>
 									<button>Editar</button>
-								    </Link></td>
-                                    <td><button className="btn btn-danger" onClick={() => this.EliminarTratamientos(controlTratamientos.id_tratamiento)}>Eliminar</button></td>
+								    </Link></TableCell>
+                                    <TableCell><button className="btn btn-danger" onClick={() => this.EliminarTratamientos(controlTratamientos.id_tratamiento)}>Eliminar</button></TableCell>
                                 
-                                </tr>
+                                </TableRow>
                             )
                         })}
 
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
+                </TableContainer>
                 <br/>
                 <br/>
                 <center>
