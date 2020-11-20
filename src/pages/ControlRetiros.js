@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 
 export default class ControlRetiros extends React.Component {
 
@@ -20,6 +20,7 @@ export default class ControlRetiros extends React.Component {
 
     componentDidMount() {
         this.listarControl();
+        localStorage.setItem("edit", "");
     }
 
 
@@ -38,6 +39,26 @@ export default class ControlRetiros extends React.Component {
                 console.log(error);
             });
     }
+
+    EliminarControlRetiro = async (id) => {
+		const res = await axios.delete('http://localhost:3001/controlRetiros/' + id);
+		console.log(res);
+		this.listarControl();
+    };
+
+    cargarInformacion = (controlRetiro) => {
+         localStorage.setItem("id_retiro",controlRetiro.id_retiro);
+         localStorage.setItem("hora_ingreso",controlRetiro.hora_ingreso);
+         localStorage.setItem("fecha_ingreso",controlRetiro.fecha_ingreso);
+         localStorage.setItem("fecha_salida",controlRetiro.fecha_salida);
+         localStorage.setItem("num_ordenos_descartar",controlRetiro.num_ordenos_descartar);
+         localStorage.setItem("observaciones",controlRetiro.observaciones);
+         localStorage.setItem("bovibo",controlRetiro.bovino);
+         localStorage.setItem("usuario",controlRetiro.usuario);
+         localStorage.setItem("edit","si");
+     }
+     
+
 
     render() {
         return (
@@ -64,7 +85,7 @@ export default class ControlRetiros extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.control.map(controlRetiro => {
+                        {this.state.control.map((controlRetiro,i) => {
                             return (
                                 <tr>
                                     <td>{controlRetiro.id_retiro}</td>
@@ -75,8 +96,10 @@ export default class ControlRetiros extends React.Component {
                                     <td>{controlRetiro.observaciones}</td>
                                     <td>{controlRetiro.bovino}</td>
                                     <td>{controlRetiro.usuario}</td>
-                                    <td><button className="btn btn-primary">Editar</button></td>
-                                    <td><button className="btn btn-danger">Eliminar</button></td>
+                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlRetiro)} to={'/actualizarControlRetiro/' + controlRetiro.id_retiro}>
+									<button>Editar</button>
+								    </Link></td>
+                                    <td><button className="btn btn-danger" onClick={() => this.EliminarControlRetiro(controlRetiro.id_retiro)}>Eliminar</button></td>
                                 </tr>
                             )
                         })}
@@ -84,6 +107,14 @@ export default class ControlRetiros extends React.Component {
                     </tbody>
                 </table>
                 </center>
+                <br/>
+                <br/>
+                <center>
+                <Link to="/insertarControlRetiro">
+                  <button>Insertar</button>
+                </Link>
+                </center>
+                
             </div>
         )
     }

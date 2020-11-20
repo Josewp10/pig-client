@@ -104,7 +104,7 @@ export default class ControlTratamientos extends React.Component {
 									<button>Editar</button>
 								    </Link></td>
                                     <td><button className="btn btn-danger" onClick={() => this.EliminarTratamientos(controlTratamientos.id_tratamiento)}>Eliminar</button></td>
-                                    <td><button className="btn btn-primary">Generar Alerta</button></td>
+                                
                                 </tr>
                             )
                         })}

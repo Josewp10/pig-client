@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 
 export default class ControlCelo extends React.Component {
 
@@ -17,11 +17,12 @@ export default class ControlCelo extends React.Component {
     }
 
     componentDidMount() {
-        this.listarControlTratamientos();
+        this.listarControlCelo();
+        localStorage.setItem("edit", "");
     }
 
 
-    listarControlTratamientos() {
+    listarControlCelo() {
         axios
             .get("http://localhost:3001/celo")
             .then(response => {
@@ -29,13 +30,30 @@ export default class ControlCelo extends React.Component {
                 this.setState({
                     controldeCelo: response.data.info
                 });
-                console.log("Control Tratamientos")
+                console.log("Control Celo")
                 console.log(this.state.control);
             })
             .catch(error => {
                 console.log(error);
             });
     }
+
+    EliminarCelo= async (id) => {
+		const res = await axios.delete('http://localhost:3001/celo/' + id);
+		console.log(res);
+		this.listarControlCelo();
+    };
+
+    cargarInformacion = (controlCelo) => {
+        console.log("ESTE ES"+controlCelo);
+         localStorage.setItem("id_celo",controlCelo.id_celo);
+         localStorage.setItem("fecha_inicio",controlCelo.fecha_inicio);
+         localStorage.setItem("detalles",controlCelo.detalles);
+         localStorage.setItem("id_bovino",controlCelo.id_bovino);
+         localStorage.setItem("id_bovino",controlCelo.id_bovino);
+         localStorage.setItem("usuario",controlCelo.usuario);
+         localStorage.setItem("edit","si");
+     }
 
     render() {
         return (
@@ -59,7 +77,7 @@ export default class ControlCelo extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.controldeCelo.map(controlCelo=> {
+                        {this.state.controldeCelo.map((controlCelo,i)=> {
                             return (
                                 <tr>
                                     <td>{controlCelo.id_celo}</td>
@@ -68,14 +86,23 @@ export default class ControlCelo extends React.Component {
                                     <td>{controlCelo.Nombre_Macho}</td>
                                     <td>{controlCelo.Nombre_Hembra}</td>
                                     <td>{controlCelo.nombre}</td>
-                                    <td><button className="btn btn-primary">Editar</button></td>
-                                    <td><button className="btn btn-danger">Eliminar</button></td>
+                                    <td><Link className="btn btn-outline-dark btn-sm " key={i} onClick={this.cargarInformacion.bind(this,controlCelo)} to={'/actualizarCelo/' + controlCelo.id_celo}>
+									<button>Editar</button>
+								    </Link></td>
+                                    <td><button className="btn btn-danger" onClick={() => this.EliminarCelo(controlCelo.id_celo)}>Eliminar</button></td>
                                 </tr>
                             )
                         })}
 
                     </tbody>
                 </table>
+                <br/>
+                <br/>
+                <center>
+                <Link to="/insertarCelo">
+                  <button>Insertar</button>
+                </Link>
+                </center>
             </div>
         )
     }
