@@ -151,7 +151,7 @@ var colors = {
     primary: "#5e72e4",
     secondary: "#f4f5f7",
     info: "#11cdef",
-    success: "#2dce89",
+    success: "#176821",
     danger: "#f5365c",
     warning: "#fb6340",
   },

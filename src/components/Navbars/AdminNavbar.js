@@ -49,13 +49,13 @@ const AdminNavbar = (props) => {
                 <DropdownItem className="noti-title" header tag="div">
                   <h6 className="text-overflow m-0">Bienvenido</h6>
                 </DropdownItem>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
+                <DropdownItem to="/admin/perfil" tag={Link}>
                   <i className="ni ni-single-02" />
                   <span>Mi Perfil</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="ni ni-user-run" />
+                <DropdownItem to="/auth/login" tag={Link}>
+                  <i className="ni ni-bold-right" />
                   <span>Salir</span>
                 </DropdownItem>
               </DropdownMenu>

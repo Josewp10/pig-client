@@ -50,9 +50,10 @@ const Login = () => {
                     autoComplete="new-password"
                   />
                 </InputGroup>
+                <b><small>¿ Olvidaste tu contraseña ?</small></b>
               </FormGroup>
               <div className="text-center">
-              <Link to={'/admin/index'}>
+              <Link to={'/admin/Bovinos'}>
                 <Button className="my-4" color="success" type="button"> 
                   Iniciar Sesión
                 </Button>
@@ -68,7 +69,7 @@ const Login = () => {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              <small>¿ Olvidaste tu contraseña ?</small>
+              
             </a>
           </Col>
           <Col className="text-right" xs="6">

@@ -1610,7 +1610,7 @@ textarea.form-control {
   width: 100%;
   margin-top: 0.25rem;
   font-size: 80%;
-  color: #2dce89; }
+  color: #176821; }
 
 .valid-tooltip {
   position: absolute;
@@ -1629,11 +1629,11 @@ textarea.form-control {
 .was-validated .form-control:valid, .form-control.is-valid, .was-validated
 .custom-select:valid,
 .custom-select.is-valid {
-  border-color: #2dce89; }
+  border-color: #176821; }
   .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated
   .custom-select:valid:focus,
   .custom-select.is-valid:focus {
-    border-color: #2dce89; }
+    border-color: #176821; }
   .was-validated .form-control:valid ~ .valid-feedback,
   .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,
   .form-control.is-valid ~ .valid-tooltip, .was-validated
@@ -1645,7 +1645,7 @@ textarea.form-control {
     display: block; }
 
 .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
-  color: #2dce89; }
+  color: #176821; }
 
 .was-validated .form-check-input:valid ~ .valid-feedback,
 .was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,
@@ -1653,7 +1653,7 @@ textarea.form-control {
   display: block; }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {
-  color: #2dce89; }
+  color: #176821; }
   .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {
     background-color: #93e7c3;
     border-color: #93e7c3; }
@@ -1671,7 +1671,7 @@ textarea.form-control {
   box-shadow: 0 0 0 1px #f8f9fe, 0 0 0 0 rgba(45, 206, 137, 0.25); }
 
 .was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {
-  border-color: #2dce89; }
+  border-color: #176821; }
   .was-validated .custom-file-input:valid ~ .custom-file-label::before, .custom-file-input.is-valid ~ .custom-file-label::before {
     border-color: inherit; }
 
@@ -1893,24 +1893,24 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #2dce89;
-  border-color: #2dce89;
+  background-color: #176821;
+  border-color: #176821;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
   .btn-success:hover {
     color: #fff;
-    background-color: #2dce89;
-    border-color: #2dce89; }
+    background-color: #176821;
+    border-color: #176821; }
   .btn-success:focus, .btn-success.focus {
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(45, 206, 137, 0.5); }
   .btn-success.disabled, .btn-success:disabled {
     color: #fff;
-    background-color: #2dce89;
-    border-color: #2dce89; }
+    background-color: #176821;
+    border-color: #176821; }
   .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,
   .show > .btn-success.dropdown-toggle {
     color: #fff;
     background-color: #24a46d;
-    border-color: #2dce89; }
+    border-color: #176821; }
     .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,
     .show > .btn-success.dropdown-toggle:focus {
       box-shadow: none, 0 0 0 0 rgba(45, 206, 137, 0.5); }
@@ -2178,14 +2178,14 @@ fieldset:disabled a.btn {
       box-shadow: 0 0 0 0 rgba(247, 250, 252, 0.5); }
 
 .btn-outline-success {
-  color: #2dce89;
+  color: #176821;
   background-color: transparent;
   background-image: none;
-  border-color: #2dce89; }
+  border-color: #176821; }
   .btn-outline-success:hover {
     color: #fff;
-    background-color: #2dce89;
-    border-color: #2dce89; }
+    background-color: #176821;
+    border-color: #176821; }
   .btn-outline-success:focus, .btn-outline-success.focus {
     box-shadow: 0 0 0 0 rgba(45, 206, 137, 0.5); }
   .btn-outline-success.disabled, .btn-outline-success:disabled {
@@ -2195,7 +2195,7 @@ fieldset:disabled a.btn {
   .show > .btn-outline-success.dropdown-toggle {
     color: #fff;
     background-color: ##156433;
-    border-color: #2dce89; }
+    border-color: #176821; }
     .btn-outline-success:not(:disabled):not(.disabled):active:focus, .btn-outline-success:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-success.dropdown-toggle:focus {
       box-shadow: 0 0 0 0 rgba(45, 206, 137, 0.5); }
@@ -5146,7 +5146,7 @@ button.bg-darker:focus {
   border-color: #f7fafc !important; }
 
 .border-success {
-  border-color: #2dce89 !important; }
+  border-color: #176821 !important; }
 
 .border-info {
   border-color: #11cdef !important; }
@@ -10325,7 +10325,7 @@ a.text-secondary:hover, a.text-secondary:focus {
   color: #bfd7e7 !important; }
 
 .text-success {
-  color: #2dce89 !important; }
+  color: #176821 !important; }
 
 a.text-success:hover, a.text-success:focus {
   color: #1f8f5f !important; }
@@ -10615,7 +10615,7 @@ button.bg-lighter:focus {
   background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important; }
 
 .bg-gradient-success {
-  background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important; }
+  background: linear-gradient(60deg, #d8e9da 0, #e6ecec 100%) !important; }
 
 .bg-gradient-info {
   background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important; }
@@ -10666,7 +10666,7 @@ button.bg-lighter:focus {
   background: linear-gradient(87deg, #ffd600 0, #beff00 100%) !important; }
 
 .bg-gradient-green {
-  background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important; }
+  background: linear-gradient(87deg, #176821 0, #2dcecc 100%) !important; }
 
 .bg-gradient-teal {
   background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important; }
@@ -10832,7 +10832,7 @@ button.section-darker:focus {
   background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important; }
 
 .bg-gradient-success {
-  background: linear-gradient(87deg, #156433 0, #2dcecc 100%) !important; }
+  background: linear-gradient(87deg, #a5d8b9 0, #f4fafa 100%) !important; }
 
 .bg-gradient-info {
   background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important; }
@@ -10874,10 +10874,10 @@ button.section-darker:focus {
   stroke: #f7fafc; }
 
 .fill-success {
-  fill: #2dce89; }
+  fill: #176821; }
 
 .stroke-success {
-  stroke: #2dce89; }
+  stroke: #176821; }
 
 .fill-info {
   fill: #11cdef; }
@@ -11448,7 +11448,7 @@ a.text-yellow:hover, a.text-yellow:focus {
   color: #b39600 !important; }
 
 .text-green {
-  color: #2dce89 !important; }
+  color: #176821 !important; }
 
 a.text-green:hover, a.text-green:focus {
   color: #1f8f5f !important; }

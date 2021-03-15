@@ -4,6 +4,7 @@ import React from "react";
 
 import {
   Badge,
+  Button,
   Card,
   CardHeader,
   CardFooter,
@@ -35,8 +36,19 @@ const Medicamentos = () => {
       <Row>
           <div className="col">
             <Card className="shadow">
-              <CardHeader className="border-0">
-              </CardHeader>
+            <CardHeader className="bg-transparent pb-5">
+            <div className="text-right">
+              <Button
+                className="btn-neutral btn-icon mr-4"
+                color="default"
+                href="#pablo"
+                onClick={(e) => e.preventDefault()}
+              >
+                 <i className="ni ni-fat-add" />
+                <span className="btn-inner--text">Añadir</span>
+              </Button>           
+            </div>
+          </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>

@@ -1,24 +1,18 @@
-import Index from "../src/views/Index.js";
-import Profile from "../src/views/examples/Profile.js";
-import Medicamentos from "../src/views/examples/Medicamentos.js";
-import Register from "../src/views/examples/Register.js";
-import Login from "../src/views/examples/Login.js";
-import Bovinos from "../src/views/examples/Bovinos.js";
-import Icons from "../src/views/examples/Icons.js";
+import Profile from "../src/views/pages/Profile.js";
+import Medicamentos from "../src/views/pages/Medicamentos.js";
+import Register from "../src/views/pages/Register.js";
+import Login from "../src/views/pages/Login.js";
+import Bovinos from "../src/views/pages/Bovinos.js";
+import Tareas from "../src/views/pages/Tareasl.js";
+import Termos from "../src/views/pages/Termos.js";
+import Icons from "../src/views/pages/Icons.js";
 import * as SimpleIcons from 'react-icons/si'
 
 var routes = [
   {
-    path: "/index",
-    name: "Inicio",
-    icon: "ni ni-tv-2 text-primary",
-    component: Index,
-    layout: "/admin",
-  },
-  {
     path: "/Bovinos",
     name: "Bovinos",
-    icon: "ni ni-world text-success" ,
+    icon: "ni ni-world text-success",
     component: Bovinos,
     layout: "/admin",
   },
@@ -30,10 +24,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/user-profile",
+    path: "/tareas",
     name: "Tareas",
     icon: "ni ni-book-bookmark text-yellow",
-    component: Profile,
+    component: Tareas,
     layout: "/admin",
   },
   {
@@ -72,17 +66,15 @@ var routes = [
     layout: "/auth",
   },
   {
-    path: "/tables",
+    path: "/termos",
     name: "Termos",
     icon: "ni ni-basket text-red",
-    component: Register,
-    layout: "/auth",
+    component: Termos,
+    layout: "/admin",
   },
   {
-    path: "/user-profile",
-    name: "Usuario",
-    icon: "ni ni-single-02 text-orange",
-    component: Icons,
+    path: "/perfil",
+    component: Profile,
     layout: "/admin",
   },
 ];

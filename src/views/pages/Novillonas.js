@@ -1,7 +1,10 @@
+
 import React from "react";
+
 
 import {
   Badge,
+  Button,
   Card,
   CardHeader,
   CardFooter,
@@ -19,22 +22,34 @@ import {
   Row,
   UncontrolledTooltip,
 } from "reactstrap";
-// core components
-import Header from "../../components/Headers/Header.js";
 
-const Bovinos = () => {
+
+
+import Novillonas from "../../components/Headers/Novillonas.js";
+
+
+const Medicamentos = () => {
   return (
     <>
-      <Header />
+      <Novillonas />
       {/* Page content */}
       <Container className="mt--7" fluid>
-        {/* Table */}
-        <Row>
+      <Row>
           <div className="col">
             <Card className="shadow">
-              <CardHeader className="border-0">
-                <h2 className="mb-0">Novillonas</h2>
-              </CardHeader>
+            <CardHeader className="bg-transparent pb-5">
+            <div className="text-right">
+              <Button
+                className="btn-neutral btn-icon mr-4"
+                color="default"
+                href="#pablo"
+                onClick={(e) => e.preventDefault()}
+              >
+                 <i className="ni ni-fat-add" />
+                <span className="btn-inner--text">Añadir</span>
+              </Button>           
+            </div>
+          </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
@@ -266,4 +281,4 @@ const Bovinos = () => {
   );
 };
 
-export default Bovinos;
+export default Medicamentos;
