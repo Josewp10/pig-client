@@ -48,16 +48,15 @@ const Terneras = () => {
               </Button>           
             </div>
           </CardHeader>
-              <Table className="align-items-center table-flush" responsive>
+          <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Horas Retiro Leche</th>
-                    <th scope="col">Fecha Compra</th>
-                    <th scope="col">Fecha Vencimiento</th>
-                    <th scope="col">Disponibilidad</th>
+                    <th scope="col">Chapeta</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Bovino</th>
+                    <th scope="col">Raza</th>
+                    <th scope="col">Genetica</th>
+                    <th scope="col">Finca</th>
                     <th scope="col">Acciones</th>
                     <th scope="col" />
                   </tr>
@@ -102,7 +101,71 @@ const Terneras = () => {
                             text
                           </span>
                         </Media></td>
-                        <td><Media>
+                    <td className="text-right">
+                      <UncontrolledDropdown>
+                        <DropdownToggle
+                          className="btn-icon-only text-light"
+                          href="#pablo"
+                          role="button"
+                          size="sm"
+                          color=""
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <i className="fas fa-ellipsis-v" />
+                        </DropdownToggle>
+                        <DropdownMenu className="dropdown-menu-arrow" right>
+                      
+                          <DropdownItem
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            Actualizar
+                          </DropdownItem>
+                          <DropdownItem
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                           Eliminar
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </th>
+                    <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
+                    <td>
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </td>
+                    <td>
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </td>
+                    <td>
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </td>
+                    <td><Media>
                           <span className="mb-0 text-sm">
                             text
                           </span>
@@ -125,22 +188,87 @@ const Terneras = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                          <i className="ni ni-ui-04" />
-                         
                             Actualizar
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                          <i className="ni ni-fat-remove" />
                            Eliminar
                           </DropdownItem>
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
-                  
+                  <tr>
+                    <th scope="row">
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </th>
+                    <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
+                    <td>
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </td>
+                    <td>
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </td>
+                    <td>
+                    <Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media>
+                    </td>
+                    <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
+                    <td className="text-right">
+                      <UncontrolledDropdown>
+                        <DropdownToggle
+                          className="btn-icon-only text-light"
+                          href="#pablo"
+                          role="button"
+                          size="sm"
+                          color=""
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <i className="fas fa-ellipsis-v" />
+                        </DropdownToggle>
+                        <DropdownMenu className="dropdown-menu-arrow" right>
+                      
+                          <DropdownItem
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            Actualizar
+                          </DropdownItem>
+                          <DropdownItem
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                           Eliminar
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    </td>
+                  </tr>
                 </tbody>
               </Table>
             </Card>

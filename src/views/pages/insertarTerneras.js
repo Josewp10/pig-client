@@ -10,7 +10,7 @@ import {
     Container,
     Col
 } from "reactstrap";
-import TernerasDestetadasHeader from "../../components/Headers/TernerasDestetadas.js";
+import TernerasDestetadasHeader from "../../components/Headers/Terneras.js";
 
 
 class insertarTerneras extends React.Component {
@@ -29,72 +29,76 @@ class insertarTerneras extends React.Component {
                                     <Row>
                                         <Col md="5">
                                             <FormGroup>
-                                                <span> Nombre </span>
+                                                <span> Chapeta </span>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
-                                                    placeholder="text"
-                                                    type="email"
+                                                    placeholder="Número Chapeta"
+                                                    type="number"
                                                 />
                                             </FormGroup>
                                         </Col>
                                         <Col md="5">
                                             <FormGroup>
-                                                <span> Nombre </span>
+                                                <span> Nombre Bovino </span>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
-                                                    placeholder="text"
-                                                    type="email"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md="5">
-                                            <span> Nombre </span>
-                                            <FormGroup>
-                                                <Input
-                                                    className="form-control-alternative"
-                                                    id="exampleFormControlInput1"
-                                                    placeholder="text"
-                                                    type="email"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="5">
-                                            <span> Nombre </span>
-                                            <FormGroup>
-                                                <Input
-                                                    className="form-control-alternative"
-                                                    id="exampleFormControlInput1"
-                                                    placeholder="text"
-                                                    type="email"
+                                                    placeholder="Nombre Bovino"
+                                                    type="text"
                                                 />
                                             </FormGroup>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col md="5">
-                                            <span> Nombre </span>
+                                            <span> Tipo de Bovino</span>
                                             <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
-                                                    placeholder="text"
-                                                    type="email"
-                                                />
+                                                    type="select"
+                                                >
+                                                <option>Ternera de Levante</option>
+                                                <option>Ternera Destetada</option>
+                                                <option>Novillona</option>
+                                                <option>Vaca Lactante</option>
+                                                <option>Vaca Orra</option>
+                                                <option>Ternero</option>
+                                                <option>Toro</option>
+                                                </Input>
                                             </FormGroup>
                                         </Col>
                                         <Col md="5">
-                                            <span> Nombre </span>
+                                            <span> Raza </span>
                                             <FormGroup>
-                                                <Input
+                                            <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
-                                                    placeholder="text"
-                                                    type="email"
-                                                />
+                                                    type="select"
+                                                >
+                                                <option>Holstein</option>
+                                                <option>Jersey</option>
+                                                <option>Pardosuiza</option>
+                                                <option>Jerholl</option>
+                                                </Input>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md="5">
+                                            <span> Finca </span>
+                                            <FormGroup>
+                                            <Input
+                                                    className="form-control-alternative"
+                                                    id="exampleFormControlInput1"
+                                                    type="select"
+                                                >
+                                                <option>La Primavera</option>
+                                                <option>La Palma</option>
+                                                <option>El Caunce</option>
+                                                <option>La China</option>
+                                                </Input>
                                             </FormGroup>
                                         </Col>
                                     </Row>

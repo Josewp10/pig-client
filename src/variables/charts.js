@@ -148,7 +148,7 @@ var colors = {
   },
   theme: {
     default: "#172b4d",
-    primary: "#5e72e4",
+    primary: "#ffffff",
     secondary: "#f4f5f7",
     info: "#11cdef",
     success: "#176821",

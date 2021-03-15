@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import logo from "../../assets/img/brand/vache.png";
+
 import {
   Button,
   Card,
@@ -20,7 +20,7 @@ const Login = () => {
   return (
     <>
       <Col lg="6" md="9">
-        <Card className="bg-secondary shadow border-0">
+        <Card className="bg-white shadow border-0">
           <CardBody className="px-lg-5 py-lg-5">
             <Form role="form">
               <FormGroup className="mb-3">
@@ -50,38 +50,27 @@ const Login = () => {
                     autoComplete="new-password"
                   />
                 </InputGroup>
-                <b><small>¿ Olvidaste tu contraseña ?</small></b>
+                <small>¿ Olvidaste tu contraseña ?</small>
               </FormGroup>
               <div className="text-center">
-              <Link to={'/admin/Bovinos'}>
-                <Button className="my-4" color="success" type="button"> 
-                  Iniciar Sesión
+                <Link to={'/admin/Bovinos'}>
+                  <Button className="my-4" color="success" type="button">
+                    Iniciar Sesión
                 </Button>
                 </Link>
               </div>
+              <Col className="text-center" xs="12">
+            <Link to={'/auth/register'}>
+              <a
+                className="text-default"
+              >
+                <small>¿No tienes una cuenta ? Regístrate</small>
+              </a>
+            </Link>
+          </Col>
             </Form>
           </CardBody>
         </Card>
-        <Row className="mt-3">
-          <Col xs="6">
-            <a
-              className="text-default"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              
-            </a>
-          </Col>
-          <Col className="text-right" xs="6">
-            <a
-              className="text-default"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Regístrate</small>
-            </a>
-          </Col>
-        </Row>
       </Col>
     </>
   );

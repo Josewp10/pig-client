@@ -18,6 +18,7 @@ import Toros from "../src/views/pages/Toros.js";
 import Termos from "../src/views/pages/Termos.js";
 import Terneros from "../src/views/pages/Terneros.js";
 import insertarTerneras from "../src/views/pages/insertarTerneras.js";
+import register from "../src/views/pages/Register.js";
 
 
 ReactDOM.render(
@@ -34,6 +35,7 @@ ReactDOM.render(
       <Route path='/toros' component={Toros}/>
       <Route path='/termos' component={Termos} />
       <Route path='/insertarTerneras' component={insertarTerneras} />
+      <Route path='/auth/registro' component={register} />
       <Redirect from="/" to="/auth/login" />
     </Switch>
   </BrowserRouter>,

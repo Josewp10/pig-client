@@ -5,8 +5,7 @@ import Login from "../src/views/pages/Login.js";
 import Bovinos from "../src/views/pages/Bovinos.js";
 import Tareas from "../src/views/pages/Tareasl.js";
 import Termos from "../src/views/pages/Termos.js";
-import Icons from "../src/views/pages/Icons.js";
-import * as SimpleIcons from 'react-icons/si'
+
 
 var routes = [
   {

@@ -221,6 +221,18 @@ const Header = () => {
               </Col>
             </Row>
           </div>
+          <br/>
+          <br/>
+          <div className="text-left">
+              <Button
+                className="btn-neutral btn-icon mr-6"
+                color="info"
+                to="/insertarTerneras" tag={Link}
+              >
+                 <i className="ni ni-fat-add" />
+                <span className="btn-inner--text">Añadir Nuevo Bovino</span>
+              </Button>           
+            </div>
         </Container>
       </div>
     </>
