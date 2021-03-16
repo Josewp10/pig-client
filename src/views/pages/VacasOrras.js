@@ -36,19 +36,7 @@ const vacasOrras = () => {
       <Row>
           <div className="col">
             <Card className="shadow">
-            <CardHeader className="bg-transparent pb-5">
-            <div className="text-right">
-              <Button
-                className="btn-neutral btn-icon mr-4"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                 <i className="ni ni-fat-add" />
-                <span className="btn-inner--text">Añadir</span>
-              </Button>           
-            </div>
-          </CardHeader>
+            
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
@@ -56,7 +44,6 @@ const vacasOrras = () => {
                     <th scope="col">Tipo</th>
                     <th scope="col">Bovino</th>
                     <th scope="col">Raza</th>
-                    <th scope="col">Genetica</th>
                     <th scope="col">Finca</th>
                     <th scope="col">Acciones</th>
                     <th scope="col" />
