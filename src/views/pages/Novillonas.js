@@ -1,6 +1,6 @@
 
 import React from "react";
-
+import axios from "axios";
 
 import {
   Badge,
@@ -25,13 +25,68 @@ import {
 
 
 
-import Novillonas from "../../components/Headers/Novillonas.js";
+import NovillonasH from "../../components/Headers/NovillonasH.js";
+export default class Novillonas extends React.Component {
 
 
-const Medicamentos = () => {
+state = {
+  listaNovillonas: [],
+  Novillona: {
+    id_Tbovinos: "",
+    chapeta: "",
+    id_tipo: "",
+    nombre: "",
+    id_raza: "",
+    genetica: "",
+    finca: ""
+  }
+}
+
+componentDidMount() {
+  this.listarNovillonas();
+  localStorage.setItem("edit", "");
+}
+
+
+listarNovillonas= () => {
+  axios
+      .get("http://vache-server.herokuapp.com/bovinos/tipo/3")
+      .then(response => {
+          console.log(response)
+          this.setState({
+            listaNovillonas: response.data.info
+          });
+          console.log("Registro bovinos")
+          console.log(this.state.control);
+      })
+      .catch(error => {
+          console.log(error);
+      });
+}
+
+eliminarNovillonas= async (chapeta) => {
+const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
+console.log(res);
+this.listarNovillonas();
+};
+
+cargarInformacion = (Novillona) => {
+  console.log("ESTE ES"+Novillona);
+   localStorage.setItem("id_Tbovinos",Novillona.id_Tbovinos);
+   localStorage.setItem("chapeta",Novillona.chapeta);
+   localStorage.setItem("id_tipo",Novillona.id_tipo);
+   localStorage.setItem("nombre",Novillona.nombre);
+   localStorage.setItem("id_raza",Novillona.id_raza);
+   localStorage.setItem("genetica",Novillona.genetica);
+   localStorage.setItem("finca",Novillona.finca);
+   localStorage.setItem("edit","si");
+}
+
+render() {
+  var raza = "";
   return (
     <>
-      <Novillonas />
+      <NovillonasH />
       {/* Page content */}
       <Container className="mt--7" fluid>
       <Row>
@@ -49,46 +104,25 @@ const Medicamentos = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
+                {this.state.listaNovillonas.map((Novillona, i) => {
+                  if (Novillona.id_raza == 1)
+                  raza = "Jersey"
+                  else if (Novillona.id_raza == 2)
+                  raza = "Holstein"
+                  else if (Novillona.id_raza == 3)
+                  raza = "Simmental"
+                  else if (Novillona.id_raza == 4)
+                  raza = "Brahman"
+                  else
+                  raza = "Cebu"
+          return (
+            <tr>
+              <td>{Novillona.chapeta}</td>
+              <td>Novillona</td>
+              <td>{Novillona.nombre}</td>
+              <td>{raza}</td>
+              <td>{Novillona.finca}</td>
+              <td className="text-right">
                       <UncontrolledDropdown>
                         <DropdownToggle
                           className="btn-icon-only text-light"
@@ -103,159 +137,23 @@ const Medicamentos = () => {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                       
                           <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="/insertarTerneras/"
+                            key={i} onClick={this.cargarInformacion.bind(this,Novillona)} 
                           >
                             Actualizar
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={() => this.eliminarNovillonas(Novillona.chapeta)}
                           >
                            Eliminar
                           </DropdownItem>
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
+            </tr>
+          );
+        })}         
                 </tbody>
               </Table>
             </Card>
@@ -266,4 +164,4 @@ const Medicamentos = () => {
   );
 };
 
-export default Medicamentos;
+}

@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container, Row, Col } from "reactstrap";
 
-const Novillonas = () => {
+const NovillonasH = () => {
   return (
     <>
       <div
@@ -33,4 +33,4 @@ const Novillonas = () => {
   );
 };
 
-export default Novillonas;
+export default NovillonasH;
