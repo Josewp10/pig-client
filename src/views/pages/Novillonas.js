@@ -137,7 +137,7 @@ render() {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                       
                           <DropdownItem
-                            href="/insertarTerneras/"
+                            href="/admin/actualizarBovino/"
                             key={i} onClick={this.cargarInformacion.bind(this,Novillona)} 
                           >
                             Actualizar
