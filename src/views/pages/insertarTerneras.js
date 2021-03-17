@@ -23,8 +23,6 @@ class insertarTerneras extends React.Component {
                     <Row>
                         <div className="col">
                             <Card className="shadow">
-                                <br />
-
                                 <Form>
                                     <Row>
                                         <Col md="5">
@@ -106,19 +104,17 @@ class insertarTerneras extends React.Component {
                                         <Button
                                             className="btn-neutral btn-icon mr-4"
                                             color="default"
-                                            to="/terneras" tag={Link}
+                                            to="/admin/Bovinos" tag={Link}
                                         >
                                             <i className="ni ni-fat-add" />
                                             <span className="btn-inner--text">Insertar</span>
                                         </Button>
                                     </div>
                                 </Form>
-
                             </Card>
                         </div>
                     </Row>
                 </Container>
-
             </>
         );
     }
