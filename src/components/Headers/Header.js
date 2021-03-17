@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from 'react-router-dom'
 
@@ -19,7 +18,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-8 mb-xl-0">
                   <Button>
-                    <Link to={'/terneras'}>
+                    <Link to={'/admin/terneraslevante'}>
                     <CardBody>
                       <Row>
                         <div className="col">
@@ -44,7 +43,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                 <Button>
-                    <Link to={'/ternerasdestetadas'}>
+                    <Link to={'/admin/ternerasdestetadas'}>
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -69,7 +68,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                 <Button>
-                    <Link to={'/novillonas'}>
+                    <Link to={'/admin/novillonas'}>
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -94,7 +93,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                 <Button>
-                    <Link to={'/vacaslactantes'}>
+                    <Link to={'/admin/vacaslactantes'}>
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -122,7 +121,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                 <Button>
-                    <Link to={'/vacasorras'}>
+                    <Link to={'/admin/vacasorras'}>
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -147,7 +146,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                 <Button>
-                    <Link to={'/terneros'}>
+                    <Link to={'/admin/terneros'}>
                   <CardBody>
                     <Row>
                       <div className="col">
@@ -172,7 +171,7 @@ const Header = () => {
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                 <Button>
-                    <Link to={'/toros'}>
+                    <Link to={'/admin/toros'}>
                   <CardBody>
                     <Row>
                       <div className="col">

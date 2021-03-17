@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 
@@ -8,6 +7,7 @@ import AdminNavbar from "../components/Navbars/AdminNavbar.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 
 import routes from "../routes.js";
+import routes2 from "../routes2.js"
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -44,8 +44,9 @@ const Admin = (props) => {
         return routes[i].name;
       }
     }
-    return "Brand";
   };
+
+
 
   return (
     <>
@@ -66,6 +67,7 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
+          {getRoutes(routes2)}
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>
