@@ -1,6 +1,6 @@
 
 import React from "react";
-
+import axios from "axios";
 
 import {
   Badge,
@@ -25,245 +25,143 @@ import {
 
 
 import Lactantes from "../../components/Headers/Lactantes.js";
+export default class VacasLactantes extends React.Component {
 
 
-const vacasLactantes = () => {
-  return (
-    <>
-      <Lactantes />
-      {/* Page content */}
-      <Container className="mt--7" fluid>
-      <Row>
-          <div className="col">
-            <Card className="shadow">
-              <Table className="align-items-center table-flush" responsive>
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col">Chapeta</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Bovino</th>
-                    <th scope="col">Raza</th>
-                    <th scope="col">Finca</th>
-                    <th scope="col">Acciones</th>
-                    <th scope="col" />
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
+  state = {
+    listaVacasLactantes: [],
+    VacaLactante: {
+      id_Tbovinos: "",
+      chapeta: "",
+      id_tipo: "",
+      nombre: "",
+      id_raza: "",
+      genetica: "",
+      finca: ""
+    }
+  }
+  
+  componentDidMount() {
+    this.listarVacasLactantes();
+    localStorage.setItem("edit", "");
+  }
+  
+  
+  listarVacasLactantes= () => {
+    axios
+        .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
+        .then(response => {
+            console.log(response)
+            this.setState({
+              listaVacasLactantes: response.data.info
+            });
+            console.log("Registro bovinos")
+            console.log(this.state.control);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+  }
+  
+  eliminarVacasLactantes= async (chapeta) => {
+  const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
+  console.log(res);
+  this.listarVacasLactantes();
+  };
+  
+  cargarInformacion = (VacaLactante) => {
+    console.log("ESTE ES"+VacaLactante);
+     localStorage.setItem("id_Tbovinos",VacaLactante.id_Tbovinos);
+     localStorage.setItem("chapeta",VacaLactante.chapeta);
+     localStorage.setItem("id_tipo",VacaLactante.id_tipo);
+     localStorage.setItem("nombre",VacaLactante.nombre);
+     localStorage.setItem("id_raza",VacaLactante.id_raza);
+     localStorage.setItem("genetica",VacaLactante.genetica);
+     localStorage.setItem("finca",VacaLactante.finca);
+     localStorage.setItem("edit","si");
+  }
+  
+  render() {
+    var raza = "";
+    return (
+      <>
+        <Lactantes />
+        {/* Page content */}
+        <Container className="mt--7" fluid>
+        <Row>
+            <div className="col">
+              <Card className="shadow">
+                <Table className="align-items-center table-flush" responsive>
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">Chapeta</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Bovino</th>
+                      <th scope="col">Raza</th>
+                      <th scope="col">Finca</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {this.state.listaVacasLactantes.map((VacaLactante, i) => {
+                    if (VacaLactante.id_raza == 1)
+                    raza = "Jersey"
+                    else if (VacaLactante.id_raza == 2)
+                    raza = "Holstein"
+                    else if (VacaLactante.id_raza == 3)
+                    raza = "Simmental"
+                    else if (VacaLactante.id_raza == 4)
+                    raza = "Brahman"
+                    else
+                    raza = "Cebu"
+            return (
+              <tr>
+                <td>{VacaLactante.chapeta}</td>
+                <td>Vaca Lactante</td>
+                <td>{VacaLactante.nombre}</td>
+                <td>{raza}</td>
+                <td>{VacaLactante.finca}</td>
+                <td className="text-right">
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            className="btn-icon-only text-light"
                             href="#pablo"
+                            role="button"
+                            size="sm"
+                            color=""
                             onClick={(e) => e.preventDefault()}
                           >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Card>
-          </div>
-        </Row>
-      </Container>
-    </>
-  );
-};
-
-export default vacasLactantes;
+                            <i className="fas fa-ellipsis-v" />
+                          </DropdownToggle>
+                          <DropdownMenu className="dropdown-menu-arrow" right>
+                        
+                            <DropdownItem
+                              href="/admin/actualizarBovino/"
+                              key={i} onClick={this.cargarInformacion.bind(this,VacaLactante)} 
+                            >
+                              Actualizar
+                            </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={() => this.eliminarVacasLactantes(VacaLactante.chapeta)}
+                            >
+                             Eliminar
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </td>
+              </tr>
+            );
+          })}         
+                  </tbody>
+                </Table>
+              </Card>
+            </div>
+          </Row>
+        </Container>
+      </>
+    );
+  };
+  
+  }
+  
