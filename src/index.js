@@ -9,7 +9,6 @@ import "../src/assets/scss/argon-dashboard-react.scss";
 
 import AdminLayout from "../src/layouts/Admin.js";
 import AuthLayout from "../src/layouts/Auth.js";
-import insertarTerneras from "../src/views/pages/insertarTerneras.js";
 import register from "../src/views/pages/Register.js";
 
 
@@ -18,7 +17,6 @@ ReactDOM.render(
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Route path='/insertarTerneras' component={insertarTerneras} />
       <Route path='/auth/registro' component={register} />
       <Redirect from="/" to="/auth/login" />
     </Switch>

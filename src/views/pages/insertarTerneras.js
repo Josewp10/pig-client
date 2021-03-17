@@ -10,7 +10,7 @@ import {
     Container,
     Col
 } from "reactstrap";
-import TernerasDestetadasHeader from "../../components/Headers/Terneras.js";
+import TernerasDestetadasHeader from "../../components/Headers/insertarBovino.js";
 
 
 class insertarTerneras extends React.Component {

@@ -6,9 +6,15 @@ import VacasOrras from "../src/views/pages/VacasOrras.js";
 import Terneros from "../src/views/pages/Terneros.js";
 import Toros from "../src/views/pages/Toros.js";
 import Termos from "../src/views/pages/Termos.js";
-
+import insertarBovino from "../src/views/pages/insertarTerneras.js";
 
 var routes2 = [
+    {
+        path: "/insertarBovino",
+        name: "InsertarBovino",
+        component: insertarBovino,
+        layout: "/admin",
+    },
     {
         path: "/TernerasLevante",
         name: "TernerasLevante",
