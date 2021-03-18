@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import imagenes from './imagenes'
+
 
 import * as SimpleIcons from 'react-icons/si'
 
@@ -28,12 +30,15 @@ const Header = () => {
                           >
                             Terneras de Levante
                         </CardTitle>
-                        </div>
-                        <Col className="col-auto">
+                        <img src={imagenes.ternera} alt="ternera" style = {{ height:50, width: 50,}}/>
+                        { /* </div>
+                       <Col className="col-auto">
                           <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                             <i className="fas fa-horse" />
-                          </div>
-                        </Col>
+                          </div>  
+                          
+                        </Col>*/}
+                        </div>
                       </Row>
                     </CardBody>
                     </Link>
@@ -53,12 +58,14 @@ const Header = () => {
                         >
                           Terneras Destetadas
                         </CardTitle>
-                      </div>
+                        <img src={imagenes.ternera} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/*</div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-chart-bar" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
@@ -78,12 +85,14 @@ const Header = () => {
                         >
                           Novillonas
                         </CardTitle>
-                      </div>
+                        <img src={imagenes.novillona} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/* </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-file-medical-alt" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
@@ -103,12 +112,15 @@ const Header = () => {
                         >
                           Vacas Lactantes
                         </CardTitle>
+                        <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/*
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-chart-bar" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
@@ -131,12 +143,15 @@ const Header = () => {
                         >
                           Vacas Orras
                         </CardTitle>
+                        <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/*
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-chart-bar" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
@@ -156,12 +171,15 @@ const Header = () => {
                         >
                           Terneros
                         </CardTitle>
+                        <img src={imagenes.ternera} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/*
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-chart-bar" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
@@ -181,12 +199,15 @@ const Header = () => {
                         >
                           Toros
                         </CardTitle>
+                        <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/*
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-chart-bar" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
@@ -206,12 +227,15 @@ const Header = () => {
                         >
                           Termos
                         </CardTitle>
+                        <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
+                      {/*
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
                           <i className="fas fa-chart-bar" />
                         </div>
-                      </Col>
+                      </Col>*/}
+                      </div>
                     </Row>
                   </CardBody>
                   </Link>
