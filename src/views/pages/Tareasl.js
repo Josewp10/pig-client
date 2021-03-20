@@ -39,10 +39,8 @@ const Tareasl = () => {
             <CardHeader className="bg-transparent pb-5">
             <div className="text-right">
               <Button
-                className="btn-neutral btn-icon mr-4"
+                className="btn-default btn-icon mr-4"
                 color="warning"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>

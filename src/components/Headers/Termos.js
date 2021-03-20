@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 
 const Termos = () => {
   return (
@@ -12,18 +12,27 @@ const Termos = () => {
           minHeight: "400px",
           backgroundImage:
             "url(" +
-            require("../../assets/img/theme/novillonas.jpeg").default +
+            require("../../assets/img/theme/termos.jpg").default +
             ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
       >
          {/* Mask */}
-         <span className="mask bg-gradient-warning opacity-8" />
+         <span className="mask bg-gradient-gray opacity-8" />
         {/* Header container */}
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
+            <div className="text-left">
+                <Button
+                  className="btn-black btn-icon mr-2"
+                  color="black"
+                  to="/admin/bovinos" tag={Link}
+                >
+                  <i className="ni ni-bold-left" />
+                </Button>
+              </div>
               <h1 className="display-2 text-white">Termos</h1>
             </Col>
           </Row>

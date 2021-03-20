@@ -24,13 +24,13 @@ import {
 } from "reactstrap";
 
 
-import TermosHeader from "../../components/Headers/Termos.js";
+import Medicine from "../../components/Headers/controlTratamientos.js";
 
 
-const Termos = () => {
+const controlTratamientos = () => {
   return (
     <>
-      <TermosHeader />
+      <Medicine />
       {/* Page content */}
       <Container className="mt--7" fluid>
       <Row>
@@ -39,7 +39,7 @@ const Termos = () => {
             <CardHeader className="bg-transparent pb-5">
             <div className="text-right">
               <Button
-                className="btn-gray btn-icon mr-4"
+                className="btn-info btn-icon mr-4"
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>
@@ -50,10 +50,13 @@ const Termos = () => {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Código</th>
-                    <th scope="col">Número Pajillas</th>
-                    <th scope="col">Toro</th>
-                    <th scope="col">Raza</th>
-                    <th scope="col">Disponibilidad</th>
+                    <th scope="col">Tipo Dosis</th>
+                    <th scope="col">Fecha Ingreso</th>
+                    <th scope="col">Fecha Salida</th>
+                    <th scope="col">Detalles</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Bovino</th>
                     <th scope="col">Acciones</th>
                     <th scope="col" />
                   </tr>
@@ -93,6 +96,21 @@ const Termos = () => {
                           </span>
                         </Media>
                     </td>
+                    <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
+                        <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
+                        <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
                     <td className="text-right">
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -111,14 +129,12 @@ const Termos = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            <i className="ni ni-ui-04" />
                             Actualizar
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            <i className="ni ni-fat-remove" />
                            Eliminar
                           </DropdownItem>
                         </DropdownMenu>
@@ -135,4 +151,4 @@ const Termos = () => {
   );
 };
 
-export default Termos;
+export default controlTratamientos;

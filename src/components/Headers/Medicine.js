@@ -24,10 +24,7 @@ const Medicine = () => {
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Medicamentos</h1>
-              <p className="text-white mt-0 mb-5">
-                Gestión de medicamentos
-              </p>
+              <h1 className="display-2 text-white">Gestión de Medicamentos</h1>
             </Col>
           </Row>
         </Container>

@@ -139,13 +139,19 @@ export default class VacasLactantes extends React.Component {
                               href="/admin/actualizarBovino/"
                               key={i} onClick={this.cargarInformacion.bind(this,VacaLactante)} 
                             >
+                              <i className="ni ni-ui-04" />
                               Actualizar
                             </DropdownItem>
                             <DropdownItem
-                              href="#pablo"
                               onClick={() => this.eliminarVacasLactantes(VacaLactante.chapeta)}
                             >
+                              <i className="ni ni-fat-remove" />
                              Eliminar
+                            </DropdownItem>
+                            <DropdownItem
+                            >
+                            <i className="ni ni-map-big" />
+                             Ver Genealogia 
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>

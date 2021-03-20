@@ -5,7 +5,10 @@ import Login from "../src/views/pages/Login.js";
 import Bovinos from "../src/views/pages/Bovinos.js";
 import Tareas from "../src/views/pages/Tareasl.js";
 import Termos from "../src/views/pages/Termos.js";
-
+import controlRetiros from "../src/views/pages/controlRetiro.js";
+import controlTratamientos from "../src/views/pages/controlTratamientos.js";
+import controlCelo from "../src/views/pages/controlCelos.js";
+import controlPartos from "../src/views/pages/controlPartos.js";
 
 var routes = [
   {
@@ -30,32 +33,32 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
+    path: "/controlRetiros",
     name: "Control de Retiro",
     icon: "ni ni-fat-add text-red",
-    component: Bovinos,
+    component: controlRetiros,
     layout: "/admin",
   },
   {
-    path: "/login",
+    path: "/controlTratamientos",
     name: "Control de Tratamientos",
     icon: "ni ni-sound-wave text-orange",
-    component: Login,
-    layout: "/auth",
+    component:  controlTratamientos,
+    layout: "/admin",
   },
   {
-    path: "/register",
+    path: "/controlCelo",
     name: "Control de Celo",
     icon: "ni ni-calendar-grid-58 text-brown",
-    component: Register,
-    layout: "/auth",
+    component: controlCelo,
+    layout: "/admin",
   },
   {
-    path: "/tables",
+    path: "/controlPartos",
     name: "Control de Partos",
     icon: "ni ni-fat-add text-purple",
-    component: Register,
-    layout: "/auth",
+    component: controlPartos,
+    layout: "/admin",
   },
   {
     path: "/tables",
