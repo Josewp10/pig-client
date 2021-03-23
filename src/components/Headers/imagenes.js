@@ -3,6 +3,7 @@ import circulo_Vaca from './img/circulo-Vaca.png'
 import circulo_novillona from './img/circulo-novillona.png'
 import circulo_toro from './img/toro_circulo.png'
 import circulo_ternero from './img/ternero_circulo.png'
+import circulo_termo from './img/termo_circulo.png'
 
 
 export default {
@@ -15,6 +16,8 @@ export default {
 
     "ternero" : circulo_ternero,
 
-    "toro" : circulo_toro
+    "toro" : circulo_toro, 
+
+    "termo" : circulo_termo
    
 }

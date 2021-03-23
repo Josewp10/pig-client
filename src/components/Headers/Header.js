@@ -231,7 +231,7 @@ const Header = () => {
                         >
                           Termos
                         </CardTitle>
-                        <img src={imagenes.toro} alt="toro" style = {{ height:50, width: 50,}}/>
+                        <img src={imagenes.termo} alt="termo" style = {{ height:50, width: 50,}}/>
                       {/*
                       </div>
                       <Col className="col-auto">
