@@ -171,7 +171,7 @@ const Header = () => {
                         >
                           Terneros
                         </CardTitle>
-                        <img src={imagenes.ternera} alt="ternera" style = {{ height:50, width: 50,}}/>
+                        <img src={imagenes.ternero} alt="ternero" style = {{ height:50, width: 50,}}/>
                       {/*
                       </div>
                       <Col className="col-auto">
@@ -199,7 +199,7 @@ const Header = () => {
                         >
                           Toros
                         </CardTitle>
-                        <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
+                        <img src={imagenes.toro} alt="toro" style = {{ height:50, width: 50,}}/>
                       {/*
                       </div>
                       <Col className="col-auto">
@@ -227,7 +227,7 @@ const Header = () => {
                         >
                           Termos
                         </CardTitle>
-                        <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
+                        <img src={imagenes.toro} alt="toro" style = {{ height:50, width: 50,}}/>
                       {/*
                       </div>
                       <Col className="col-auto">
