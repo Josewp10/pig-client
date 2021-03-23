@@ -39,10 +39,7 @@ const Medicamentos = () => {
             <CardHeader className="bg-transparent pb-5">
             <div className="text-right">
               <Button
-                className="btn-neutral btn-icon mr-4"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                className="btn-warning btn-icon mr-4"
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>
@@ -126,160 +123,14 @@ const Medicamentos = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
+                             <i className="ni ni-ui-04" />
                             Actualizar
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                        <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Eliminar
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </th>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td>
-                    <Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media>
-                    </td>
-                    <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                        <td><Media>
-                          <span className="mb-0 text-sm">
-                            text
-                          </span>
-                        </Media></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                      
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Actualizar
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                              <i className="ni ni-fat-remove" />
                            Eliminar
                           </DropdownItem>
                         </DropdownMenu>

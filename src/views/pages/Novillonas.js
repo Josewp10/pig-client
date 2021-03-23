@@ -140,14 +140,21 @@ render() {
                             href="/admin/actualizarBovino/"
                             key={i} onClick={this.cargarInformacion.bind(this,Novillona)} 
                           >
+                            <i className="ni ni-ui-04" />
                             Actualizar
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={() => this.eliminarNovillonas(Novillona.chapeta)}
                           >
+                             <i className="ni ni-fat-remove" />
                            Eliminar
                           </DropdownItem>
+                          <DropdownItem
+                            >
+                            <i className="ni ni-map-big" />
+                             Ver Genealogia 
+                            </DropdownItem>
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>

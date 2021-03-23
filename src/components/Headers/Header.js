@@ -14,6 +14,10 @@ const Header = () => {
     <>
       <div className="header bg-gradient-success pb-9 pt-5 pt-md-8">
         <Container fluid>
+        <Col lg="7" md="10">
+              <h1 className="display-2 text-white">Inventario de Bovinos</h1>
+              <br></br>
+            </Col>
           <div className="header-body">
             {/* Card stats */}
             <Row>

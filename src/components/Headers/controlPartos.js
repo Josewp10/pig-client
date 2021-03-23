@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container, Row, Col } from "reactstrap";
 
-const Tareas = () => {
+const controlPartos = () => {
   return (
     <>
       <div
@@ -12,19 +12,22 @@ const Tareas = () => {
           minHeight: "300px",
           backgroundImage:
             "url(" +
-            require("../../assets/img/theme/tareas.jpeg").default +
+            require("../../assets/img/theme/partos.jpeg").default +
             ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
       >
          {/* Mask */}
-         <span className="mask bg-gradient-default opacity-8" />
+         <span className="mask bg-gradient-warning opacity-8" />
         {/* Header container */}
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Tareas</h1>
+              <h1 className="display-2 text-white">Controles de Parto</h1>
+              <p className="text-white mt-0 mb-5">
+                Administre los nuevos nacimientos de terneros y terneras en la finca
+              </p>
             </Col>
           </Row>
         </Container>
@@ -33,4 +36,4 @@ const Tareas = () => {
   );
 };
 
-export default Tareas;
+export default controlPartos;

@@ -34,9 +34,6 @@ const actualizarBovino = () => {
               </Button>           
             </div>
               <h1 className="display-2 text-white">Actualizar Bovino</h1>
-              <p className="display-5 text-white mt-0 mb-5">
-                Aca poner la carreta de usabilidad...
-              </p>
             </Col>
           </Row>
         </Container>

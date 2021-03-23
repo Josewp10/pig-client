@@ -24,13 +24,13 @@ import {
 } from "reactstrap";
 
 
-import TermosHeader from "../../components/Headers/Termos.js";
+import Medicine from "../../components/Headers/controlCelo.js";
 
 
-const Termos = () => {
+const controlCelos= () => {
   return (
     <>
-      <TermosHeader />
+      <Medicine />
       {/* Page content */}
       <Container className="mt--7" fluid>
       <Row>
@@ -39,7 +39,7 @@ const Termos = () => {
             <CardHeader className="bg-transparent pb-5">
             <div className="text-right">
               <Button
-                className="btn-gray btn-icon mr-4"
+                className="btn-danger btn-icon mr-4"
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>
@@ -50,16 +50,17 @@ const Termos = () => {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Código</th>
-                    <th scope="col">Número Pajillas</th>
-                    <th scope="col">Toro</th>
-                    <th scope="col">Raza</th>
-                    <th scope="col">Disponibilidad</th>
+                    <th scope="col">Nombre Vaca</th>
+                    <th scope="col">Nombre Toro</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Detalles</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Acciones</th>
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                <tr>
                     <th scope="row">
                     <Media>
                           <span className="mb-0 text-sm">
@@ -93,6 +94,11 @@ const Termos = () => {
                           </span>
                         </Media>
                     </td>
+                    <td><Media>
+                          <span className="mb-0 text-sm">
+                            text
+                          </span>
+                        </Media></td>
                     <td className="text-right">
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -124,7 +130,7 @@ const Termos = () => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
-                  </tr>
+                  </tr>  
                 </tbody>
               </Table>
             </Card>
@@ -135,4 +141,4 @@ const Termos = () => {
   );
 };
 
-export default Termos;
+export default controlCelos;

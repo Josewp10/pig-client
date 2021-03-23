@@ -147,7 +147,7 @@ var colors = {
     900: "#212529",
   },
   theme: {
-    default: "#172b4d",
+    default: "#54d699",
     primary: "#ffffff",
     secondary: "#f4f5f7",
     info: "#11cdef",
