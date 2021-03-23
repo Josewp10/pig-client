@@ -109,11 +109,9 @@ export default class VacasOrras extends React.Component {
                     else if (VacaOrra.id_raza == 2)
                     raza = "Holstein"
                     else if (VacaOrra.id_raza == 3)
-                    raza = "Simmental"
+                    raza = "Jerhol"
                     else if (VacaOrra.id_raza == 4)
-                    raza = "Brahman"
-                    else
-                    raza = "Cebu"
+                    raza = "PardoSuiza"
             return (
               <tr>
                 <td>{VacaOrra.chapeta}</td>

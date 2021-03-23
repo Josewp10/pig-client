@@ -1,4 +1,4 @@
-import Profile from "../src/views/pages/Profile.js";
+
 import Medicamentos from "../src/views/pages/Medicamentos.js";
 import Register from "../src/views/pages/Register.js";
 import Login from "../src/views/pages/Login.js";
@@ -9,6 +9,7 @@ import controlRetiros from "../src/views/pages/controlRetiro.js";
 import controlTratamientos from "../src/views/pages/controlTratamientos.js";
 import controlCelo from "../src/views/pages/controlCelos.js";
 import controlPartos from "../src/views/pages/controlPartos.js";
+import Potreros from "../src/views/pages/Potreros.js";
 
 var routes = [
   {
@@ -75,8 +76,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/perfil",
-    component: Profile,
+    path: "/potreros",
+    name: "Potreros",
+    icon: "ni ni-image text-success",
+    component: Potreros,
     layout: "/admin",
   },
 ];

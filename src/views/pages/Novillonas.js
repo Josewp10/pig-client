@@ -110,11 +110,9 @@ render() {
                   else if (Novillona.id_raza == 2)
                   raza = "Holstein"
                   else if (Novillona.id_raza == 3)
-                  raza = "Simmental"
+                  raza = "Jerhol"
                   else if (Novillona.id_raza == 4)
-                  raza = "Brahman"
-                  else
-                  raza = "Cebu"
+                  raza = "PardoSuiza"
           return (
             <tr>
               <td>{Novillona.chapeta}</td>

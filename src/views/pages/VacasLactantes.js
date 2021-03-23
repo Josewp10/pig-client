@@ -109,11 +109,9 @@ export default class VacasLactantes extends React.Component {
                     else if (VacaLactante.id_raza == 2)
                     raza = "Holstein"
                     else if (VacaLactante.id_raza == 3)
-                    raza = "Simmental"
+                    raza = "Jerhol"
                     else if (VacaLactante.id_raza == 4)
-                    raza = "Brahman"
-                    else
-                    raza = "Cebu"
+                    raza = "PardoSuiza"
             return (
               <tr>
                 <td>{VacaLactante.chapeta}</td>

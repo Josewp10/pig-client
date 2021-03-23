@@ -109,11 +109,9 @@ export default class Terneros extends React.Component {
                     else if (Ternero.id_raza == 2)
                     raza = "Holstein"
                     else if (Ternero.id_raza == 3)
-                    raza = "Simmental"
+                    raza = "Jerhol"
                     else if (Ternero.id_raza == 4)
-                    raza = "Brahman"
-                    else
-                    raza = "Cebu"
+                    raza = "PardoSuizo"
             return (
               <tr>
                 <td>{Ternero.chapeta}</td>

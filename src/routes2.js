@@ -8,6 +8,7 @@ import Toros from "../src/views/pages/Toros.js";
 import Termos from "../src/views/pages/Termos.js";
 import insertarBovino from "../src/views/pages/insertarTerneras.js";
 import actualizarBovino from "./views/pages/actualizarBovino.js";
+import Profile from "../src/views/pages/Profile.js";
 
 var routes2 = [
     {
@@ -70,6 +71,11 @@ var routes2 = [
         component: Termos,
         layout: "/admin",
     },
+    {
+        path: "/perfil",
+        component: Profile,
+        layout: "/admin",
+      },
 
 ];
 export default routes2;
