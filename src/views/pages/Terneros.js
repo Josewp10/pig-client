@@ -149,6 +149,7 @@ export default class Terneros extends React.Component {
                             </DropdownItem>
                             <DropdownItem
                             href="/admin/verGenealogia/"
+                            key={i} onClick={this.cargarInformacion.bind(this,Ternero)} 
                             >
                             <i className="ni ni-map-big" />
                              Ver Genealogia 

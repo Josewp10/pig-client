@@ -148,6 +148,7 @@ export default class VacasLactantes extends React.Component {
                             </DropdownItem>
                             <DropdownItem
                             href="/admin/verGenealogia/"
+                            key={i} onClick={this.cargarInformacion.bind(this, VacaLactante)}
                             >
                             <i className="ni ni-map-big" />
                              Ver Genealogia 

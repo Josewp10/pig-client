@@ -18,28 +18,35 @@ export default class genealogicos extends React.Component {
     listaGenealogicos: [],
     Genealogicos: {
       id_tbovino: "",
-      id_mama: "",
-      id_papa: "",
-      mama: [],
-      id_abuelo: "",
-      id_abuela: "",
-      papa: [],
-      abuelo: [],
-      abuela: [],
+      Bovino: "",
+      Mamá: "",
+      Papá: "",
+      Abuelo: "",
+      Abuela: ""
     }
   }
 
   async componentDidMount() {
+    try {
     this.state.id_tbovino = localStorage.getItem("id_Tbovinos")
     console.log(this.state.id_tbovino);
     const res = await axios.get('http://vache-server.herokuapp.com/genealogicos/' + this.state.id_tbovino);
     this.setState({
-      id_tbovino: res.data.info[0].id_tbovino,
-      id_mama: res.data.info[0].id_mama,
-      id_papa: res.data.info[0].id_papa,
-      id_abuela: res.data.info[0].id_abuela,
-      id_abuelo: res.data.info[0].id_abuelo,
-    });
+      Bovino: res.data.info[0].Bovino,
+      Mamá: res.data.info[0].Mamá,
+      Papá: res.data.info[0].Papá,
+      Abuela: res.data.info[0].Abuela,
+      Abuelo: res.data.info[0].Abuelo,
+    })}catch{
+      this.setState({
+        Bovino: localStorage.getItem("nombre"),
+        Mamá: "Sin información",
+        Papá: "Sin información",
+        Abuela: "Sin información",
+        Abuelo: "Sin información",
+      })
+    };
+
 
   }
 
@@ -63,7 +70,7 @@ export default class genealogicos extends React.Component {
                         </h3>
                         <div className="h5 font-weight-300">
                           <i className="ni location_pin mr-2" />
-                          {this.state.id_tbovino}
+                          {this.state.Bovino}
                         </div>
                         <br></br>
                         <h3>
@@ -72,7 +79,7 @@ export default class genealogicos extends React.Component {
                         </h3>
                         <div className="h5 font-weight-300">
                           <i className="ni location_pin mr-2" />
-                          {this.state.id_mama}
+                          {this.state.Mamá}
                         </div>
                         <br></br>
                         <h3>
@@ -81,7 +88,7 @@ export default class genealogicos extends React.Component {
                         </h3>
                         <div className="h5 font-weight-300">
                           <i className="ni location_pin mr-2" />
-                          {this.state.id_papa}
+                          {this.state.Papá}
                         </div>
                         <br></br>
                         <h3>
@@ -91,7 +98,7 @@ export default class genealogicos extends React.Component {
                         <div className="h5 font-weight-300">
                           <i className="ni location_pin mr-2" />
                          
-                          {this.state.id_abuelo}
+                          {this.state.Abuelo}
                          
                           
                         </div>
@@ -102,7 +109,7 @@ export default class genealogicos extends React.Component {
                         </h3>
                         <div className="h5 font-weight-300">
                           <i className="ni location_pin mr-2" />
-                          {this.state.id_abuela}
+                          {this.state.Abuela}
                         </div>
                       </div>
                   

@@ -20,14 +20,15 @@ class insertarGenealogicos extends React.Component {
         super();
         this.state = {
             id_tbovino: "",
+            nombre: "",
             id_mama: "",
             id_papa: "",
-            mama: [],
+            mamas: [],
             id_abuelo: "",
             id_abuela: "",
-            papa: [],
-            abuelo: [],
-            abuela: [],
+            papas: [],
+            abuelos: [],
+            abuelas: [],
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -35,30 +36,31 @@ class insertarGenealogicos extends React.Component {
 
     componentDidMount() {
 
-
+        this.state.nombre = localStorage.getItem("nombre")
+        this.state.id_tbovino = localStorage.getItem("id_Tbovinos")
         //lactantes madres
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/8")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    mama: response.data.info
+                    mamas: response.data.info
                 });
                 console.log("Registro lactantes")
-                console.log(this.state.control);
+                console.log(this.state.mama);
             })
             .catch(error => {
                 console.log(error);
             });
         // toros
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/2")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    papa: response.data.info
+                    papas: response.data.info
                 });
-                console.log("Registro razas")
+                console.log("Registro toros")
                 console.log(this.state.control);
             })
             .catch(error => {
@@ -66,13 +68,13 @@ class insertarGenealogicos extends React.Component {
             });
             // lactantes abuelas
             axios
-            .get("http://vache-server.herokuapp.com/bovinos/8")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    abuela: response.data.info
+                    abuelas: response.data.info
                 });
-                console.log("Registro razas")
+                console.log("Registro lactantes")
                 console.log(this.state.control);
             })
             .catch(error => {
@@ -80,13 +82,13 @@ class insertarGenealogicos extends React.Component {
             });
             // lactantes abuelos
             axios
-            .get("http://vache-server.herokuapp.com/bovinos/2")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    abuelo: response.data.info
+                    abuelos: response.data.info
                 });
-                console.log("Registro razas")
+                console.log("Registro toros")
                 console.log(this.state.control);
             })
             .catch(error => {
@@ -115,14 +117,15 @@ class insertarGenealogicos extends React.Component {
 
         this.setState({
             id_tbovino: "",
+            nombre: "",
             id_mama: "",
             id_papa: "",
-            mama: [],
+            mamas: [],
             id_abuelo: "",
             id_abuela: "",
-            papa: [],
-            abuelo: [],
-            abuela: [],
+            papas: [],
+            abuelos: [],
+            abuelas: [],
         });
 
 
@@ -161,7 +164,7 @@ class insertarGenealogicos extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     placeholder="Nombre Bovino"
                                                     type="text"
-                                                    value={this.state.id_tbovino}
+                                                    value={this.state.nombre}
                                                     name="nombre"
                                                     onChange={this.onInputChange}
                                                     required
@@ -175,11 +178,15 @@ class insertarGenealogicos extends React.Component {
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="id_tipo"
+                                                    name="id_mama"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                   
+                                                    {this.state.mamas.map(mamá => (
+                                                        <option key={mamá.id_Tbovinos} value={mamá.id_Tbovinos} onChange={this.onInputChange}>{mamá.nombre}</option>
+                                                    )
+
+                                                    )}
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -192,11 +199,15 @@ class insertarGenealogicos extends React.Component {
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="id_tipo"
+                                                    name="id_papa"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                   
+                                                   {this.state.papas.map(papá => (
+                                                            <option key={papá.id_Tbovinos} value={papá.id_Tbovinos} onChange={this.onInputChange}>{papá.nombre}</option>
+                                                        )
+
+                                                        )}  
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -207,11 +218,15 @@ class insertarGenealogicos extends React.Component {
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="id_raza"
+                                                    name="id_abuelo"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                  
+                                                  {this.state.abuelos.map(abuelo => (
+                                                            <option key={abuelo.id_Tbovinos} value={abuelo.id_Tbovinos} onChange={this.onInputChange}>{abuelo.nombre}</option>
+                                                        )
+
+                                                        )}  
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -224,11 +239,15 @@ class insertarGenealogicos extends React.Component {
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="id_tipo"
+                                                    name="id_abuela"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    
+                                                    {this.state.abuelas.map(abuela => (
+                                                            <option key={abuela.id_Tbovinos} value={abuela.id_Tbovinos} onChange={this.onInputChange}>{abuela.nombre}</option>
+                                                        )
+
+                                                        )}  
                                                 </Input>
                                             </FormGroup>
                                         </Col>

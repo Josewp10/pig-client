@@ -149,6 +149,7 @@ export default class VacasOrras extends React.Component {
                             </DropdownItem>
                             <DropdownItem
                             href="/admin/verGenealogia/"
+                            key={i} onClick={this.cargarInformacion.bind(this,VacaOrra)} 
                             >
                             <i className="ni ni-map-big" />
                              Ver Genealogia 
