@@ -18,9 +18,9 @@ import {
     InputGroup
 } from "reactstrap";
 
-import TernerasDestetadasHeader from "../../components/Headers/insertarMedicamentosHeader.js";
+import TernerasDestetadasHeader from "../../components/Headers/actualizarMedicamentosHeader.js";
 
-class insertarMedicamentos extends React.Component {
+class actualizarMedicamentos extends React.Component {
 
     constructor() {
         super();
@@ -31,13 +31,33 @@ class insertarMedicamentos extends React.Component {
             horas_retiro_leche: "",
             fecha_compra: "",
             fecha_vencimiento: "",
-            disponibilidad: ""
-        }
+            disponibilidad: "",
+        };
         this.onInputChange = this.onInputChange.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
+        this.state.codigo = localStorage.getItem("codigo");
+        this.state.nombre = localStorage.getItem("nombre");
+        this.state.descripcion = localStorage.getItem("descripcion");
+        this.state.horas_retiro_leche = localStorage.getItem("horas_retiro_leche");
+        this.state.fecha_compra = localStorage.getItem("fecha_compra");
+        this.state.fecha_vencimiento = localStorage.getItem("fecha_vencimiento");
+        this.state.disponibilidad = localStorage.getItem("disponibilidad");
+        console.log(this.state.codigo);
+        const res = await axios.get('http://vache-server.herokuapp.com/medicamentos/' + this.state.codigo);
+        this.setState({
+            codigo: res.data.info[0].codigo,
+            nombre: res.data.info[0].nombre,
+            descripcion: res.data.info[0].descripcion,
+            horas_retiro_leche: res.data.info[0].horas_retiro_leche,
+            fecha_compra: res.data.info[0].fecha_compra,
+            fecha_vencimiento: res.data.info[0].fecha_vencimiento,
+            disponibilidad: res.data.info[0].disponibilidad,
+        });
+
+       
     }
 
     onSubmit = async (e) => {
@@ -46,7 +66,7 @@ class insertarMedicamentos extends React.Component {
         e.preventDefault();
 
 
-        await axios.post('http://vache-server.herokuapp.com/medicamentos', {
+        const res = await axios.put('http://vache-server.herokuapp.com/medicamentos/' + this.state.codigo, {
             codigo: this.state.codigo,
             nombre: this.state.nombre,
             descripcion: this.state.descripcion,
@@ -55,9 +75,10 @@ class insertarMedicamentos extends React.Component {
             fecha_vencimiento: this.state.fecha_vencimiento,
             disponibilidad: this.state.disponibilidad,
         }).then((response) => {
-            console.log(response);
+            console.log(response)
+            alert('Medicamento Actualizado');
             window.location.href = '/admin/medicamentos';
-        });
+        }); console.log(res);
 
 
         this.setState({
@@ -67,8 +88,11 @@ class insertarMedicamentos extends React.Component {
             horas_retiro_leche: "",
             fecha_compra: "",
             fecha_vencimiento: "",
-            disponibilidad: ""
+            disponibilidad: "",
         });
+
+
+
     };
 
 
@@ -79,6 +103,7 @@ class insertarMedicamentos extends React.Component {
             [name]: value
         })
     };
+
 
     render() {
         return (
@@ -226,7 +251,7 @@ class insertarMedicamentos extends React.Component {
 
                                         >
                                             <i className="ni ni-fat-add" />
-                                            <span className="btn-inner--text">Insertar</span>
+                                            <span className="btn-inner--text">Guardar</span>
                                         </Button>
                                     </div>
                                 </Form>
@@ -239,4 +264,4 @@ class insertarMedicamentos extends React.Component {
     }
 }
 
-export default insertarMedicamentos;
+export default actualizarMedicamentos;

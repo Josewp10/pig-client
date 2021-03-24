@@ -147,10 +147,12 @@ export default class VacasLactantes extends React.Component {
                              Eliminar
                             </DropdownItem>
                             <DropdownItem
+                            href="/admin/verGenealogia/"
                             >
                             <i className="ni ni-map-big" />
                              Ver Genealogia 
                             </DropdownItem>
+                            
                           </DropdownMenu>
                         </UncontrolledDropdown>
                       </td>

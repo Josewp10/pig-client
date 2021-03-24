@@ -9,26 +9,25 @@ import {
     Card,
     Button,
     Container,
-    Col,
-    CardHeader,
-    Alert
+    Col
 } from "reactstrap";
-import TernerasDestetadasHeader from "../../components/Headers/insertarBovino.js";
+import TernerasDestetadasHeader from "../../components/Headers/genealogico.js";
 
 
-class insertarTerneras extends React.Component {
+class insertarGenealogicos extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            id_Tbovinos: "",
-            chapeta: "",
-            id_tipo: "",
-            tipos: [],
-            nombre: "",
-            id_raza: "",
-            razas: [],
-            finca: "",
+            id_tbovino: "",
+            id_mama: "",
+            id_papa: "",
+            mama: [],
+            id_abuelo: "",
+            id_abuela: "",
+            papa: [],
+            abuelo: [],
+            abuela: [],
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -37,27 +36,27 @@ class insertarTerneras extends React.Component {
     componentDidMount() {
 
 
-
+        //lactantes madres
         axios
-            .get("http://vache-server.herokuapp.com/registroTipos/")
+            .get("http://vache-server.herokuapp.com/bovinos/8")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    tipos: response.data.info
+                    mama: response.data.info
                 });
-                console.log("Registro tipos")
+                console.log("Registro lactantes")
                 console.log(this.state.control);
             })
             .catch(error => {
                 console.log(error);
             });
-
+        // toros
         axios
-            .get("http://vache-server.herokuapp.com/registroRazas/")
+            .get("http://vache-server.herokuapp.com/bovinos/2")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    razas: response.data.info
+                    papa: response.data.info
                 });
                 console.log("Registro razas")
                 console.log(this.state.control);
@@ -65,6 +64,35 @@ class insertarTerneras extends React.Component {
             .catch(error => {
                 console.log(error);
             });
+            // lactantes abuelas
+            axios
+            .get("http://vache-server.herokuapp.com/bovinos/8")
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    abuela: response.data.info
+                });
+                console.log("Registro razas")
+                console.log(this.state.control);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            // lactantes abuelos
+            axios
+            .get("http://vache-server.herokuapp.com/bovinos/2")
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    abuelo: response.data.info
+                });
+                console.log("Registro razas")
+                console.log(this.state.control);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+          
     }
 
     onSubmit = async (e) => {
@@ -73,35 +101,28 @@ class insertarTerneras extends React.Component {
         e.preventDefault();
 
 
-        await axios.post('http://vache-server.herokuapp.com/bovinos', {
-            chapeta: this.state.chapeta,
-            id_tipo: this.state.id_tipo,
-            nombre: this.state.nombre,
-            id_raza: this.state.id_raza,
-            finca: this.state.finca,
+        await axios.post('http://vache-server.herokuapp.com/genealogicos', {
+            id_tbovino: this.state.id_tbovino,
+            id_mama: this.state.id_mama,
+            id_papa: this.state.id_papa,
+            id_abuela: this.state.id_abuela,
+            id_abuelo: this.state.id_abuelo,
         }).then((response) => {
             console.log(response);
-            < Alert color="success" >
-                <span className="alert-inner--icon">
-                    <i className="ni ni-like-2" />
-                </span>{" "}
-                <span className="alert-inner--text">
-                    <strong>Bovino</strong> Insertado Correctamente
-        </span>
-            </Alert >
             window.location.href = '/admin/Bovinos';
         });
 
 
         this.setState({
-            id_Tbovinos: "",
-            chapeta: "",
-            id_tipo: "",
-            tipos: [],
-            nombre: "",
-            id_raza: "",
-            razas: [],
-            finca: "",
+            id_tbovino: "",
+            id_mama: "",
+            id_papa: "",
+            mama: [],
+            id_abuelo: "",
+            id_abuela: "",
+            papa: [],
+            abuelo: [],
+            abuela: [],
         });
 
 
@@ -128,25 +149,10 @@ class insertarTerneras extends React.Component {
                 <Container className="mt--7" fluid>
                     <Row>
                         <div className="col">
-                            <Card className="shadow">
+                            <Card className="shadow">                             
                                 <br></br>
                                 <Form onSubmit={this.onSubmit} className="text-center">
                                     <Row>
-                                        <Col md="5">
-                                            <FormGroup>
-                                                <span> Chapeta </span>
-                                                <Input
-                                                    className="form-control-alternative"
-                                                    id="exampleFormControlInput1"
-                                                    placeholder="Número Chapeta"
-                                                    type="number"
-                                                    value={this.state.chapeta}
-                                                    name="chapeta"
-                                                    onChange={this.onInputChange}
-                                                    required
-                                                />
-                                            </FormGroup>
-                                        </Col>
                                         <Col md="5">
                                             <FormGroup>
                                                 <span> Nombre Bovino </span>
@@ -155,17 +161,15 @@ class insertarTerneras extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     placeholder="Nombre Bovino"
                                                     type="text"
-                                                    value={this.state.nombre}
+                                                    value={this.state.id_tbovino}
                                                     name="nombre"
                                                     onChange={this.onInputChange}
                                                     required
                                                 />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
-                                    <Row>
                                         <Col md="5">
-                                            <span> Tipo de Bovino</span>
+                                            <span> Mamá </span>
                                             <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
@@ -175,16 +179,29 @@ class insertarTerneras extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    {this.state.tipos.map(tipo => (
-                                                        <option key={tipo.id_tipo} value={tipo.id_tipo} onChange={this.onInputChange}>{tipo.nombre}</option>
-                                                    )
-
-                                                    )}
+                                                   
+                                                </Input>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md="5">
+                                            <span> Papá</span>
+                                            <FormGroup>
+                                                <Input
+                                                    className="form-control-alternative"
+                                                    id="exampleFormControlInput1"
+                                                    type="select"
+                                                    name="id_tipo"
+                                                    onChange={this.onInputChange}
+                                                    required
+                                                >
+                                                   
                                                 </Input>
                                             </FormGroup>
                                         </Col>
                                         <Col md="5">
-                                            <span> Raza </span>
+                                            <span> Abuelo </span>
                                             <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
@@ -194,31 +211,24 @@ class insertarTerneras extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    {this.state.razas.map(raza => (
-                                                        <option key={raza.id_raza} value={raza.id_raza} onChange={this.onInputChange}>{raza.nombre}</option>
-                                                    )
-
-                                                    )}
+                                                  
                                                 </Input>
                                             </FormGroup>
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col md="5">
-                                            <span> Finca </span>
+                                    <Col md="5">
+                                            <span> Abuela</span>
                                             <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="finca"
+                                                    name="id_tipo"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    <option value={"La Esperanza"} onChange={this.onInputChange}>La Esperanza</option>
-                                                    <option value={"La Palma"} onChange={this.onInputChange}>La Palma</option>
-                                                    <option value={"La Chinita"} onChange={this.onInputChange}>La Chinita</option>
-                                                    <option value={"Cambure"} onChange={this.onInputChange}>Cambure</option>
+                                                    
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -244,4 +254,4 @@ class insertarTerneras extends React.Component {
     }
 }
 
-export default insertarTerneras;
+export default insertarGenealogicos;

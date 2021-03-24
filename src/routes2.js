@@ -9,12 +9,40 @@ import Termos from "../src/views/pages/Termos.js";
 import insertarBovino from "../src/views/pages/insertarTerneras.js";
 import actualizarBovino from "./views/pages/actualizarBovino.js";
 import Profile from "../src/views/pages/Profile.js";
+import insertarMedicamentos from "./views/pages/insertarMedicamentos.js";
+import actualizarMedicamento from "./views/pages/actualizarMedicamentos.js";
+import genealogico from "./views/pages/genealogicos.js";
+import insertarGenealogicos from "./views/pages/insertarGenealogicos.js";
 
 var routes2 = [
     {
         path: "/insertarBovino",
         name: "InsertarBovino",
         component: insertarBovino,
+        layout: "/admin",
+    },
+    {
+        path: "/verGenealogia",
+        name: "Genealogia",
+        component: genealogico,
+        layout: "/admin",
+    },
+    {
+        path: "/insertarMedicamentos",
+        name: "InsertarMedicamentos",
+        component: insertarMedicamentos,
+        layout: "/admin",
+    },
+    {
+        path: "/insertarGenealogia",
+        name: "InsertarGenealogia",
+        component: insertarGenealogicos,
+        layout: "/admin",
+    },
+    {
+        path: "/actualizarMedicamento",
+        name: "ActualizarMedicamento",
+        component: actualizarMedicamento,
         layout: "/admin",
     },
     {

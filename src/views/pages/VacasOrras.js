@@ -148,6 +148,7 @@ export default class VacasOrras extends React.Component {
                              Eliminar
                             </DropdownItem>
                             <DropdownItem
+                            href="/admin/verGenealogia/"
                             >
                             <i className="ni ni-map-big" />
                              Ver Genealogia 
