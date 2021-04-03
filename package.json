@@ -1,5 +1,5 @@
 {
-  "name": "VACHE",
+  "name": "vache",
   "version": "1.2.0",
   "description": "VACHE",
   "main": "index.js",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/Josewp10/vache-client"
   },
-  "homepage": "https://github.com/Josewp10/vache-client",
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
