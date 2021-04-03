@@ -1,22 +1,16 @@
 
 import React from "react";
-
+import { Link } from "react-router-dom";
 
 import {
-  Badge,
   Button,
   Card,
   CardHeader,
-  CardFooter,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
   Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
   Table,
   Container,
   Row,
@@ -41,8 +35,7 @@ const controlPartos = () => {
               <Button
                 className="btn-neutral btn-icon mr-4"
                 color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                to="/admin/insertarControlParto" tag={Link}
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>

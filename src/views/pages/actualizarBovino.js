@@ -9,6 +9,7 @@ import {
     Card,
     Button,
     Container,
+    Modal,
     Col
 } from "reactstrap";
 import TernerasDestetadasHeader from "../../components/Headers/actualizarBovinoH.js";
@@ -26,6 +27,8 @@ class actualizarBovino extends React.Component {
         id_raza: "",
         razas:[],
         finca: "",
+        notificationModal: false,
+        errorModal: false,
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -91,8 +94,16 @@ onSubmit = async (e) => {
         finca: this.state.finca,
     }).then((response) => {
         console.log(response)
-        alert('Registro de Bovinos Actualizado');
-        window.location.href = '/admin/Bovinos';               
+        if (response.status === 200 && response.data.ok === true ) {
+            setTimeout(() => {
+                this.setState({ notificationModal: true });
+            }, 200)
+        }
+        else {
+            setTimeout(() => {
+                this.setState({ errorModal: true });
+            }, 200)
+        }              
     }); console.log(res);
     
 
@@ -109,6 +120,12 @@ onSubmit = async (e) => {
 
 
 
+};
+
+toggleModal = state => {
+    this.setState({
+        [state]: !this.state[state]
+    });
 };
 
 
@@ -227,6 +244,81 @@ onInputChange(e) {
                                             </FormGroup>
                                         </Col>
                                     </Row>
+                                    <div>
+                                            {
+                                                this.state.notificationModal &&
+                                                <Modal
+                                                    className="modal-dialog-centered modal-success"
+                                                    contentClassName="bg-gradient-success"
+                                                    isOpen={this.state.notificationModal}
+                                                   toggle={() => this.toggleModal("notificationModal")}
+                                                >
+                                                    <div className="modal-header">
+                                                        <h4 className="modal-title" id="modal-title-notification">
+                                                            Bovino Actualizado
+                                                        </h4>
+                                                        <button
+                                                            aria-label="Close"
+                                                            className="close"
+                                                            data-dismiss="modal"
+                                                            type="button"
+                                                        >
+                                                            <span aria-hidden={true}>X</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className="py-3 text-center">
+                                                            <i className="ni ni-bell-55 ni-3x" />
+                                                            <h4 className="heading mt-4">¡ Genial !</h4>
+                                                            <p>
+                                                                El Bovino ha sido actualizado
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="modal-footer center">
+                                                        <Button className="btn-white" text="center" color="default" type="button" href="/admin/bovinos/">
+                                                            Entendido
+                                                    </Button>
+                                                    </div>
+                                                </Modal>
+                                            }
+                                        </div>
+                                        <div>
+                                            {
+                                                this.state.errorModal &&
+                                                <Modal
+                                                    className="modal-dialog-centered modal-warning"
+                                                    contentClassName="bg-gradient-warning"
+                                                    isOpen={this.state.errorModal}
+                                                   toggle={() => this.toggleModal("errorModal")}
+                                                >
+                                                    <div className="modal-header">
+                                                        <h4 className="modal-title" id="modal-title-notification">
+                                                            Bovino No Actualizado
+                                                        </h4>
+                                                        <button
+                                                            aria-label="Close"
+                                                            className="close"
+                                                            data-dismiss="modal"
+                                                            type="button"
+                                                            //onClick={() => this.toggleModal("notificationModal")}
+                                                        >
+                                                            <span aria-hidden={true}>X</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className="py-3 text-center">
+                                                            <i className="ni ni-bell-55 ni-3x" />
+                                                            <h4 className="heading mt-4">¡Ops!</h4>
+                                                            <p>
+                                                                Por Favor Revisa los campos y selecciona correctamente las opciones
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </Modal>
+                                            }
+                                        </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"

@@ -1,26 +1,19 @@
 
 import React from "react";
-
+import { Link } from "react-router-dom";
 
 import {
-  Badge,
   Button,
   Card,
   CardHeader,
-  CardFooter,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
   Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 
@@ -40,6 +33,7 @@ const controlCelos= () => {
             <div className="text-right">
               <Button
                 className="btn-danger btn-icon mr-4"
+                to="/admin/insertarControlesCelo" tag={Link}
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>

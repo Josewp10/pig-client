@@ -1,7 +1,5 @@
 
 import Medicamentos from "../src/views/pages/Medicamentos.js";
-import Register from "../src/views/pages/Register.js";
-import Login from "../src/views/pages/Login.js";
 import Bovinos from "../src/views/pages/Bovinos.js";
 import Tareas from "../src/views/pages/Tareasl.js";
 import Termos from "../src/views/pages/Termos.js";
@@ -10,6 +8,9 @@ import controlTratamientos from "../src/views/pages/controlTratamientos.js";
 import controlCelo from "../src/views/pages/controlCelos.js";
 import controlPartos from "../src/views/pages/controlPartos.js";
 import Potreros from "../src/views/pages/Potreros.js";
+import Login from "../src/views/pages/Login.js";
+import Register from "../src/views/pages/Register.js";
+
 
 var routes = [
   {
@@ -27,31 +28,17 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tareas",
-    name: "Tareas",
-    icon: "ni ni-book-bookmark text-yellow",
-    component: Tareas,
-    layout: "/admin",
-  },
-  {
-    path: "/controlRetiros",
-    name: "Control de Retiro",
-    icon: "ni ni-fat-add text-red",
-    component: controlRetiros,
-    layout: "/admin",
-  },
-  {
-    path: "/controlTratamientos",
-    name: "Control de Tratamientos",
-    icon: "ni ni-sound-wave text-orange",
-    component:  controlTratamientos,
-    layout: "/admin",
-  },
-  {
     path: "/controlCelo",
     name: "Control de Celo",
     icon: "ni ni-calendar-grid-58 text-brown",
     component: controlCelo,
+    layout: "/admin",
+  },
+  {
+    path: "/tables",
+    name: "Control de Preñez",
+    icon: "ni ni-collection text-red",
+    //component: controlCelo,
     layout: "/admin",
   },
   {
@@ -62,18 +49,18 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
-    name: "Control de Preñez",
-    icon: "ni ni-collection text-red",
-    component: Register,
-    layout: "/auth",
+    path: "/controlTratamientos",
+    name: "Control de Tratamientos",
+    icon: "ni ni-sound-wave text-orange",
+    component:  controlTratamientos,
+    layout: "/admin",
   },
   {
-    path: "/login",
-    name: "Login",
-    icon: "ni ni-collection text-red",
-    component: Login,
-    layout: "/auth",
+    path: "/controlRetiros",
+    name: "Control de Retiro",
+    icon: "ni ni-fat-add text-red",
+    component: controlRetiros,
+    layout: "/admin",
   },
   {
     path: "/termos",
@@ -83,11 +70,29 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/tareas",
+    name: "Tareas",
+    icon: "ni ni-book-bookmark text-yellow",
+    component: Tareas,
+    layout: "/admin",
+  },
+  {
     path: "/potreros",
     name: "Potreros",
     icon: "ni ni-image text-success",
     component: Potreros,
     layout: "/admin",
   },
+  {
+    path: "/login",
+    component: Login,
+    layout: "/auth",
+  },
+  {
+    path: "/register",
+    component: Register,
+    layout: "/auth",
+},
+  
 ];
 export default routes;

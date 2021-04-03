@@ -3,24 +3,14 @@ import React from "react";
 import axios from "axios";
 
 import {
-  Badge,
   Card,
-  CardHeader,
-  CardFooter,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Media,
-  Button,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 

@@ -3,24 +3,16 @@ import React from "react";
 import axios from "axios";
 
 import {
-  Badge,
   Button,
   Card,
-  CardHeader,
-  CardFooter,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
+  Modal,
 } from "reactstrap";
 
 
@@ -38,8 +30,9 @@ export default class Novillonas extends React.Component {
       nombre: "",
       id_raza: "",
       genetica: "",
-      finca: ""
-    }
+      finca: "",
+    },
+    notificationModal: false,
   }
 
   componentDidMount() {
@@ -68,6 +61,12 @@ export default class Novillonas extends React.Component {
     const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
     console.log(res);
     this.listarNovillonas();
+  };
+
+  toggleModal = state => {
+    this.setState({
+      [state]: !this.state[state]
+    });
   };
 
   cargarInformacion = (Novillona) => {
@@ -128,7 +127,8 @@ export default class Novillonas extends React.Component {
                                 role="button"
                                 size="sm"
                                 color=""
-                                onClick={(e) => e.preventDefault()}
+                                key={i} onClick={this.cargarInformacion.bind(this, Novillona)}
+
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
@@ -141,12 +141,51 @@ export default class Novillonas extends React.Component {
                                   <i className="ni ni-ui-04" />
                             Actualizar
                           </DropdownItem>
+                                <Modal
+                                  className="modal-dialog-centered modal-warning"
+                                  contentClassName="bg-gradient-warning"
+                                  isOpen={this.state.notificationModal}
+                                >
+                                  <div className="modal-header">
+                                    <button
+                                      aria-label="Close"
+                                      className="close"
+                                      data-dismiss="modal"
+                                      type="button"
+                                      onClick={() => this.toggleModal("notificationModal")}
+                                    >
+                                      <span aria-hidden={true}>X</span>
+                                    </button>
+                                  </div>
+                                  <div className="modal-body">
+                                    <div className="py-3 text-center">
+                                      <i className="ni ni-bell-55 ni-3x" />
+                                      <h2 className="heading mt-4">Cuidado!</h2>
+                                      <p>
+                                        Estas a punto de eliminar un bovino de tu inventario 
+                                 </p>
+                                    </div>
+                                  </div>
+                                  <div className="modal-footer">
+                                    <Button className="btn-white"  href="/admin/Novillonas/" color="default" type="button" onClick={() => this.eliminarNovillonas(localStorage.getItem("chapeta"))}>
+                                    Eliminar
+                                    </Button>
+                                    <Button
+                                      className="text-white ml-auto"
+                                      color="link"
+                                      data-dismiss="modal"
+                                      type="button"
+                                      onClick={() => this.toggleModal("notificationModal")}
+                                    >
+                                      Cerrar
+                               </Button>
+                                  </div>
+                                </Modal>
                                 <DropdownItem
-                                  href="#pablo"
-                                  onClick={() => this.eliminarNovillonas(Novillona.chapeta)}
+                                  onClick={() => this.toggleModal("notificationModal")}
                                 >
                                   <i className="ni ni-fat-remove" />
-                           Eliminar
+                                 Eliminar
                           </DropdownItem>
                                 <DropdownItem
                                   href="/admin/verGenealogia/"

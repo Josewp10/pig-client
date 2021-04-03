@@ -13,12 +13,28 @@ import insertarMedicamentos from "./views/pages/insertarMedicamentos.js";
 import actualizarMedicamento from "./views/pages/actualizarMedicamentos.js";
 import genealogico from "./views/pages/genealogicos.js";
 import insertarGenealogicos from "./views/pages/insertarGenealogicos.js";
+import Register from "./views/pages/Register.js";
+import Login from "./views/pages/Login.js";
+import insertarControlesCelo from "./views/pages/insertarControlesCelo.js";
+import insertarControlParto from "./views/pages/insertarControlParto.js";
 
 var routes2 = [
     {
         path: "/insertarBovino",
         name: "InsertarBovino",
         component: insertarBovino,
+        layout: "/admin",
+    },
+    {
+        path: "/insertarControlesCelo",
+        name: "insertarControlesCelo",
+        component: insertarControlesCelo,
+        layout: "/admin",
+    },
+    {
+        path: "/insertarControlParto",
+        name: "insertarControlParto",
+        component: insertarControlParto,
         layout: "/admin",
     },
     {
@@ -103,7 +119,18 @@ var routes2 = [
         path: "/perfil",
         component: Profile,
         layout: "/admin",
-      },
+    },
+    {
+        path: "/login",
+        name: "Login",
+        component: Login,
+        layout: "/auth",
+    },
+    {
+        path: "/register",
+        component: Register,
+        layout: "/auth",
+    },
 
 ];
 export default routes2;

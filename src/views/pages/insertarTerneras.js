@@ -10,8 +10,7 @@ import {
     Button,
     Container,
     Col,
-    CardHeader,
-    Alert
+    Modal,
 } from "reactstrap";
 import TernerasDestetadasHeader from "../../components/Headers/insertarBovino.js";
 
@@ -29,9 +28,12 @@ class insertarTerneras extends React.Component {
             id_raza: "",
             razas: [],
             finca: "",
+            notificationModal: false,
+            errorModal: false,
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
+
 
 
     componentDidMount() {
@@ -67,6 +69,13 @@ class insertarTerneras extends React.Component {
             });
     }
 
+
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
+    };
+
     onSubmit = async (e) => {
 
 
@@ -81,15 +90,16 @@ class insertarTerneras extends React.Component {
             finca: this.state.finca,
         }).then((response) => {
             console.log(response);
-            < Alert color="success" >
-                <span className="alert-inner--icon">
-                    <i className="ni ni-like-2" />
-                </span>{" "}
-                <span className="alert-inner--text">
-                    <strong>Bovino</strong> Insertado Correctamente
-        </span>
-            </Alert >
-            window.location.href = '/admin/Bovinos';
+            if (response.status === 200 && response.data.ok === true ) {
+                setTimeout(() => {
+                    this.setState({ notificationModal: true });
+                }, 200)
+            }
+            else {
+                setTimeout(() => {
+                    this.setState({ errorModal: true });
+                },200)
+            }
         });
 
 
@@ -103,8 +113,6 @@ class insertarTerneras extends React.Component {
             razas: [],
             finca: "",
         });
-
-
 
     };
 
@@ -175,6 +183,7 @@ class insertarTerneras extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
+                                                    <option value={"Seleccione el tipo del bovino"} onChange={this.onInputChange}>Seleccione el tipo del Bovino</option>
                                                     {this.state.tipos.map(tipo => (
                                                         <option key={tipo.id_tipo} value={tipo.id_tipo} onChange={this.onInputChange}>{tipo.nombre}</option>
                                                     )
@@ -194,7 +203,9 @@ class insertarTerneras extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
+                                                     <option value={"Seleccione la raza del bovino"} onChange={this.onInputChange}>Seleccione la raza del Bovino</option>
                                                     {this.state.razas.map(raza => (
+                                                        
                                                         <option key={raza.id_raza} value={raza.id_raza} onChange={this.onInputChange}>{raza.nombre}</option>
                                                     )
 
@@ -223,13 +234,88 @@ class insertarTerneras extends React.Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
+                                    <div>
+                                            {
+                                                this.state.notificationModal &&
+                                                <Modal
+                                                    className="modal-dialog-centered modal-success"
+                                                    contentClassName="bg-gradient-success"
+                                                    isOpen={this.state.notificationModal}
+                                                   toggle={() => this.toggleModal("notificationModal")}
+                                                >
+                                                    <div className="modal-header">
+                                                        <h4 className="modal-title" id="modal-title-notification">
+                                                            Bovino Registrado
+                                                        </h4>
+                                                        <button
+                                                            aria-label="Close"
+                                                            className="close"
+                                                            data-dismiss="modal"
+                                                            type="button"
+                                                            onClick={() => this.toggleModal("notificationModal")}
+                                                        >
+                                                            <span aria-hidden={true}>X</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className="py-3 text-center">
+                                                            <i className="ni ni-bell-55 ni-3x" />
+                                                            <h4 className="heading mt-4">¡ Genial !</h4>
+                                                            <p>
+                                                                Tu nuevo bovino ha sido registrado
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="modal-footer center">
+                                                        <Button className="btn-white" text="center" color="default" type="button" href="/admin/bovinos/">
+                                                            Entendido
+                                                    </Button>
+                                                    </div>
+                                                </Modal>
+                                            }
+                                        </div>
+                                        <div>
+                                            {
+                                                this.state.errorModal &&
+                                                <Modal
+                                                    className="modal-dialog-centered modal-warning"
+                                                    contentClassName="bg-gradient-warning"
+                                                    isOpen={this.state.errorModal}
+                                                   toggle={() => this.toggleModal("errorModal")}
+                                                >
+                                                    <div className="modal-header">
+                                                        <h4 className="modal-title" id="modal-title-notification">
+                                                            Bovino No Registrado
+                                                        </h4>
+                                                        <button
+                                                            aria-label="Close"
+                                                            className="close"
+                                                            data-dismiss="modal"
+                                                            type="button"
+                                                            onClick={() => this.toggleModal("errorModal")}
+                                                        >
+                                                            <span aria-hidden={true}>X</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className="py-3 text-center">
+                                                            <i className="ni ni-bell-55 ni-3x" />
+                                                            <h4 className="heading mt-4">¡Ops!</h4>
+                                                            <p>
+                                                                Por favor revisa los campos y selecciona correctamente las opciones
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                                </Modal>
+                                            }
+                                        </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"
                                             className="btn-neutral btn-icon mr-4"
-                                            color="default"
-
+                                            color="default"                                  
                                         >
+
                                             <i className="ni ni-fat-add" />
                                             <span className="btn-inner--text">Insertar</span>
                                         </Button>
