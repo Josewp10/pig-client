@@ -17,6 +17,7 @@ import Register from "./views/pages/Register.js";
 import Login from "./views/pages/Login.js";
 import insertarControlesCelo from "./views/pages/insertarControlesCelo.js";
 import insertarControlParto from "./views/pages/insertarControlParto.js";
+import actualizarControlCelo from "./views/pages/actualizarControlCelo.js";
 
 var routes2 = [
     {
@@ -65,6 +66,12 @@ var routes2 = [
         path: "/actualizarBovino",
         name: "ActualizarBovino",
         component: actualizarBovino,
+        layout: "/admin",
+    },
+    {
+        path: "/actualizarControlCelo",
+        name: "ActualizarControlCelo",
+        component: actualizarControlCelo,
         layout: "/admin",
     },
     {

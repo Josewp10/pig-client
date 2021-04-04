@@ -10,7 +10,7 @@ import controlPartos from "../src/views/pages/controlPartos.js";
 import Potreros from "../src/views/pages/Potreros.js";
 import Login from "../src/views/pages/Login.js";
 import Register from "../src/views/pages/Register.js";
-
+import controlPreñez from "../src/views/pages/controlPreñez.js";
 
 var routes = [
   {
@@ -35,10 +35,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
+    path: "/controlPreñez",
     name: "Control de Preñez",
     icon: "ni ni-collection text-red",
-    //component: controlCelo,
+    component: controlPreñez,
     layout: "/admin",
   },
   {

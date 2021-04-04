@@ -1,9 +1,7 @@
 import React from "react";
 import axios from 'axios';
-import moment from 'moment';
 import ReactDatetime from "react-datetime";
 import { Link } from "react-router-dom";
-
 import {
     FormGroup,
     Form,
@@ -18,11 +16,10 @@ import {
     InputGroupText,
     InputGroup
 } from "reactstrap";
-
 import TernerasDestetadasHeader from "../../components/Headers/controlCelo.js";
 
-class insertarControlesCelo extends React.Component {
 
+class actualizarControlCelo extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -42,10 +39,18 @@ class insertarControlesCelo extends React.Component {
     }
 
 
+    async componentDidMount() {
 
-    componentDidMount() {
-
-
+        this.state.id_celo = localStorage.getItem("id_celo");
+        const res = await axios.get('http://vache-server.herokuapp.com/celo/' + this.state.id_celo);
+        this.setState({
+            id_celo: res.data.info[0].id_celo,
+            fecha_inicio: res.data.info[0].fecha_inicio,
+            detalles: res.data.info[0].detalles,
+            id_macho: res.data.info[0].id_macho,
+            id_hembra: res.data.info[0].id_hembra,
+            id_usuario: res.data.info[0].id_usuario,
+        });
 
         axios
             .get("http://vache-server.herokuapp.com/usuarios/NombreId")
@@ -89,27 +94,22 @@ class insertarControlesCelo extends React.Component {
             });
     }
 
-
-    toggleModal = state => {
-        this.setState({
-            [state]: !this.state[state]
-        });
-    };
-
     onSubmit = async (e) => {
 
 
         e.preventDefault();
 
 
-        await axios.post('http://vache-server.herokuapp.com/celo', {
+        const res = await axios.put('http://vache-server.herokuapp.com/celo/' + this.state.id_celo, {
             fecha_inicio: this.state.fecha_inicio,
+            detalles: this.state.detalles,
             id_macho: this.state.id_macho,
             id_hembra: this.state.id_hembra,
-            detalles: this.state.detalles,
-            id_usuario: this.state.id_usuario
+            id_usuario: this.state.id_usuario,
+            id_celo: this.state.id_celo,
         }).then((response) => {
-            console.log(response);
+            console.log(this.state.id_macho );
+            console.log("actualizacion" + response)
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {
                     this.setState({ notificationModal: true });
@@ -120,7 +120,7 @@ class insertarControlesCelo extends React.Component {
                     this.setState({ errorModal: true });
                 }, 200)
             }
-        });
+        }); console.log(res);
 
 
         this.setState({
@@ -135,6 +135,14 @@ class insertarControlesCelo extends React.Component {
             encargado: [],
         });
 
+
+
+    };
+
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
     };
 
 
@@ -155,10 +163,8 @@ class insertarControlesCelo extends React.Component {
                     <Row>
                         <div className="col">
                             <Card className="shadow">
-                                <br></br>
-                                <Form onSubmit={this.onSubmit} className="text-center">
+                                <Form onSubmit={this.onSubmit}>
                                     <Row>
-
                                         <Col md="5">
                                             <FormGroup>
                                                 <span> Hembra en Celo </span>
@@ -167,10 +173,10 @@ class insertarControlesCelo extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     type="select"
                                                     name="id_hembra"
+                                                    value={this.state.id_hembra}
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                <option value={"Seleccione la hembra que estuvo en celo"} onChange={this.onInputChange}>Seleccione la hembra que estuvo en celo</option>
                                                     {this.state.hembras.map(hembras => (
                                                         <option key={hembras.chapeta} value={hembras.chapeta} onChange={this.onInputChange}>{hembras.nombre}</option>
                                                     )
@@ -187,10 +193,10 @@ class insertarControlesCelo extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     type="select"
                                                     name="id_macho"
+                                                    value={this.state.id_macho}
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                <option value={"Seleccione el toro"} onChange={this.onInputChange}>Seleccione el toro</option>
                                                     {this.state.machos.map(machos => (
                                                         <option key={machos.chapeta} value={machos.chapeta} onChange={this.onInputChange}>{machos.nombre}</option>
                                                     )
@@ -249,9 +255,9 @@ class insertarControlesCelo extends React.Component {
                                                         type="select"
                                                         name="id_usuario"
                                                         onChange={this.onInputChange}
+                                                        value={this.state.id_usuario}
                                                         required
                                                     >
-                                                    <option value={"Seleccione el encargado del celo"} onChange={this.onInputChange}>Seleccione el usuario que registra el celo</option>
                                                     {this.state.encargado.map(encargado => (
                                                         <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
                                                     )
@@ -262,89 +268,88 @@ class insertarControlesCelo extends React.Component {
                                         </Col>
                                     </Row>
                                     <div>
-                                            {
-                                                this.state.notificationModal &&
-                                                <Modal
-                                                    className="modal-dialog-centered modal-danger"
-                                                    contentClassName="bg-gradient-danger"
-                                                    isOpen={this.state.notificationModal}
-                                                   toggle={() => this.toggleModal("notificationModal")}
-                                                >
-                                                    <div className="modal-header">
-                                                        <h4 className="modal-title" id="modal-title-notification">
-                                                            Control de Celo Registrado
+                                        {
+                                            this.state.notificationModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-success"
+                                                contentClassName="bg-gradient-success"
+                                                isOpen={this.state.notificationModal}
+                                                toggle={() => this.toggleModal("notificationModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Bovino Actualizado
                                                         </h4>
-                                                        <button
-                                                            aria-label="Close"
-                                                            className="close"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            onClick={() => this.toggleModal("notificationModal")}
-                                                        >
-                                                            <span aria-hidden={true}>X</span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className="py-3 text-center">
-                                                            <i className="ni ni-bell-55 ni-3x" />
-                                                            <h4 className="heading mt-4">¡ Genial !</h4>
-                                                            <p>
-                                                                Tu control de celo ha sido registrado
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡ Genial !</h4>
+                                                        <p>
+                                                            El Bovino ha sido actualizado
                                                         </p>
-                                                        </div>
                                                     </div>
-                                                    <div className="modal-footer center">
-                                                        <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlCelo/">
-                                                            Entendido
+                                                </div>
+                                                <div className="modal-footer center">
+                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlCelo/">
+                                                        Entendido
                                                     </Button>
-                                                    </div>
-                                                </Modal>
-                                            }
-                                        </div>
-                                        <div>
-                                            {
-                                                this.state.errorModal &&
-                                                <Modal
-                                                    className="modal-dialog-centered modal-warning"
-                                                    contentClassName="bg-gradient-warning"
-                                                    isOpen={this.state.errorModal}
-                                                   toggle={() => this.toggleModal("errorModal")}
-                                                >
-                                                    <div className="modal-header">
-                                                        <h4 className="modal-title" id="modal-title-notification">
-                                                            Control de Celo No Registrado
+                                                </div>
+                                            </Modal>
+                                        }
+                                    </div>
+                                    <div>
+                                        {
+                                            this.state.errorModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
+                                                isOpen={this.state.errorModal}
+                                                toggle={() => this.toggleModal("errorModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Bovino No Actualizado
                                                         </h4>
-                                                        <button
-                                                            aria-label="Close"
-                                                            className="close"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            onClick={() => this.toggleModal("errorModal")}
-                                                        >
-                                                            <span aria-hidden={true}>X</span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className="py-3 text-center">
-                                                            <i className="ni ni-bell-55 ni-3x" />
-                                                            <h4 className="heading mt-4">¡Opss!</h4>
-                                                            <p>
-                                                                Por favor revisa los campos y selecciona correctamente las opciones
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡Ops!</h4>
+                                                        <p>
+                                                            Por Favor Revisa los campos y selecciona correctamente las opciones
                                                         </p>
-                                                        </div>
                                                     </div>
-                                                </Modal>
-                                            }
-                                        </div>
+                                                </div>
+
+                                            </Modal>
+                                        }
+                                    </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"
-                                            className="btn-danger btn-icon mr-4"
-                                            color="danger"
+                                            className="btn-neutral btn-icon mr-4"
+                                            color="default"
 
                                         >
                                             <i className="ni ni-fat-add" />
-                                            <span className="btn-inner--text">Insertar</span>
+                                            <span className="btn-inner--text">Guardar</span>
                                         </Button>
                                     </div>
                                 </Form>
@@ -357,4 +362,4 @@ class insertarControlesCelo extends React.Component {
     }
 }
 
-export default insertarControlesCelo;
+export default actualizarControlCelo;

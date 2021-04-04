@@ -20,40 +20,38 @@ import {
 } from "reactstrap";
 
 
-import Medicine from "../../components/Headers/controlCelo.js";
+import Medicine from "../../components/Headers/controlPrenez.js";
 
-export default class controlCelos extends React.Component {
+export default class controlPreñez extends React.Component {
 
   state = {
-    listaControlCelo: [],
-    celo: {
-      id_celo: "",
-      fecha_inicio: "",
-      detalles: "",
-      Nombre_Macho: "",
-      Nombre_Hembra: "",
-      nombre: "",
-      id_macho:"",
-      id_usuario:"",
-      id_hembra:"",
-      fecha_posible_parto: "",
+    listaControlPrenez: [],
+    controlPrenez: {
+      id_control:"",
+      vaca:"",
+      fecha_palpacion:"",
+      confirmacion_palpacion:"",
+      num_parto:"",
+      fecha_secado:"",
+      usuario:"",
+      id_celo:"",
     },
     notificationModal: false,
   }
 
   componentDidMount() {
-    this.listarControlesCelos();
+    this.listarControlesPrenez();
     localStorage.setItem("edit", "");
   }
 
 
-  listarControlesCelos = () => {
+  listarControlesPrenez = () => {
     axios
-      .get("http://vache-server.herokuapp.com/celo")
+      .get("http://vache-server.herokuapp.com/controlPrenez")
       .then(response => {
         console.log(response)
         this.setState({
-          listaControlCelo: response.data.info
+          listaControlPrenez: response.data.info
         });
         console.log("Registro Control de Celo")
         console.log(this.state.control);
@@ -63,10 +61,10 @@ export default class controlCelos extends React.Component {
       });
   }
 
-  eliminarControlCelo = async (id_celo) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/celo/' + id_celo);
+  eliminarControlPrenez = async (id_control) => {
+    const res = await axios.delete('http://vache-server.herokuapp.com/controlPrenez' + id_control);
     console.log(res);
-    this.listarControlesCelos();
+    this.listarControlesPrenez();
   };
 
   toggleModal = state => {
@@ -75,15 +73,16 @@ export default class controlCelos extends React.Component {
     });
   };
 
-  cargarInformacion = (celo) => {
-    console.log("ESTE ES" + celo);
-    localStorage.setItem("id_celo", celo.id_celo);
-    localStorage.setItem("fecha_inicio", celo.fecha_inicio);
-    localStorage.setItem("detalles", celo.detalles);
-    localStorage.setItem("Nombre_Macho", celo.Nombre_Macho);
-    localStorage.setItem("Nombre_Hembra", celo.Nombre_Hembra);
-    localStorage.setItem("nombre", celo.nombre);
-    localStorage.setItem("fecha_posible_parto", celo.fecha_posible_parto);
+  cargarInformacion = (controlPrenez) => {
+    localStorage.setItem("id_control", controlPrenez.id_celo);
+    localStorage.setItem("vaca", controlPrenez.vaca);
+    localStorage.setItem("fecha_palpacion", controlPrenez.fecha_palpacion);
+    localStorage.setItem("confirmacion_palpacion", controlPrenez.confirmacion_palpacion);
+    localStorage.setItem("num_parto", controlPrenez.num_parto);
+    localStorage.setItem("fecha_secado", controlPrenez.fecha_secado);
+    localStorage.setItem("usuario", controlPrenez.usuario);
+    localStorage.setItem("id_celo", controlPrenez.id_celo);
+
   }
 
   render() {
@@ -98,8 +97,8 @@ export default class controlCelos extends React.Component {
             <CardHeader className="bg-transparent pb-5">
             <div className="text-right">
               <Button
-                className="btn-danger btn-icon mr-4"
-                to="/admin/insertarControlesCelo" tag={Link}
+                className="btn-info btn-icon mr-4"
+                to="/admin/insertarControlesPrenez" tag={Link}
               >
                  <i className="ni ni-fat-add" />
                 <span className="btn-inner--text">Añadir</span>
@@ -109,26 +108,26 @@ export default class controlCelos extends React.Component {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Hembra en Celo</th>
-                    <th scope="col">Nombre Toro</th>
-                    <th scope="col">Detalles</th>
-                    <th scope="col">Fecha Inicio</th>
-                    <th scope="col">Fecha Posible Parto</th>
+                    <th scope="col">Nombre Vaca</th>
+                    <th scope="col">Fecha Palpación</th>
+                    <th scope="col">Confirmacion Palpación</th>
+                    <th scope="col">Fecha Secado</th>
+                    <th scope="col">Número de Partos</th>
                     <th scope="col">Encargado</th>
                     <th scope="col">Acciones</th>
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                {this.state.listaControlCelo.map((celo, i) => {
+                {this.state.listaControlPrenez.map((controlPrenez, i) => {
                       return (
                         <tr>
-                          <td>{celo.Nombre_Hembra}</td>
-                          <td>{celo.Nombre_Macho}</td>
-                          <td>{celo.detalles}</td>
-                          <td>{moment(new Date(celo.fecha_inicio)).format('DD-MM-YYYY')}</td>
-                          <td>{moment(new Date(celo.fecha_posible_parto)).format('DD-MM-YYYY')}</td>
-                          <td>{celo.nombre}</td>
+                          <td>{controlPrenez.vaca}</td>
+                          <td>{moment(new Date(controlPrenez.fecha_palpacion)).format('DD-MM-YYYY')}</td>
+                          <td>{controlPrenez.confirmacion_palpacion}</td>
+                          <td>{moment(new Date(controlPrenez.fecha_secado)).format('DD-MM-YYYY')}</td>
+                          <td>{controlPrenez.num_parto}</td>
+                          <td>{controlPrenez.usuario}</td>
                           <td className="text-right">
                             <UncontrolledDropdown>
                               <DropdownToggle
@@ -136,7 +135,7 @@ export default class controlCelos extends React.Component {
                                 role="button"
                                 size="sm"
                                 color=""
-                                key={i} onClick={this.cargarInformacion.bind(this, celo)}
+                                key={i} onClick={this.cargarInformacion.bind(this, controlPrenez)}
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
@@ -144,7 +143,7 @@ export default class controlCelos extends React.Component {
 
                                 <DropdownItem
                                   href="/admin/actualizarcontrolCelo/"
-                                  key={i} onClick={this.cargarInformacion.bind(this, celo)}
+                                  key={i} onClick={this.cargarInformacion.bind(this, controlPrenez)}
                                 >
                                   <i className="ni ni-ui-04" />
                             Actualizar
@@ -170,12 +169,12 @@ export default class controlCelos extends React.Component {
                                       <i className="ni ni-bell-55 ni-3x" />
                                       <h2 className="heading mt-4">¡Cuidado!</h2>
                                       <p>
-                                        Estas a punto de eliminar un control de celo
+                                        Estas a punto de eliminar un control de Preñez
                                  </p>
                                     </div>
                                   </div>
                                   <div className="modal-footer">
-                                    <Button className="btn-white"  href="/admin/controlCelo/" color="default" type="button" onClick={() => this.eliminarControlCelo(localStorage.getItem("id_celo"))}>
+                                    <Button className="btn-white"  href="/admin/controlPreñez/" color="default" type="button" onClick={() => this.eliminarControlPrenez(localStorage.getItem("id_control"))}>
                                     Eliminar
                                     </Button>
                                     <Button
