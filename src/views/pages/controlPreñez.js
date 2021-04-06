@@ -124,7 +124,7 @@ export default class controlPreñez extends React.Component {
                         <tr>
                           <td>{controlPrenez.vaca}</td>
                           <td>{moment(new Date(controlPrenez.fecha_palpacion)).format('DD-MM-YYYY')}</td>
-                          <td>{controlPrenez.confirmacion_palpacion}</td>
+                          <td>{controlPrenez.confirmacion_palpacion ? "confirmado" : "No Esta en preñez"}</td>
                           <td>{moment(new Date(controlPrenez.fecha_secado)).format('DD-MM-YYYY')}</td>
                           <td>{controlPrenez.num_parto}</td>
                           <td>{controlPrenez.usuario}</td>
