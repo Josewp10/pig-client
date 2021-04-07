@@ -74,14 +74,13 @@ export default class controlPreñez extends React.Component {
   };
 
   cargarInformacion = (controlPrenez) => {
-    localStorage.setItem("id_control", controlPrenez.id_celo);
+    localStorage.setItem("id_control", controlPrenez.id_control);
     localStorage.setItem("vaca", controlPrenez.vaca);
     localStorage.setItem("fecha_palpacion", controlPrenez.fecha_palpacion);
     localStorage.setItem("confirmacion_palpacion", controlPrenez.confirmacion_palpacion);
     localStorage.setItem("num_parto", controlPrenez.num_parto);
-    localStorage.setItem("fecha_secado", controlPrenez.fecha_secado);
+    localStorage.setItem("id_usuario", controlPrenez.id_usuario);
     localStorage.setItem("usuario", controlPrenez.usuario);
-    localStorage.setItem("id_celo", controlPrenez.id_celo);
 
   }
 
@@ -142,58 +141,14 @@ export default class controlPreñez extends React.Component {
                               <DropdownMenu className="dropdown-menu-arrow" right>
 
                                 <DropdownItem
-                                  href="/admin/actualizarcontrolCelo/"
+                                  href="/admin/actualizarcontrolPreñez/"
                                   key={i} onClick={this.cargarInformacion.bind(this, controlPrenez)}
                                 >
                                   <i className="ni ni-ui-04" />
                             Actualizar
                           </DropdownItem>
-                                <Modal
-                                  className="modal-dialog-centered modal-warning"
-                                  contentClassName="bg-gradient-warning"
-                                  isOpen={this.state.notificationModal}
-                                >
-                                  <div className="modal-header">
-                                    <button
-                                      aria-label="Close"
-                                      className="close"
-                                      data-dismiss="modal"
-                                      type="button"
-                                      onClick={() => this.toggleModal("notificationModal")}
-                                    >
-                                      <span aria-hidden={true}>X</span>
-                                    </button>
-                                  </div>
-                                  <div className="modal-body">
-                                    <div className="py-3 text-center">
-                                      <i className="ni ni-bell-55 ni-3x" />
-                                      <h2 className="heading mt-4">¡Cuidado!</h2>
-                                      <p>
-                                        Estas a punto de eliminar un control de Preñez
-                                 </p>
-                                    </div>
-                                  </div>
-                                  <div className="modal-footer">
-                                    <Button className="btn-white"  href="/admin/controlPreñez/" color="default" type="button" onClick={() => this.eliminarControlPrenez(localStorage.getItem("id_control"))}>
-                                    Eliminar
-                                    </Button>
-                                    <Button
-                                      className="text-white ml-auto"
-                                      color="link"
-                                      data-dismiss="modal"
-                                      type="button"
-                                      onClick={() => this.toggleModal("notificationModal")}
-                                    >
-                                      Cerrar
-                               </Button>
-                                  </div>
-                                </Modal>
-                                <DropdownItem
-                                  onClick={() => this.toggleModal("notificationModal")}
-                                >
-                                  <i className="ni ni-fat-remove" />
-                                 Eliminar
-                          </DropdownItem>
+                                
+                                
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </td>

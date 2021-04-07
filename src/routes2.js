@@ -18,6 +18,8 @@ import Login from "./views/pages/Login.js";
 import insertarControlesCelo from "./views/pages/insertarControlesCelo.js";
 import insertarControlParto from "./views/pages/insertarControlParto.js";
 import actualizarControlCelo from "./views/pages/actualizarControlCelo.js";
+import insertarControlesPrenez from "./views/pages/insertarControlesPrenez.js";
+import actualizarControlPreñez from "./views/pages/actualizarControlPreñez.js";
 
 var routes2 = [
     {
@@ -30,6 +32,12 @@ var routes2 = [
         path: "/insertarControlesCelo",
         name: "insertarControlesCelo",
         component: insertarControlesCelo,
+        layout: "/admin",
+    },
+    {
+        path: "/insertarControlesPrenez",
+        name: "insertarControlesPrenez",
+        component: insertarControlesPrenez,
         layout: "/admin",
     },
     {
@@ -72,6 +80,12 @@ var routes2 = [
         path: "/actualizarControlCelo",
         name: "ActualizarControlCelo",
         component: actualizarControlCelo,
+        layout: "/admin",
+    },
+    {
+        path: "/actualizarControlPreñez",
+        name: "ActualizarControlPreñez",
+        component: actualizarControlPreñez,
         layout: "/admin",
     },
     {
