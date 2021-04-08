@@ -37,7 +37,7 @@ class insertarGenealogicos extends React.Component {
     componentDidMount() {
 
         this.state.nombre = localStorage.getItem("nombre")
-        this.state.id_tbovino = localStorage.getItem("id_Tbovinos")
+        this.state.id_tbovino = localStorage.getItem("chapeta")
         //lactantes madres
         axios
             .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
@@ -183,7 +183,7 @@ class insertarGenealogicos extends React.Component {
                                                     required
                                                 >
                                                     {this.state.mamas.map(mamá => (
-                                                        <option key={mamá.id_Tbovinos} value={mamá.id_Tbovinos} onChange={this.onInputChange}>{mamá.nombre}</option>
+                                                        <option key={mamá.chapeta} value={mamá.chapeta} onChange={this.onInputChange}>{mamá.nombre}</option>
                                                     )
 
                                                     )}
@@ -204,7 +204,7 @@ class insertarGenealogicos extends React.Component {
                                                     required
                                                 >
                                                    {this.state.papas.map(papá => (
-                                                            <option key={papá.id_Tbovinos} value={papá.id_Tbovinos} onChange={this.onInputChange}>{papá.nombre}</option>
+                                                            <option key={papá.chapeta} value={papá.chapeta} onChange={this.onInputChange}>{papá.nombre}</option>
                                                         )
 
                                                         )}  
@@ -223,7 +223,7 @@ class insertarGenealogicos extends React.Component {
                                                     required
                                                 >
                                                   {this.state.abuelos.map(abuelo => (
-                                                            <option key={abuelo.id_Tbovinos} value={abuelo.id_Tbovinos} onChange={this.onInputChange}>{abuelo.nombre}</option>
+                                                            <option key={abuelo.chapeta} value={abuelo.chapeta} onChange={this.onInputChange}>{abuelo.nombre}</option>
                                                         )
 
                                                         )}  
@@ -244,7 +244,7 @@ class insertarGenealogicos extends React.Component {
                                                     required
                                                 >
                                                     {this.state.abuelas.map(abuela => (
-                                                            <option key={abuela.id_Tbovinos} value={abuela.id_Tbovinos} onChange={this.onInputChange}>{abuela.nombre}</option>
+                                                            <option key={abuela.chapeta} value={abuela.chapeta} onChange={this.onInputChange}>{abuela.nombre}</option>
                                                         )
 
                                                         )}  
