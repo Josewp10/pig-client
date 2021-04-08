@@ -11,6 +11,7 @@ import Potreros from "../src/views/pages/Potreros.js";
 import Login from "../src/views/pages/Login.js";
 import Register from "../src/views/pages/Register.js";
 import controlPreñez from "../src/views/pages/controlPreñez.js";
+import produccionLechera from "../src/views/pages/produccionLechera";
 
 var routes = [
   {
@@ -18,13 +19,6 @@ var routes = [
     name: "Bovinos",
     icon: "ni ni-world text-success",
     component: Bovinos,
-    layout: "/admin",
-  },
-  {
-    path: "/medicamentos",
-    name: "Medicamentos",
-    icon: "ni ni-briefcase-24 text-gray",
-    component: Medicamentos,
     layout: "/admin",
   },
   {
@@ -60,6 +54,20 @@ var routes = [
     name: "Control de Retiro",
     icon: "ni ni-fat-add text-red",
     component: controlRetiros,
+    layout: "/admin",
+  },
+  {
+    path: "/medicamentos",
+    name: "Medicamentos",
+    icon: "ni ni-briefcase-24 text-gray",
+    component: Medicamentos,
+    layout: "/admin",
+  },
+  {
+    path: "/produccionLechera",
+    name: "Producción Lechera",
+    icon: "ni ni-archive-2 text-green",
+    component: produccionLechera,
     layout: "/admin",
   },
   {

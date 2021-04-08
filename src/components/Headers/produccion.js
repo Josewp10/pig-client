@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container, Row, Col } from "reactstrap";
 
-const controlCelo = () => {
+const produccion = () => {
   return (
     <>
       <div
@@ -12,21 +12,21 @@ const controlCelo = () => {
           minHeight: "300px",
           backgroundImage:
             "url(" +
-            require("../../assets/img/theme/celo.jpeg").default +
+            require("../../assets/img/theme/lecherias.jpeg").default +
             ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
       >
          {/* Mask */}
-         <span className="mask bg-gradient-danger opacity-8" />
+         <span className="mask bg-gradient-success opacity-8" />
         {/* Header container */}
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Controles de Celo</h1>
+              <h1 className="display-2 text-white">Producción Lechera</h1>
               <p className="text-white mt-0 mb-5">
-                Administre los periodos cuando la vaca esta en calor y esta en celo con el toro
+                Inventaree sus producciones lecheras 
               </p>
             </Col>
           </Row>
@@ -36,4 +36,4 @@ const controlCelo = () => {
   );
 };
 
-export default controlCelo;
+export default produccion;

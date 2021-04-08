@@ -12,7 +12,7 @@ const controlCelo = () => {
           minHeight: "300px",
           backgroundImage:
             "url(" +
-            require("../../assets/img/theme/controlparto.jpeg").default +
+            require("../../assets/img/theme/preñez.jpeg").default +
             ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
