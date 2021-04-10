@@ -11,7 +11,7 @@ import Potreros from "../src/views/pages/Potreros.js";
 import Login from "../src/views/pages/Login.js";
 import Register from "../src/views/pages/Register.js";
 import controlPreñez from "../src/views/pages/controlPreñez.js";
-import produccionLechera from "../src/views/pages/produccionLechera";
+import Lecherias from "../src/views/pages/Lecherias.js";
 
 var routes = [
   {
@@ -64,10 +64,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/produccionLechera",
+    path: "/lecherias",
     name: "Producción Lechera",
     icon: "ni ni-archive-2 text-green",
-    component: produccionLechera,
+    component: Lecherias,
     layout: "/admin",
   },
   {

@@ -145,7 +145,7 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Vacas Orras
+                          Vacas Horras
                         </CardTitle>
                         <img src={imagenes.vaca} alt="ternera" style = {{ height:50, width: 50,}}/>
                       {/*

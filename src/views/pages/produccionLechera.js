@@ -86,9 +86,11 @@ export default class produccionLeche extends React.Component {
             <div className="col">
               <Card className="shadow">
                 <p>    
-
-                  Cantidad semanal en esta lecheria: 3030030
-              
+                  <center>
+                  <b className="text-center">
+                  Cantidad producida desde hasta: 
+                  </b>  
+                  </center>          
                 </p>
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">

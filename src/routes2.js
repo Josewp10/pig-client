@@ -20,8 +20,15 @@ import insertarControlParto from "./views/pages/insertarControlParto.js";
 import actualizarControlCelo from "./views/pages/actualizarControlCelo.js";
 import insertarControlesPrenez from "./views/pages/insertarControlesPrenez.js";
 import actualizarControlPreñez from "./views/pages/actualizarControlPreñez.js";
+import produccionLechera from "../src/views/pages/produccionLechera.js";
 
 var routes2 = [
+    {
+        path: "/produccionLechera",
+        name: "Produccion Lechera",
+        component: produccionLechera,
+        layout: "/admin",
+      },
     {
         path: "/insertarBovino",
         name: "InsertarBovino",

@@ -9,10 +9,10 @@ const PotrerosH = () => {
       <div
         className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style={{
-          minHeight: "300px",
+          minHeight: "500px",
           backgroundImage:
             "url(" +
-            require("../../assets/img/theme/tareas.jpeg").default +
+            require("../../assets/img/theme/potreros.jpeg").default +
             ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",

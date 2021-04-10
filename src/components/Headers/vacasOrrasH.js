@@ -34,7 +34,7 @@ const vacasOrrasH = () => {
                   <i className="ni ni-bold-left" />
                 </Button>
               </div>
-              <h1 className="display-2 text-white">Vacas Orras</h1>
+              <h1 className="display-2 text-white">Vacas Horras</h1>
             </Col>
           </Row>
         </Container>
