@@ -23,6 +23,11 @@ export default class produccionLeche extends React.Component {
 
   state = {
     listaProduccion: [],
+    listaLitros:[],
+    litros:"",
+    id_lecheria: "",
+    fecha_inicio: "",
+    fecha_fin: "",
     produccion: {
       id_Tproduccion: "",
       lecheria:"",
@@ -34,26 +39,43 @@ export default class produccionLeche extends React.Component {
     notificationModal: false,
   }
 
-  componentDidMount() {
-    this.listarProduccion();
-  }
+  async componentDidMount() {
+    this.setState({
+      id_lecheria: localStorage.getItem("id_lecheria"),
+      fecha_inicio: new Date((localStorage.getItem("fecha_inicio"))).toISOString(),
+      fecha_fin: new Date((localStorage.getItem("fecha_fin"))).toISOString()
+  });   
+  const res = await axios
+  .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros/"+localStorage.getItem("id_lecheria")+"/"+new Date((localStorage.getItem("fecha_inicio"))).toISOString()+"/"+new Date((localStorage.getItem("fecha_fin"))).toISOString())
+    this.setState({
+      listaProduccion: res.data.info,
+      id_Tproduccion: res.data.info[0].id_Tproduccion,
+      lecheria: res.data.info[0].lecheria,
+      nombre: res.data.info[0].nombre,
+      fecha: res.data.info[0].fecha,
+      cantidad_dia: res.data.info[0].cantidad_dia,
+      encargado: res.data.info[0].encargado
+    });
+    console.log(res.data.info)
 
-
-  listarProduccion = () => {
     axios
-      .get("http://vache-server.herokuapp.com/produccionLeche")
-      .then(response => {
-        console.log(response)
-        this.setState({
-          listaProduccion: response.data.info
-        });
-        console.log("Registro Produccion Lechera")
-        console.log(this.state.control);
-      })
-      .catch(error => {
-        console.log(error);
+  .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros/"+localStorage.getItem("id_lecheria")+"/"+new Date((localStorage.getItem("fecha_inicio"))).toISOString()+"/"+new Date((localStorage.getItem("fecha_fin"))).toISOString())
+  .then(response => {
+      console.log(response)
+      this.setState({
+        listaLitros: response.data.info,
+        litros: response.data.info[0].litros
       });
+      console.log("Registro tipos")
+      console.log(this.state.control);
+  })
+  .catch(error => {
+      console.log(error);
+  });
   }
+
+
+
 
   eliminarProducciones = async (id_Tproduccion) => {
     const res = await axios.delete('http://vache-server.herokuapp.com/produccionLeche' + id_Tproduccion);
@@ -73,6 +95,7 @@ export default class produccionLeche extends React.Component {
     localStorage.setItem("nombre", produccion.nombre);
     localStorage.setItem("fecha", produccion.fecha);
     localStorage.setItem("cantidad_dia", produccion.cantidad_dia);
+    localStorage.setItem("encargado", produccion.encargado);
   }
 
   render() {
@@ -88,7 +111,7 @@ export default class produccionLeche extends React.Component {
                 <p>    
                   <center>
                   <b className="text-center">
-                  Cantidad producida desde hasta: 
+                  Cantidad producida desde {moment(this.state.fecha_inicio).format('YYYY-MM-DD')} hasta: {moment(this.state.fecha_fin).format('YYYY-MM-DD')} = {this.state.litros}
                   </b>  
                   </center>          
                 </p>
@@ -116,7 +139,7 @@ export default class produccionLeche extends React.Component {
                             <UncontrolledDropdown>
                               <DropdownToggle
                                 className="btn-icon-only text-light"
-                                href="#pablo"
+                                href=""
                                 role="button"
                                 size="sm"
                                 color=""
