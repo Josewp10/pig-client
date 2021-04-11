@@ -21,6 +21,9 @@ import actualizarControlCelo from "./views/pages/actualizarControlCelo.js";
 import insertarControlesPrenez from "./views/pages/insertarControlesPrenez.js";
 import actualizarControlPreñez from "./views/pages/actualizarControlPreñez.js";
 import produccionLechera from "../src/views/pages/produccionLechera.js";
+import actualizarControlParto from "./views/pages/actualizarControlParto";
+import controlPartos from "./views/pages/controlPartos";
+
 
 var routes2 = [
     {
@@ -95,6 +98,19 @@ var routes2 = [
         component: actualizarControlPreñez,
         layout: "/admin",
     },
+    {
+        path: "/actualizarControlParto",
+        name: "ActualizarControlParto",
+        component: actualizarControlParto,
+        layout: "/admin",
+    },
+    {
+        path: "/controlPartos",
+        name: "ControlPartos",
+        component: controlPartos,
+        layout: "/admin",
+    },
+    
     {
         path: "/TernerasLevante",
         name: "TernerasLevante",
