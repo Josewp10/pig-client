@@ -26,6 +26,7 @@ class insertarControlesCelo extends React.Component {
     constructor() {
         super();
         this.state = {
+            listaControlCelo: [],
             id_celo: "",
             fecha_inicio: "",
             detalles: "",
@@ -33,10 +34,13 @@ class insertarControlesCelo extends React.Component {
             machos: [],
             id_hembra: "",
             hembras: [],
+            nombreHembra:"",
             id_usuario: "",
             encargado: [],
             notificationModal: false,
             errorModal: false,
+            celularUser: '',
+            fecha_posible_parto: "",
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -45,7 +49,19 @@ class insertarControlesCelo extends React.Component {
 
     componentDidMount() {
 
-
+        axios
+            .get("http://vache-server.herokuapp.com/celo")
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    listaControlCelo: response.data.info.fecha_posible_parto
+                });
+                console.log("Registro Control de Celo")
+                console.log(this.state.control);
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
         axios
             .get("http://vache-server.herokuapp.com/usuarios/NombreId")
@@ -66,7 +82,7 @@ class insertarControlesCelo extends React.Component {
             .then(response => {
                 console.log(response)
                 this.setState({
-                   hembras: response.data.info
+                    hembras: response.data.info
                 });
                 console.log("Registro Hembras")
                 console.log(this.state.control);
@@ -100,6 +116,20 @@ class insertarControlesCelo extends React.Component {
 
 
         e.preventDefault();
+
+        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
+            .catch(error => { console.log(error); });
+        this.setState({
+            celularUser: celular.data.info[0].celular
+        });
+        console.log("ACA COGIO EL CELULAR: " + this.state.celularUser);
+
+        let mensaje = {
+            to: this.state.celularUser,
+            body: `Se registro un control de celo en la fecha: ${moment(this.state.fecha_inicio).format('YYYY-MM-DD')} para la vaca con chapeta : ${this.state.id_hembra} y nombre: ${"aca nombre de la vaca"}
+            su posible parto será el dia: ${"aca fecha posible parto"} `
+        }
+        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
 
 
         await axios.post('http://vache-server.herokuapp.com/celo', {
@@ -170,7 +200,7 @@ class insertarControlesCelo extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                <option value={"Seleccione la hembra que estuvo en celo"} onChange={this.onInputChange}>Seleccione la hembra que estuvo en celo</option>
+                                                    <option value={"Seleccione la hembra que estuvo en celo"} onChange={this.onInputChange}>Seleccione la hembra que estuvo en celo</option>
                                                     {this.state.hembras.map(hembras => (
                                                         <option key={hembras.chapeta} value={hembras.chapeta} onChange={this.onInputChange}>{hembras.nombre}</option>
                                                     )
@@ -190,7 +220,7 @@ class insertarControlesCelo extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                <option value={"Seleccione el toro"} onChange={this.onInputChange}>Seleccione el toro</option>
+                                                    <option value={"Seleccione el toro"} onChange={this.onInputChange}>Seleccione el toro</option>
                                                     {this.state.machos.map(machos => (
                                                         <option key={machos.chapeta} value={machos.chapeta} onChange={this.onInputChange}>{machos.nombre}</option>
                                                     )
@@ -243,7 +273,7 @@ class insertarControlesCelo extends React.Component {
                                             <span>Encargado</span>
                                             <FormGroup>
                                                 <FormGroup>
-                                                <Input
+                                                    <Input
                                                         className="form-control-alternative"
                                                         id="exampleFormControlInput1"
                                                         type="select"
@@ -251,91 +281,91 @@ class insertarControlesCelo extends React.Component {
                                                         onChange={this.onInputChange}
                                                         required
                                                     >
-                                                    <option value={"Seleccione el encargado del celo"} onChange={this.onInputChange}>Seleccione el usuario que registra el celo</option>
-                                                    {this.state.encargado.map(encargado => (
-                                                        <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
-                                                    )
-                                                    )}
+                                                        <option value={"Seleccione el encargado del celo"} onChange={this.onInputChange}>Seleccione el usuario que registra el celo</option>
+                                                        {this.state.encargado.map(encargado => (
+                                                            <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
+                                                        )
+                                                        )}
                                                     </Input>
                                                 </FormGroup>
                                             </FormGroup>
                                         </Col>
                                     </Row>
                                     <div>
-                                            {
-                                                this.state.notificationModal &&
-                                                <Modal
-                                                    className="modal-dialog-centered modal-danger"
-                                                    contentClassName="bg-gradient-danger"
-                                                    isOpen={this.state.notificationModal}
-                                                   toggle={() => this.toggleModal("notificationModal")}
-                                                >
-                                                    <div className="modal-header">
-                                                        <h4 className="modal-title" id="modal-title-notification">
-                                                            Control de Celo Registrado
+                                        {
+                                            this.state.notificationModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-danger"
+                                                contentClassName="bg-gradient-danger"
+                                                isOpen={this.state.notificationModal}
+                                                toggle={() => this.toggleModal("notificationModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Control de Celo Registrado
                                                         </h4>
-                                                        <button
-                                                            aria-label="Close"
-                                                            className="close"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            onClick={() => this.toggleModal("notificationModal")}
-                                                        >
-                                                            <span aria-hidden={true}>X</span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className="py-3 text-center">
-                                                            <i className="ni ni-bell-55 ni-3x" />
-                                                            <h4 className="heading mt-4">¡ Genial !</h4>
-                                                            <p>
-                                                                Tu control de celo ha sido registrado
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                        onClick={() => this.toggleModal("notificationModal")}
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡ Genial !</h4>
+                                                        <p>
+                                                            Tu control de celo ha sido registrado
                                                         </p>
-                                                        </div>
                                                     </div>
-                                                    <div className="modal-footer center">
-                                                        <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlCelo/">
-                                                            Entendido
+                                                </div>
+                                                <div className="modal-footer center">
+                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlCelo/">
+                                                        Entendido
                                                     </Button>
-                                                    </div>
-                                                </Modal>
-                                            }
-                                        </div>
-                                        <div>
-                                            {
-                                                this.state.errorModal &&
-                                                <Modal
-                                                    className="modal-dialog-centered modal-warning"
-                                                    contentClassName="bg-gradient-warning"
-                                                    isOpen={this.state.errorModal}
-                                                   toggle={() => this.toggleModal("errorModal")}
-                                                >
-                                                    <div className="modal-header">
-                                                        <h4 className="modal-title" id="modal-title-notification">
-                                                            Control de Celo No Registrado
+                                                </div>
+                                            </Modal>
+                                        }
+                                    </div>
+                                    <div>
+                                        {
+                                            this.state.errorModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
+                                                isOpen={this.state.errorModal}
+                                                toggle={() => this.toggleModal("errorModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Control de Celo No Registrado
                                                         </h4>
-                                                        <button
-                                                            aria-label="Close"
-                                                            className="close"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            onClick={() => this.toggleModal("errorModal")}
-                                                        >
-                                                            <span aria-hidden={true}>X</span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className="py-3 text-center">
-                                                            <i className="ni ni-bell-55 ni-3x" />
-                                                            <h4 className="heading mt-4">¡Opss!</h4>
-                                                            <p>
-                                                                Por favor revisa los campos y selecciona correctamente las opciones
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                        onClick={() => this.toggleModal("errorModal")}
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡Opss!</h4>
+                                                        <p>
+                                                            Por favor revisa los campos y selecciona correctamente las opciones
                                                         </p>
-                                                        </div>
                                                     </div>
-                                                </Modal>
-                                            }
-                                        </div>
+                                                </div>
+                                            </Modal>
+                                        }
+                                    </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"
