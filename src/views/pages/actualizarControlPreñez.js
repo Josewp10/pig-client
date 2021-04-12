@@ -245,8 +245,8 @@ class actualizarControlesPrenez extends React.Component {
                                             {
                                                 this.state.notificationModal &&
                                                 <Modal
-                                                    className="modal-dialog-centered modal-danger"
-                                                    contentClassName="bg-gradient-danger"
+                                                    className="modal-dialog-centered modal-info"
+                                                    contentClassName="bg-gradient-info"
                                                     isOpen={this.state.notificationModal}
                                                    toggle={() => this.toggleModal("notificationModal")}
                                                 >
@@ -319,8 +319,8 @@ class actualizarControlesPrenez extends React.Component {
                                     <div className="text-center">
                                         <Button
                                             type="submit"
-                                            className="btn-danger btn-icon mr-4"
-                                            color="danger"
+                                            className="btn-info btn-icon mr-4"
+                                            color="info"
 
                                         >
                                             <i className="ni ni-fat-add" />
