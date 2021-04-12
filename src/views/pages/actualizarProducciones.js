@@ -1,9 +1,7 @@
 import React from "react";
 import axios from 'axios';
-import moment from 'moment';
 import ReactDatetime from "react-datetime";
 import { Link } from "react-router-dom";
-
 import {
     FormGroup,
     Form,
@@ -18,52 +16,41 @@ import {
     InputGroupText,
     InputGroup
 } from "reactstrap";
-
 import TernerasDestetadasHeader from "../../components/Headers/controlCelo.js";
 
-class insertarControlesCelo extends React.Component {
 
+class actualizarProducciones extends React.Component {
     constructor() {
         super();
         this.state = {
-            listaControlCelo: [],
-            id_celo: "",
-            fecha_inicio: "",
-            detalles: "",
-            id_macho: "",
-            machos: [],
-            id_hembra: "",
-            hembras: [],
-            nombreHembra: "",
-            id_usuario: "",
+            id_TProduccion: "",
+            id_lecheria: "",
+            id_bovino: "",
+            nombre: "",
+            fecha: "",
+            cantidad_dia: "",
+            encargado: "",
+            listaProducciones: [],
+            lactantes: [],
             encargado: [],
+            lecherias: [],
             notificationModal: false,
             errorModal: false,
-            celularUser: '',
-            fecha_posible_parto: "",
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
 
 
+    async componentDidMount() {
 
-    componentDidMount() {
-
-        axios
-            .get("http://vache-server.herokuapp.com/celo/" +this.state.id_celo)
-            .then(response => {
-                console.log(response)
-                this.setState({
-                    fecha_posible_parto : response.data.info[0].fecha_posible_parto
-                });
-                console.log(this.state.fecha_posible_parto);
-                console.log(this.state.listaControlCelo);
-                console.log("Registro Control de Celo")
-                console.log(this.state.control);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        this.state.id_TProduccion = localStorage.getItem("id_Tproducccion");
+        const res = await axios.get('http://vache-server.herokuapp.com/produccionLeche/' + this.state.id_Tproduccion);
+        this.setState({
+            id_bovino: res.data.info[0].id_bovino,
+            id_lecheria: res.data.info[0].id_lecheria,
+            fecha: res.data.info[0].fecha,
+            cantidad_dia: res.data.info[0].cantidad_dia,
+        });
 
         axios
             .get("http://vache-server.herokuapp.com/usuarios/NombreId")
@@ -107,26 +94,20 @@ class insertarControlesCelo extends React.Component {
             });
     }
 
-
-    toggleModal = state => {
-        this.setState({
-            [state]: !this.state[state]
-        });
-    };
-
     onSubmit = async (e) => {
 
 
         e.preventDefault();
 
-        await axios.post('http://vache-server.herokuapp.com/celo', {
-            fecha_inicio: this.state.fecha_inicio,
-            id_macho: this.state.id_macho,
-            id_hembra: this.state.id_hembra,
-            detalles: this.state.detalles,
-            id_usuario: this.state.id_usuario,          
+
+        const res = await axios.put('http://vache-server.herokuapp.com/produccionLeche/' + this.state.id_Tproduccion, {
+            id_bovino: this.state.id_bovino,
+            id_lecheria: this.state.id_macho,
+            fecha: this.state.id_hembra,
+            cantidad_dia: this.state.cantidad_dia,
         }).then((response) => {
-            console.log(response);
+            console.log(this.state.id_macho);
+            console.log("actualizacion" + response)
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {
                     this.setState({ notificationModal: true });
@@ -137,37 +118,31 @@ class insertarControlesCelo extends React.Component {
                     this.setState({ errorModal: true });
                 }, 200)
             }
-
-        });
-
-        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
-            .catch(error => { console.log(error); });
-        this.setState({
-            celularUser: celular.data.info[0].celular
-        });
-        console.log("ACA COGIO EL CELULAR: " + this.state.celularUser);
-
-        let mensaje = {
-            to: this.state.celularUser,
-            body: `Señor Usuario,se registro un control de celo con fecha de inicio:  ${moment(this.state.fecha_inicio).format('DD-MM-YYYY')} para la vaca con chapeta : ${this.state.id_hembra} y nombre: ${"(aca nombre de la vaca)"}
-        estuvo en celo con el toro: ${"(aca nombre del toro)"}, la fecha de la vaca para su posible parto será el dia:  ${moment(this.state.listaControlCelo.fecha_posible_parto).format('DD-MM-YYYY')} `
-        }
-        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
-
+        }); console.log(res);
 
 
         this.setState({
-            id_celo: "",
-            fecha_inicio: "",
-            detalles: "",
-            id_macho: "",
-            machos: [],
-            id_hembra: "",
-            hembras: [],
-            id_usuario: "",
+            id_TProduccion: "",
+            id_lecheria: "",
+            id_bovino: "",
+            nombre: "",
+            fecha: "",
+            cantidad_dia: "",
+            encargado: "",
+            listaProducciones: [],
+            lactantes: [],
             encargado: [],
+            lecherias: [],
         });
 
+
+
+    };
+
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
     };
 
 
@@ -188,47 +163,37 @@ class insertarControlesCelo extends React.Component {
                     <Row>
                         <div className="col">
                             <Card className="shadow">
-                                <br></br>
-                                <Form onSubmit={this.onSubmit} className="text-center">
+                                <Form onSubmit={this.onSubmit}>
                                     <Row>
 
                                         <Col md="5">
                                             <FormGroup>
-                                                <span> Hembra en Celo </span>
+                                                <span> Lecheria </span>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="id_hembra"
+                                                    name="id_lecheria"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    <option value={"Seleccione la hembra que estuvo en celo"} onChange={this.onInputChange}>Seleccione la hembra que estuvo en celo</option>
-                                                    {this.state.hembras.map(hembras => (
-                                                        <option key={hembras.chapeta} value={hembras.chapeta} onChange={this.onInputChange}>{hembras.nombre}</option>
-                                                    )
 
-                                                    )}
 
                                                 </Input>
                                             </FormGroup>
                                         </Col>
                                         <Col md="5">
-                                            <span> Toro</span>
+                                            <span> Nombre Lactante</span>
                                             <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     type="select"
-                                                    name="id_macho"
+                                                    name="id_bovino"
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    <option value={"Seleccione el toro"} onChange={this.onInputChange}>Seleccione el toro</option>
-                                                    {this.state.machos.map(machos => (
-                                                        <option key={machos.chapeta} value={machos.chapeta} onChange={this.onInputChange}>{machos.nombre}</option>
-                                                    )
-                                                    )}
+
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -236,7 +201,7 @@ class insertarControlesCelo extends React.Component {
                                     <Row>
                                         <Col md="5">
                                             <FormGroup>
-                                                <span> Fecha Celo</span>
+                                                <span> Fecha Registro Producción</span>
                                                 <InputGroup className="input-group-alternative">
                                                     <InputGroupAddon addonType="prepend">
                                                         <InputGroupText>
@@ -245,27 +210,27 @@ class insertarControlesCelo extends React.Component {
                                                     </InputGroupAddon>
                                                     <ReactDatetime
                                                         inputProps={{
-                                                            placeholder: "Fecha Celo"
+                                                            placeholder: "Fecha Registro Producción"
                                                         }}
                                                         dateFormat={'DD-MM-YYYY'}
                                                         timeFormat={false}
-                                                        value={new Date(this.state.fecha_inicio)}
-                                                        onChange={e => this.setState({ fecha_inicio: e })}
+                                                        value={new Date(this.state.fecha)}
+                                                        onChange={e => this.setState({ fecha: e })}
                                                         name="fecha_inicio"
                                                     />
                                                 </InputGroup>
                                             </FormGroup>
                                         </Col>
                                         <Col md="5">
-                                            <span> Detalles </span>
+                                            <span> Cantidad Dia </span>
                                             <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     placeholder="Detalles"
-                                                    type="text"
+                                                    type="number"
                                                     value={this.state.detalles}
-                                                    name="detalles"
+                                                    name="cantidad_dia"
                                                     onChange={this.onInputChange}
                                                     required
                                                 />
@@ -285,11 +250,7 @@ class insertarControlesCelo extends React.Component {
                                                         onChange={this.onInputChange}
                                                         required
                                                     >
-                                                        <option value={"Seleccione el encargado del celo"} onChange={this.onInputChange}>Seleccione el usuario que registra el celo</option>
-                                                        {this.state.encargado.map(encargado => (
-                                                            <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
-                                                        )
-                                                        )}
+
                                                     </Input>
                                                 </FormGroup>
                                             </FormGroup>
@@ -306,14 +267,13 @@ class insertarControlesCelo extends React.Component {
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                        Control de Celo Registrado
+                                                    Producción de Leche Actualizada
                                                         </h4>
                                                     <button
                                                         aria-label="Close"
                                                         className="close"
                                                         data-dismiss="modal"
                                                         type="button"
-                                                        onClick={() => this.toggleModal("notificationModal")}
                                                     >
                                                         <span aria-hidden={true}>X</span>
                                                     </button>
@@ -323,7 +283,7 @@ class insertarControlesCelo extends React.Component {
                                                         <i className="ni ni-bell-55 ni-3x" />
                                                         <h4 className="heading mt-4">¡ Genial !</h4>
                                                         <p>
-                                                            Tu control de celo ha sido registrado
+                                                        Tu producción de leche para esta lecheria ha sido ha sido actualizada
                                                         </p>
                                                     </div>
                                                 </div>
@@ -346,14 +306,13 @@ class insertarControlesCelo extends React.Component {
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                        Control de Celo No Registrado
+                                                    Producción de leche no actualizada
                                                         </h4>
                                                     <button
                                                         aria-label="Close"
                                                         className="close"
                                                         data-dismiss="modal"
                                                         type="button"
-                                                        onClick={() => this.toggleModal("errorModal")}
                                                     >
                                                         <span aria-hidden={true}>X</span>
                                                     </button>
@@ -361,24 +320,25 @@ class insertarControlesCelo extends React.Component {
                                                 <div className="modal-body">
                                                     <div className="py-3 text-center">
                                                         <i className="ni ni-bell-55 ni-3x" />
-                                                        <h4 className="heading mt-4">¡Opss!</h4>
+                                                        <h4 className="heading mt-4">¡Ops!</h4>
                                                         <p>
-                                                            Por favor revisa los campos y selecciona correctamente las opciones
+                                                            Por Favor Revisa los campos y selecciona correctamente las opciones
                                                         </p>
                                                     </div>
                                                 </div>
+
                                             </Modal>
                                         }
                                     </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"
-                                            className="btn-danger btn-icon mr-4"
-                                            color="danger"
+                                            className="btn-neutral btn-icon mr-4"
+                                            color="default"
 
                                         >
                                             <i className="ni ni-fat-add" />
-                                            <span className="btn-inner--text">Insertar</span>
+                                            <span className="btn-inner--text">Guardar</span>
                                         </Button>
                                     </div>
                                 </Form>
@@ -391,4 +351,4 @@ class insertarControlesCelo extends React.Component {
     }
 }
 
-export default insertarControlesCelo;
+export default actualizarProducciones;

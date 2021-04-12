@@ -271,14 +271,14 @@ class actualizarControlCelo extends React.Component {
                                         {
                                             this.state.notificationModal &&
                                             <Modal
-                                                className="modal-dialog-centered modal-success"
-                                                contentClassName="bg-gradient-success"
+                                                className="modal-dialog-centered modal-danger"
+                                                contentClassName="bg-gradient-danger"
                                                 isOpen={this.state.notificationModal}
                                                 toggle={() => this.toggleModal("notificationModal")}
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                        Bovino Actualizado
+                                                       Control de Celo Actualizado
                                                         </h4>
                                                     <button
                                                         aria-label="Close"
@@ -294,7 +294,7 @@ class actualizarControlCelo extends React.Component {
                                                         <i className="ni ni-bell-55 ni-3x" />
                                                         <h4 className="heading mt-4">¡ Genial !</h4>
                                                         <p>
-                                                            El Bovino ha sido actualizado
+                                                           El control de celo ha sido actualizado
                                                         </p>
                                                     </div>
                                                 </div>

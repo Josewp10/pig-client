@@ -2,10 +2,12 @@
 import React from "react";
 import moment from 'moment';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import {
   Button,
   Card,
+  CardHeader,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
@@ -23,18 +25,18 @@ export default class produccionLeche extends React.Component {
 
   state = {
     listaProduccion: [],
-    listaLitros:[],
-    litros:"",
+    listaLitros: [],
+    litros: "",
     id_lecheria: "",
     fecha_inicio: "",
     fecha_fin: "",
     produccion: {
       id_Tproduccion: "",
-      lecheria:"",
-      nombre:"",
-      fecha:"",
-      cantidad_dia:"",
-      encargado:"",
+      lecheria: "",
+      nombre: "",
+      fecha: "",
+      cantidad_dia: "",
+      encargado: "",
     },
     notificationModal: false,
   }
@@ -44,9 +46,9 @@ export default class produccionLeche extends React.Component {
       id_lecheria: localStorage.getItem("id_lecheria"),
       fecha_inicio: new Date((localStorage.getItem("fecha_inicio"))).toISOString(),
       fecha_fin: new Date((localStorage.getItem("fecha_fin"))).toISOString()
-  });   
-  const res = await axios
-  .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros/"+localStorage.getItem("id_lecheria")+"/"+new Date((localStorage.getItem("fecha_inicio"))).toISOString()+"/"+new Date((localStorage.getItem("fecha_fin"))).toISOString())
+    });
+    const res = await axios
+      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString())
     this.setState({
       listaProduccion: res.data.info,
       id_Tproduccion: res.data.info[0].id_Tproduccion,
@@ -59,19 +61,19 @@ export default class produccionLeche extends React.Component {
     console.log(res.data.info)
 
     axios
-  .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros/"+localStorage.getItem("id_lecheria")+"/"+new Date((localStorage.getItem("fecha_inicio"))).toISOString()+"/"+new Date((localStorage.getItem("fecha_fin"))).toISOString())
-  .then(response => {
-      console.log(response)
-      this.setState({
-        listaLitros: response.data.info,
-        litros: response.data.info[0].litros
+      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString())
+      .then(response => {
+        console.log(response)
+        this.setState({
+          listaLitros: response.data.info,
+          litros: response.data.info[0].litros
+        });
+        console.log("Registro tipos")
+        console.log(this.state.control);
+      })
+      .catch(error => {
+        console.log(error);
       });
-      console.log("Registro tipos")
-      console.log(this.state.control);
-  })
-  .catch(error => {
-      console.log(error);
-  });
   }
 
 
@@ -108,12 +110,23 @@ export default class produccionLeche extends React.Component {
           <Row>
             <div className="col">
               <Card className="shadow">
-                <p>    
+                <CardHeader className="bg-transparent pb-5">
+                  <div className="text-right">
+                    <Button
+                      className="btn-success btn-icon mr-4"
+                      to="/admin/insertarProduccionLechera" tag={Link}
+                    >
+                      <i className="ni ni-fat-add" />
+                      <span className="btn-inner--text">Añadir</span>
+                    </Button>
+                  </div>
+                </CardHeader>
+                <p>
                   <center>
-                  <b className="text-center">
-                  Cantidad producida desde {moment(this.state.fecha_inicio).format('YYYY-MM-DD')} hasta: {moment(this.state.fecha_fin).format('YYYY-MM-DD')} = {this.state.litros}
-                  </b>  
-                  </center>          
+                    <b className="text-center">
+                      Cantidad producida desde {moment(this.state.fecha_inicio).format('YYYY-MM-DD')} hasta: {moment(this.state.fecha_fin).format('YYYY-MM-DD')} = {this.state.litros}
+                    </b>
+                  </center>
                 </p>
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
@@ -151,7 +164,7 @@ export default class produccionLeche extends React.Component {
                               <DropdownMenu className="dropdown-menu-arrow" right>
 
                                 <DropdownItem
-                                  href="/admin/actualizarBovino/"
+                                  href="/admin/actualizarProduccionLeche/"
                                   key={i} onClick={this.cargarInformacion.bind(this, produccion)}
                                 >
                                   <i className="ni ni-ui-04" />
@@ -178,13 +191,13 @@ export default class produccionLeche extends React.Component {
                                       <i className="ni ni-bell-55 ni-3x" />
                                       <h2 className="heading mt-4">Cuidado!</h2>
                                       <p>
-                                        Estas a punto de eliminar un bovino de tu inventario 
+                                        Estas a punto de eliminar un bovino de tu inventario
                                  </p>
                                     </div>
                                   </div>
                                   <div className="modal-footer">
-                                    <Button className="btn-white"  href="/admin/Novillonas/" color="default" type="button" onClick={() => this.eliminarProducciones(localStorage.getItem("chapeta"))}>
-                                    Eliminar
+                                    <Button className="btn-white" href="/admin/produccionLechera" color="default" type="button" onClick={() => this.eliminarProducciones(localStorage.getItem("id_Tproduccion"))}>
+                                      Eliminar
                                     </Button>
                                     <Button
                                       className="text-white ml-auto"
@@ -203,7 +216,7 @@ export default class produccionLeche extends React.Component {
                                   <i className="ni ni-fat-remove" />
                                  Eliminar
                           </DropdownItem>
-                                
+
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </td>

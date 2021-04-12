@@ -326,8 +326,8 @@ class insertarControlesPrenez extends React.Component {
                                     <div className="text-center">
                                         <Button
                                             type="submit"
-                                            className="btn-danger btn-icon mr-4"
-                                            color="danger"
+                                            className="btn-info btn-icon mr-4"
+                                            color="info"
 
                                         >
                                             <i className="ni ni-fat-add" />

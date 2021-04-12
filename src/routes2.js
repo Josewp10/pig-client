@@ -23,7 +23,8 @@ import actualizarControlPreñez from "./views/pages/actualizarControlPreñez.js"
 import produccionLechera from "../src/views/pages/produccionLechera.js";
 import actualizarControlParto from "./views/pages/actualizarControlParto";
 import controlPartos from "./views/pages/controlPartos";
-
+import insertarProduccionLechera from "./views/pages/insertarProduccionLechera.js";
+import actualizarProducciones from "./views/pages/actualizarProducciones.js";
 
 var routes2 = [
     {
@@ -42,6 +43,12 @@ var routes2 = [
         path: "/insertarControlesCelo",
         name: "insertarControlesCelo",
         component: insertarControlesCelo,
+        layout: "/admin",
+    },
+    {
+        path: "/insertarProduccionLechera",
+        name: "insertarProduccionLechera",
+        component: insertarProduccionLechera,
         layout: "/admin",
     },
     {
@@ -72,6 +79,12 @@ var routes2 = [
         path: "/insertarGenealogia",
         name: "InsertarGenealogia",
         component: insertarGenealogicos,
+        layout: "/admin",
+    },
+    {
+        path: "/actualizarProduccionLeche",
+        name: "actualizarProduccionLeche",
+        component: actualizarProducciones,
         layout: "/admin",
     },
     {

@@ -26,22 +26,22 @@ class insertarControlParto extends React.Component {
     constructor() {
         super();
         this.state = {
-            id_bovino:"",
-            id_tipo:"",
-            tipos:[],
-            nombre:"",
+            id_bovino: "",
+            id_tipo: "",
+            tipos: [],
+            nombre: "",
             id_raza: "",
-            razas:[],
-            finca:"",
-            fecha_parto:"",
-            pesaje:"",
-            observaciones:"",
-            id_mama:"",
-            id_papa:"",
+            razas: [],
+            finca: "",
+            fecha_parto: "",
+            pesaje: "",
+            observaciones: "",
+            id_mama: "",
+            id_papa: "",
             mamas: [],
             papas: [],
-            id_usuario:"",
-            encargado:[],
+            id_usuario: "",
+            encargado: [],
             notificationModal: false,
             errorModal: false,
         }
@@ -50,22 +50,22 @@ class insertarControlParto extends React.Component {
 
     componentDidMount() {
 
-        this.state.nombre = localStorage.getItem("nombre")
-        this.state.id_mama = localStorage.getItem("chapeta")
-        
+        //this.state.nombre = localStorage.getItem("nombre")
+        //this.state.id_mama = localStorage.getItem("chapeta")
+
         axios
-        .get("http://vache-server.herokuapp.com/registroTipos/")
-        .then(response => {
-            console.log(response)
-            this.setState({
-                tipos: response.data.info
+            .get("http://vache-server.herokuapp.com/registroTipos/")
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    tipos: response.data.info
+                });
+                console.log("Registro tipos")
+                console.log(this.state.control);
+            })
+            .catch(error => {
+                console.log(error);
             });
-            console.log("Registro tipos")
-            console.log(this.state.control);
-        })
-        .catch(error => {
-            console.log(error);
-        });
 
 
         axios
@@ -87,7 +87,7 @@ class insertarControlParto extends React.Component {
             .then(response => {
                 console.log(response)
                 this.setState({
-                   mamas: response.data.info
+                    mamas: response.data.info
                 });
                 console.log("Registro Hembras")
                 console.log(this.state.control);
@@ -96,32 +96,32 @@ class insertarControlParto extends React.Component {
                 console.log(error);
             });
         axios
-        .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
-        .then(response => {
-            console.log(response)
-            this.setState({
-                papas: response.data.info
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    papas: response.data.info
+                });
+                console.log("Registro Machos")
+                console.log(this.state.control);
+            })
+            .catch(error => {
+                console.log(error);
             });
-            console.log("Registro Machos")
-            console.log(this.state.control);
-        })
-        .catch(error => {
-            console.log(error);
-        });
 
         axios
-        .get("http://vache-server.herokuapp.com/usuarios/NombreId")
-        .then(response => {
-            console.log(response)
-            this.setState({
-                encargado: response.data.info
+            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    encargado: response.data.info
+                });
+                console.log("Registro Usuarios")
+                console.log(this.state.control);
+            })
+            .catch(error => {
+                console.log(error);
             });
-            console.log("Registro Usuarios")
-            console.log(this.state.control);
-        })
-        .catch(error => {
-            console.log(error);
-        });
     }
 
     toggleModal = state => {
@@ -137,18 +137,29 @@ class insertarControlParto extends React.Component {
 
 
         await axios.post('http://vache-server.herokuapp.com/controlPartos', {
-            id_bovino:this.state.id_bovino,
+            id_bovino: this.state.id_bovino,
             id_tipo: this.state.id_tipo,
-            nombre:this.state.nombre,
-            id_raza:this.state.id_raza,
-            finca:this.state.finca,
-            fecha_parto:this.state.fecha_parto,
+            nombre: this.state.nombre,
+            id_raza: this.state.id_raza,
+            finca: this.state.finca,
+            fecha_parto: this.state.fecha_parto,
             pesaje: this.state.pesaje,
             observaciones: this.state.observaciones,
             id_mama: this.state.id_mama,
             id_papa: this.state.id_papa,
-            id_usuario:this.state.id_usuario,
+            id_usuario: this.state.id_usuario,
         }).then((response) => {
+            console.log(this.state.id_bovino);
+            console.log(this.state.id_tipo);
+            console.log(this.state.nombre);
+            console.log(this.state.id_raza);
+            console.log(this.state.finca);
+            console.log(this.state.fecha_parto);
+            console.log(this.state.pesaje);
+            console.log(this.state.observaciones);
+            console.log(this.state.id_mama);
+            console.log(this.state.id_papa);
+            console.log(this.state.id_usuario);
             console.log(response);
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {
@@ -160,27 +171,27 @@ class insertarControlParto extends React.Component {
                     this.setState({ errorModal: true });
                 }, 200)
             }
-           
+
         });
 
 
         this.setState({
-            id_bovino:"",
-            id_tipo:"",
-            tipos:[],
-            nombre:"",
+            id_bovino: "",
+            id_tipo: "",
+            tipos: [],
+            nombre: "",
             id_raza: "",
-            razas:[],
-            finca:"",
-            fecha_parto:"",
-            pesaje:"",
-            observaciones:"",
-            id_mama:"",
-            id_papa:"",
+            razas: [],
+            finca: "",
+            fecha_parto: "",
+            pesaje: "",
+            observaciones: "",
+            id_mama: "",
+            id_papa: "",
             mamas: [],
             papas: [],
-            id_usuario:"",
-            encargado:[]
+            id_usuario: "",
+            encargado: []
         });
     };
 
@@ -205,7 +216,7 @@ class insertarControlParto extends React.Component {
                                 <br></br>
                                 <Form onSubmit={this.onSubmit} className="text-center">
                                     <Row>
-                                    <Col md="5">
+                                        <Col md="5">
                                             <FormGroup>
                                                 <span> Chapeta </span>
                                                 <Input
@@ -235,9 +246,10 @@ class insertarControlParto extends React.Component {
                                                 />
                                             </FormGroup>
                                         </Col>
-                                    
+                                    </Row>
+                                    <Row>
                                         <Col md="5">
-                                        <FormGroup>
+                                            <FormGroup>
                                                 <span> Fecha parto</span>
                                                 <InputGroup className="input-group-alternative">
                                                     <InputGroupAddon addonType="prepend">
@@ -277,12 +289,12 @@ class insertarControlParto extends React.Component {
                                                     )}
                                                 </Input>
                                             </FormGroup>
-                                            </Col>
-                                   
-                                    
+                                        </Col>
+                                    </Row>
+                                    <Row>
                                         <Col md="5">
-                                                <span> Raza de la cria</span>
-                                                <FormGroup>
+                                            <span> Raza de la cria</span>
+                                            <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
@@ -291,9 +303,9 @@ class insertarControlParto extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                     <option value={"Seleccione la raza del bovino"} onChange={this.onInputChange}>Seleccione la raza del Bovino</option>
+                                                    <option value={"Seleccione la raza del bovino"} onChange={this.onInputChange}>Seleccione la raza del Bovino</option>
                                                     {this.state.razas.map(raza => (
-                                                        
+
                                                         <option key={raza.id_raza} value={raza.id_raza} onChange={this.onInputChange}>{raza.nombre}</option>
                                                     )
 
@@ -302,8 +314,8 @@ class insertarControlParto extends React.Component {
                                             </FormGroup>
                                         </Col>
                                         <Col md="5">
-                                        <span> Fincas </span>
-                                        <FormGroup>
+                                            <span> Fincas </span>
+                                            <FormGroup>
                                                 <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
@@ -319,7 +331,8 @@ class insertarControlParto extends React.Component {
                                                 </Input>
                                             </FormGroup>
                                         </Col>
-                                        <Row>
+                                    </Row>
+                                    <Row>
                                         <Col md="5">
                                             <FormGroup>
                                                 <span> Pesaje</span>
@@ -335,8 +348,8 @@ class insertarControlParto extends React.Component {
                                                 />
                                             </FormGroup>
                                         </Col>
-                                    
-                                    
+
+
                                         <Col md="5">
                                             <span> Mamá </span>
                                             <FormGroup>
@@ -348,15 +361,16 @@ class insertarControlParto extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 ><option value={"Seleccione la mamá del bovino"} onChange={this.onInputChange}>Seleccione la mamá del bovino</option>
-                                                    {this.state.mamas.map(mamá => (
-                                                        <option key={mamá.id_mama} value={mamá.id_mama} onChange={this.onInputChange}>{mamá.nombre}</option>
+                                                    {this.state.mamas.map(mamas => (
+                                                        <option key={mamas.chapeta} value={mamas.chapeta} onChange={this.onInputChange}>{mamas.nombre}</option>
                                                     )
 
                                                     )}
                                                 </Input>
                                             </FormGroup>
                                         </Col>
-                                       
+                                    </Row>
+                                    <Row>
                                         <Col md="5">
                                             <span> Papá</span>
                                             <FormGroup>
@@ -368,20 +382,20 @@ class insertarControlParto extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >  <option value={"Seleccione el padre del bovino"} onChange={this.onInputChange}>Seleccione el padre del bovino</option>
-                                                   {this.state.papas.map(papá => (
-                                                            <option key={papá.id_papa} value={papá.id_papa} onChange={this.onInputChange}>{papá.nombre}</option>
-                                                        )
+                                                    {this.state.papas.map(papas => (
+                                                        <option key={papas.chapeta} value={papas.chapeta} onChange={this.onInputChange}>{papas.nombre}</option>
+                                                    )
 
-                                                        )}  
+                                                    )}
                                                 </Input>
                                             </FormGroup>
                                         </Col>
-                                    
-                                
-                                    <Col md="5">
+
+
+                                        <Col md="5">
                                             <span> Observaciones</span>
                                             <FormGroup>
-                                            <Input
+                                                <Input
                                                     className="form-control-alternative"
                                                     id="exampleFormControlInput1"
                                                     placeholder="Observaciones del Parto"
@@ -393,11 +407,13 @@ class insertarControlParto extends React.Component {
                                                 />
                                             </FormGroup>
                                         </Col>
+                                    </Row>
+                                    <Row>
                                         <Col md="5">
                                             <span>Encargado</span>
                                             <FormGroup>
                                                 <FormGroup>
-                                                <Input
+                                                    <Input
                                                         className="form-control-alternative"
                                                         id="exampleFormControlInput1"
                                                         type="select"
@@ -405,97 +421,96 @@ class insertarControlParto extends React.Component {
                                                         onChange={this.onInputChange}
                                                         required
                                                     >
-                                                    <option value={"Seleccione el encargado del parto"} onChange={this.onInputChange}>Seleccione el usuario que registra el parto</option>
-                                                    {this.state.encargado.map(encargado => (
-                                                        <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
-                                                    )
-                                                    )}
+                                                        <option value={"Seleccione el encargado del parto"} onChange={this.onInputChange}>Seleccione el usuario que registra el parto</option>
+                                                        {this.state.encargado.map(encargado => (
+                                                            <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
+                                                        )
+                                                        )}
                                                     </Input>
                                                 </FormGroup>
                                             </FormGroup>
                                         </Col>
-                                        </Row>
-                                        </Row>
-                                        <div>
-                                            {
-                                                this.state.notificationModal &&
-                                                <Modal
-                                                    className="modal-dialog-centered modal-danger"
-                                                    contentClassName="bg-gradient-danger"
-                                                    isOpen={this.state.notificationModal}
-                                                   toggle={() => this.toggleModal("notificationModal")}
-                                                >
-                                                    <div className="modal-header">
-                                                        <h4 className="modal-title" id="modal-title-notification">
-                                                            Control de parto Registrado
+                                    </Row>
+                                    <div>
+                                        {
+                                            this.state.notificationModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
+                                                isOpen={this.state.notificationModal}
+                                                toggle={() => this.toggleModal("notificationModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Control de parto Registrado
                                                         </h4>
-                                                        <button
-                                                            aria-label="Close"
-                                                            className="close"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            onClick={() => this.toggleModal("notificationModal")}
-                                                        >
-                                                            <span aria-hidden={true}>X</span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className="py-3 text-center">
-                                                            <i className="ni ni-bell-55 ni-3x" />
-                                                            <h4 className="heading mt-4">¡ Genial !</h4>
-                                                            <p>
-                                                                Tu control de parto ha sido registrado
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                        onClick={() => this.toggleModal("notificationModal")}
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡ Genial !</h4>
+                                                        <p>
+                                                            Tu control de parto ha sido registrado
                                                         </p>
-                                                        </div>
                                                     </div>
-                                                    <div className="modal-footer center">
-                                                        <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlPartos/">
-                                                            Entendido
+                                                </div>
+                                                <div className="modal-footer center">
+                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlPartos/">
+                                                        Entendido
                                                     </Button>
-                                                    </div>
-                                                </Modal>
-                                            }
-                                        </div>
-                                        <div>
-                                            {
-                                                this.state.errorModal &&
-                                                <Modal
-                                                    className="modal-dialog-centered modal-warning"
-                                                    contentClassName="bg-gradient-warning"
-                                                    isOpen={this.state.errorModal}
-                                                   toggle={() => this.toggleModal("errorModal")}
-                                                >
-                                                    <div className="modal-header">
-                                                        <h4 className="modal-title" id="modal-title-notification">
-                                                            Control de parto No Registrado
+                                                </div>
+                                            </Modal>
+                                        }
+                                    </div>
+                                    <div>
+                                        {
+                                            this.state.errorModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
+                                                isOpen={this.state.errorModal}
+                                                toggle={() => this.toggleModal("errorModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Control de parto No Registrado
                                                         </h4>
-                                                        <button
-                                                            aria-label="Close"
-                                                            className="close"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            onClick={() => this.toggleModal("errorModal")}
-                                                        >
-                                                            <span aria-hidden={true}>X</span>
-                                                        </button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className="py-3 text-center">
-                                                            <i className="ni ni-bell-55 ni-3x" />
-                                                            <h4 className="heading mt-4">¡Opss!</h4>
-                                                            <p>
-                                                                Por favor revisa los campos y selecciona correctamente las opciones
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                        onClick={() => this.toggleModal("errorModal")}
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡Opss!</h4>
+                                                        <p>
+                                                            Por favor revisa los campos y selecciona correctamente las opciones
                                                         </p>
-                                                        </div>
                                                     </div>
-                                                </Modal>
-                                            }
-                                        </div>
+                                                </div>
+                                            </Modal>
+                                        }
+                                    </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"
-                                            className="btn-danger btn-icon mr-4"
-                                            color="danger"
+                                            className="btn-warning btn-icon mr-4"
+                                            color="warning"
 
                                         >
                                             <i className="ni ni-fat-add" />

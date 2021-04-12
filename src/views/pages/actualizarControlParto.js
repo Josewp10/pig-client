@@ -292,14 +292,14 @@ class actualizarControlPartos extends React.Component {
                                         {
                                             this.state.notificationModal &&
                                             <Modal
-                                                className="modal-dialog-centered modal-success"
-                                                contentClassName="bg-gradient-success"
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
                                                 isOpen={this.state.notificationModal}
                                                 toggle={() => this.toggleModal("notificationModal")}
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                        Bovino Actualizado
+                                                        El Control de Parto ha sido actualizado
                                                         </h4>
                                                     <button
                                                         aria-label="Close"
@@ -338,7 +338,7 @@ class actualizarControlPartos extends React.Component {
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                        Bovino No Actualizado
+                                                       Control de Parto no Actualizado
                                                         </h4>
                                                     <button
                                                         aria-label="Close"

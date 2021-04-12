@@ -101,7 +101,7 @@ export default class controlPartos extends React.Component {
               <CardHeader className="bg-transparent pb-5">
               <div className="text-right">
                 <Button
-                  className="btn-danger btn-icon mr-4"
+                  className="btn-warning btn-icon mr-4"
                   to="/admin/insertarControlParto" tag={Link}
                 >
                    <i className="ni ni-fat-add" />
