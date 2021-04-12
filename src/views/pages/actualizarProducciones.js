@@ -53,13 +53,13 @@ class actualizarProducciones extends React.Component {
         });
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .get("http://vache-server.herokuapp.com/lecherias")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    encargado: response.data.info
+                    lecherias: response.data.info
                 });
-                console.log("Registro Usuarios")
+                console.log("Registro Lecherias")
                 console.log(this.state.control);
             })
             .catch(error => {
@@ -67,26 +67,26 @@ class actualizarProducciones extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    hembras: response.data.info
+                    lactantes: response.data.info
                 });
-                console.log("Registro Hembras")
+                console.log("Registro Lactantes")
                 console.log(this.state.control);
             })
             .catch(error => {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
+            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
             .then(response => {
                 console.log(response)
                 this.setState({
-                    machos: response.data.info
+                    encargado: response.data.info
                 });
-                console.log("Registro Machos")
+                console.log("Registro Encargado")
                 console.log(this.state.control);
             })
             .catch(error => {
@@ -177,7 +177,12 @@ class actualizarProducciones extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
+                                                    <option value={"Seleccione la lecheria"} onChange={this.onInputChange}>Seleccione la lecheria</option>
+                                                    {this.state.lecherias.map(lecherias => (
+                                                        <option key={lecherias.id_lecheria} value={lecherias.id_lecheria} onChange={this.onInputChange}>{lecherias.id_lecheria}</option>
+                                                    )
 
+                                                    )}
 
                                                 </Input>
                                             </FormGroup>
@@ -193,7 +198,12 @@ class actualizarProducciones extends React.Component {
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
+                                                    <option value={"Seleccione la vaca lactante"} onChange={this.onInputChange}>Seleccione la vaca lactante</option>
+                                                    {this.state.lactantes.map(lactantes => (
+                                                        <option key={lactantes.chapeta} value={lactantes.chapeta} onChange={this.onInputChange}>{lactantes.nombre}</option>
+                                                    )
 
+                                                    )}
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -250,7 +260,12 @@ class actualizarProducciones extends React.Component {
                                                         onChange={this.onInputChange}
                                                         required
                                                     >
+                                                        <option value={"Seleccione el encargado de la lecheria"} onChange={this.onInputChange}>Seleccione el encargado de la lecheria</option>
+                                                        {this.state.encargado.map(encargado => (
+                                                            <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
+                                                        )
 
+                                                        )}
                                                     </Input>
                                                 </FormGroup>
                                             </FormGroup>
@@ -267,7 +282,7 @@ class actualizarProducciones extends React.Component {
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                    Producción de Leche Actualizada
+                                                        Producción de Leche Actualizada
                                                         </h4>
                                                     <button
                                                         aria-label="Close"
@@ -283,7 +298,7 @@ class actualizarProducciones extends React.Component {
                                                         <i className="ni ni-bell-55 ni-3x" />
                                                         <h4 className="heading mt-4">¡ Genial !</h4>
                                                         <p>
-                                                        Tu producción de leche para esta lecheria ha sido ha sido actualizada
+                                                            Tu producción de leche para esta lecheria ha sido ha sido actualizada
                                                         </p>
                                                     </div>
                                                 </div>
@@ -306,7 +321,7 @@ class actualizarProducciones extends React.Component {
                                             >
                                                 <div className="modal-header">
                                                     <h4 className="modal-title" id="modal-title-notification">
-                                                    Producción de leche no actualizada
+                                                        Producción de leche no actualizada
                                                         </h4>
                                                     <button
                                                         aria-label="Close"
