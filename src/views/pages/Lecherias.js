@@ -21,21 +21,20 @@ import {
 
 import UserHeader from "../../components/Headers/produccion.js";
 
-export default class Lecherias extends React.Component {
+class Lecherias extends React.Component {
+constructor() {
+  super();
+  this.state = {
+  listafechas: [],
+  listalecherias: [],
+  litros: [],
+  id_lecheria: "",
+  fecha_inicio: "",
+  fecha_fin: "",
+  };
+  this.onInputChange = this.onInputChange.bind(this);
+}
 
-  state = {
-    listafechas: [],
-    listalecherias: [],
-    litros: [],
-    lecherias: {
-      id_lecheria: "",
-    },
-    fechas: {
-      id_lecheria: "",
-      fecha_inicio: "",
-      fecha_fin: "",
-    },
-  }
 
   async componentDidMount() {
 
@@ -46,8 +45,7 @@ export default class Lecherias extends React.Component {
         this.setState({
           listalecherias: response.data.info
         });
-        console.log("Lecherias")
-        console.log(this.state.control);
+        console.log(response);
       })
       .catch(error => {
         console.log(error);
@@ -85,12 +83,18 @@ export default class Lecherias extends React.Component {
 
   cargarInformacion() {
     localStorage.setItem("id_lecheria", this.state.id_lecheria);
-    localStorage.setItem("fecha_inicio", this.state.fecha_inicio);
-    localStorage.setItem("fecha_fin", this.state.fecha_fin);
+    localStorage.setItem("fecha_inicio", this.state.fecha_inicio.toString());
+    localStorage.setItem("fecha_fin", this.state.fecha_fin.toString());
   }
 
 
-
+  onInputChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({
+        [name]: value
+    })
+};
   render() {
     return (
       <>
@@ -115,15 +119,15 @@ export default class Lecherias extends React.Component {
                             id="exampleFormControlInput1"
                             type="select"
                             name="id_lecheria"
+                            value={this.state.id_lecheria}
                             onChange={this.onInputChange}
                             required
                           >
                             <option value={"Seleccione número de la lecheria"} >Seleccione número de la lecheria</option>
                             {this.state.listalecherias.map(lecherias => (
 
-                              <option key={lecherias.id_lecheria} value={lecherias.id_lecheria} onChange={e => this.setState({ id_lecheria: e })}>{lecherias.id_lecheria}</option>
+                              <option key={lecherias.id_lecheria} value={lecherias.id_lecheria} onChange={this.onInputChange}>{lecherias.id_lecheria}</option>
                             )
-
                             )}
                           </Input>
                         </FormGroup>
@@ -143,9 +147,9 @@ export default class Lecherias extends React.Component {
                               inputProps={{
                                 placeholder: "Fecha Inicio"
                               }}
-                              dateFormat={'DD-MM-YYYY'}
+                              dateFormat={'YYYY-MM-DD'}
                               timeFormat={false}
-                              value={new Date(this.state.fechas.fecha_inicio)}
+                              value={new Date(this.state.fecha_inicio)}
                               onChange={e => this.setState({ fecha_inicio: e })}
                               name="fecha_inicio"
                             />
@@ -165,7 +169,7 @@ export default class Lecherias extends React.Component {
                               inputProps={{
                                 placeholder: "Fecha Fin"
                               }}
-                              dateFormat={'DD-MM-YYYY'}
+                              dateFormat={'YYYY-MM-DD'}
                               timeFormat={false}
                               value={new Date(this.state.fecha_fin)}
                               onChange={e => this.setState({ fecha_fin: e })}
@@ -174,7 +178,7 @@ export default class Lecherias extends React.Component {
                           </InputGroup>
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row>         
                     <div className="text-center">
                       <Button
                         className="btn-neutral btn-icon mr-2"
@@ -185,8 +189,9 @@ export default class Lecherias extends React.Component {
                         <i className="ni ni-active-40" />
                         <span className="btn-inner--text">Consultar</span>
                       </Button>
-                    </div>
+                    </div>     
                   </Form>
+                  
                 </CardBody>
               </Card>
             </Col>
@@ -199,4 +204,4 @@ export default class Lecherias extends React.Component {
 
 };
 
-
+export default Lecherias;
