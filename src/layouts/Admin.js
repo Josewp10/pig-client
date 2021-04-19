@@ -52,7 +52,7 @@ const Admin = (props) => {
     <>
       <Sidebar
          logo={{
-          innerLink: "/admin/index",
+          innerLink: "/admin/Bovinos",
           imgSrc: require("../assets/img/brand/vache.png").default,
           imgAlt: "...",
         }}

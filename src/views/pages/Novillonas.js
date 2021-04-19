@@ -31,6 +31,7 @@ export default class Novillonas extends React.Component {
       id_raza: "",
       genetica: "",
       finca: "",
+      token:"",
     },
     notificationModal: false,
   }
@@ -43,7 +44,7 @@ export default class Novillonas extends React.Component {
 
   listarNovillonas = () => {
     axios
-      .get("http://vache-server.herokuapp.com/bovinos/tipo/3")
+      .get("http://vache-server.herokuapp.com/bovinos/tipo/3", { headers: { token: this.token } } )
       .then(response => {
         console.log(response)
         this.setState({

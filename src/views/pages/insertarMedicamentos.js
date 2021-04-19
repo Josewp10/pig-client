@@ -31,7 +31,7 @@ class insertarMedicamentos extends React.Component {
             horas_retiro_leche: "",
             fecha_compra: "",
             fecha_vencimiento: "",
-            disponibilidad: ""
+            disponibilidad: "",
         }
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -58,6 +58,20 @@ class insertarMedicamentos extends React.Component {
             console.log(response);
             window.location.href = '/admin/medicamentos';
         });
+
+        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
+            .catch(error => { console.log(error); });
+        this.setState({
+            celularUser: celular.data.info[0].celular
+        });
+        console.log("ACA COGIO EL CELULAR: " + this.state.celularUser);
+
+        let mensaje = {
+            to: this.state.celularUser,
+            body: `Señor Usuario,se registro un control de Medicamentos `
+        }
+        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
+
 
 
         this.setState({
