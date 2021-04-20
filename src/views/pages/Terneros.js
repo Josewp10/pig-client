@@ -41,7 +41,7 @@ export default class Terneros extends React.Component {
   listarTerneros= () => {
     this.token = localStorage.getItem("token");
     axios
-        .get("http://vache-server.herokuapp.com/bovinos/tipo/5", { headers: { token: this.token } })
+        .get("https://vache-server.herokuapp.com/bovinos/tipo/5", { headers: { token: this.token } })
         .then(response => {
             console.log(response)
             this.setState({
@@ -56,7 +56,7 @@ export default class Terneros extends React.Component {
   }
   
   eliminarTerneros= async (chapeta) => {
-  const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta, { headers: { token: this.token } });
+  const res = await axios.delete('https://vache-server.herokuapp.com/bovinos/' + chapeta, { headers: { token: this.token } });
   console.log(res);
   this.listarTerneros();
   };

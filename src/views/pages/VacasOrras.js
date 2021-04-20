@@ -42,7 +42,7 @@ export default class VacasOrras extends React.Component {
   listarVacasOrras= () => {
     this.token = localStorage.getItem("token");
     axios
-        .get("http://vache-server.herokuapp.com/bovinos/tipo/9",{ headers: { token: this.token } })
+        .get("https://vache-server.herokuapp.com/bovinos/tipo/9",{ headers: { token: this.token } })
         .then(response => {
             console.log(response)
             this.setState({
@@ -57,7 +57,7 @@ export default class VacasOrras extends React.Component {
   }
   
   eliminarVacasOrras= async (chapeta) => {
-  const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
+  const res = await axios.delete('https://vache-server.herokuapp.com/bovinos/' + chapeta);
   console.log(res);
   this.listarVacasOrras();
   };

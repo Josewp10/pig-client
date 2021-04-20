@@ -43,7 +43,7 @@ class actualizarBovino extends React.Component {
         this.state.nombre = localStorage.getItem("nombre");
         this.state.id_raza = localStorage.getItem("id_raza");
         this.state.finca = localStorage.getItem("finca");
-        const res = await axios.get('http://vache-server.herokuapp.com/bovinos/chapeta_tipo/' + this.state.chapeta + '/' + this.state.id_tipo,{ headers: { token: this.token } });
+        const res = await axios.get('https://vache-server.herokuapp.com/bovinos/chapeta_tipo/' + this.state.chapeta + '/' + this.state.id_tipo,{ headers: { token: this.token } });
         this.setState({
             chapeta: res.data.info[0].chapeta,
             id_tipo: res.data.info[0].id_tipo,
@@ -54,7 +54,7 @@ class actualizarBovino extends React.Component {
         });
 
         axios
-            .get("http://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -68,7 +68,7 @@ class actualizarBovino extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -88,7 +88,7 @@ class actualizarBovino extends React.Component {
         e.preventDefault();
 
 
-        const res = await axios.put('http://vache-server.herokuapp.com/bovinos/' + this.state.chapeta, {
+        const res = await axios.put('https://vache-server.herokuapp.com/bovinos/' + this.state.chapeta, {
             chapeta: this.state.chapeta,
             id_tipo: this.state.id_tipo,
             nombre: this.state.nombre,

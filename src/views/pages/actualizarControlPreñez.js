@@ -50,7 +50,7 @@ class actualizarControlesPrenez extends React.Component {
         this.token = localStorage.getItem("token");
         this.state.id_control = localStorage.getItem("id_control");
         const res = await axios
-            .get("http://vache-server.herokuapp.com/controlPrenez/" + this.state.id_control,{ headers: { token: this.token } });
+            .get("https://vache-server.herokuapp.com/controlPrenez/" + this.state.id_control,{ headers: { token: this.token } });
                 this.setState({
                     fecha_palpacion: res.data.info[0].fecha_palpacion,
                     vaca: res.data.info[0].vaca,
@@ -62,7 +62,7 @@ class actualizarControlesPrenez extends React.Component {
 
         
             axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -89,7 +89,7 @@ class actualizarControlesPrenez extends React.Component {
         e.preventDefault();
 
 
-        await axios.put('http://vache-server.herokuapp.com/controlPrenez/' + this.state.id_control, {
+        await axios.put('https://vache-server.herokuapp.com/controlPrenez/' + this.state.id_control, {
             fecha_palpacion: this.state.fecha_palpacion,
             confirmacion_palpacion: this.state.confirmacion_palpacion,
             num_parto: this.state.num_parto,

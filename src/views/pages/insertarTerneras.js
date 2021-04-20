@@ -41,7 +41,7 @@ class insertarTerneras extends React.Component {
         this.token = localStorage.getItem("token");
 
         axios
-            .get("http://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -55,7 +55,7 @@ class insertarTerneras extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -82,7 +82,7 @@ class insertarTerneras extends React.Component {
         e.preventDefault();
 
 
-        await axios.post('http://vache-server.herokuapp.com/bovinos', {
+        await axios.post('https://vache-server.herokuapp.com/bovinos', {
             chapeta: this.state.chapeta,
             id_tipo: this.state.id_tipo,
             nombre: this.state.nombre,

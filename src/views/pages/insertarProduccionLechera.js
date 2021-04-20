@@ -33,10 +33,10 @@ class insertarProduccionLechera extends React.Component {
             nombre: "",
             fecha: "",
             cantidad_dia: "",
-            encargado: "",
+            id_usuario: "",
             listaProducciones: [],
             lactantes: [],
-            encargado: [],
+            encargados: [],
             lecherias: [],
             notificationModal: false,
             errorModal: false,
@@ -49,7 +49,7 @@ class insertarProduccionLechera extends React.Component {
     componentDidMount() {
         this.token = localStorage.getItem("token");
         axios
-            .get("http://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -63,7 +63,7 @@ class insertarProduccionLechera extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -76,11 +76,11 @@ class insertarProduccionLechera extends React.Component {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
-                    encargado: response.data.info
+                    encargados: response.data.info
                 });
                 console.log("Registro Encargado")
                 console.log(this.state.control);
@@ -102,11 +102,11 @@ class insertarProduccionLechera extends React.Component {
 
         e.preventDefault();
 
-        await axios.post('http://vache-server.herokuapp.com/produccionLeche/', {
-            id_bovino: this.state.id_bovino,
-            id_lecheria: this.state.id_macho,
-            fecha: this.state.id_hembra,
+        await axios.post('https://vache-server.herokuapp.com/produccionLeche/', {           
+            lecheria: this.state.id_lecheria,
+            fecha: this.state.fecha,
             cantidad_dia: this.state.cantidad_dia,
+            id_bovino: this.state.id_bovino,
         },{ headers: { token: this.token } }).then((response) => {
             console.log(response);
             if (response.status === 200 && response.data.ok === true) {
@@ -123,7 +123,7 @@ class insertarProduccionLechera extends React.Component {
         });
 
         /*
-        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
+        const celular = await axios.get('https://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
             .catch(error => { console.log(error); });
         this.setState({
             celularUser: celular.data.info[0].celular
@@ -135,7 +135,7 @@ class insertarProduccionLechera extends React.Component {
             body: `Señor Usuario,se registro un control de celo con fecha de inicio:  ${moment(this.state.fecha_inicio).format('DD-MM-YYYY')} para la vaca con chapeta : ${this.state.id_hembra} y nombre: ${"(aca nombre de la vaca)"}
         estuvo en celo con el toro: ${"(aca nombre del toro)"}, la fecha de la vaca para su posible parto será el dia:  ${moment(this.state.listaControlCelo.fecha_posible_parto).format('DD-MM-YYYY')} `
         }
-        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
+        const twilio = await axios.post('https://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
         */
 
 
@@ -149,7 +149,7 @@ class insertarProduccionLechera extends React.Component {
             encargado: "",
             listaProducciones: [],
             lactantes: [],
-            encargado: [],
+            encargados: [],
             lecherias: [],
         });
 
@@ -272,7 +272,7 @@ class insertarProduccionLechera extends React.Component {
                                                         required
                                                     >
                                                         <option value={"Seleccione el encargado de la lecheria"} onChange={this.onInputChange}>Seleccione el encargado de la lecheria</option>
-                                                        {this.state.encargado.map(encargado => (
+                                                        {this.state.encargados.map(encargado => (
                                                             <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
                                                         )
 
@@ -315,7 +315,7 @@ class insertarProduccionLechera extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="modal-footer center">
-                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlCelo/">
+                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/lecherias">
                                                         Entendido
                                                     </Button>
                                                 </div>

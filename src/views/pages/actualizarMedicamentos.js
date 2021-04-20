@@ -50,7 +50,7 @@ class actualizarMedicamentos extends React.Component {
         this.state.fecha_vencimiento = localStorage.getItem("fecha_vencimiento");
         this.state.disponibilidad = localStorage.getItem("disponibilidad");
         console.log(this.state.codigo);
-        const res = await axios.get('http://vache-server.herokuapp.com/medicamentos/' + this.state.codigo,{ headers: { token: this.token } });
+        const res = await axios.get('https://vache-server.herokuapp.com/medicamentos/' + this.state.codigo,{ headers: { token: this.token } });
         this.setState({
             codigo: res.data.info[0].codigo,
             nombre: res.data.info[0].nombre,
@@ -76,7 +76,7 @@ class actualizarMedicamentos extends React.Component {
         e.preventDefault();
 
 
-        const res = await axios.put('http://vache-server.herokuapp.com/medicamentos/' + this.state.codigo, {
+        const res = await axios.put('https://vache-server.herokuapp.com/medicamentos/' + this.state.codigo, {
             codigo: this.state.codigo,
             nombre: this.state.nombre,
             descripcion: this.state.descripcion,

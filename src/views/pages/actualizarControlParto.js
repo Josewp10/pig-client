@@ -45,7 +45,7 @@ class actualizarControlPartos extends React.Component {
     async componentDidMount() {
         this.token = localStorage.getItem("token");
         this.state.id_parto = localStorage.getItem("id_parto");
-        const res = await axios.get('http://vache-server.herokuapp.com/controlPartos/' + this.state.id_parto,{ headers: { token: this.token } });
+        const res = await axios.get('https://vache-server.herokuapp.com/controlPartos/' + this.state.id_parto,{ headers: { token: this.token } });
         this.setState({
             id_bovino: res.data.info[0].id_bovino,
             fecha_parto: res.data.info[0].fecha_parto,
@@ -57,7 +57,7 @@ class actualizarControlPartos extends React.Component {
         });
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -71,7 +71,7 @@ class actualizarControlPartos extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/novillonaLactante/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -84,7 +84,7 @@ class actualizarControlPartos extends React.Component {
                 console.log(error);
             });
             axios
-            .get("http://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -104,7 +104,7 @@ class actualizarControlPartos extends React.Component {
         e.preventDefault();
 
 
-        const res = await axios.put('http://vache-server.herokuapp.com/controlPartos/' + this.state.id_parto, {
+        const res = await axios.put('https://vache-server.herokuapp.com/controlPartos/' + this.state.id_parto, {
             id_bovino: this.state.id_bovino,
             fecha_parto: this.state.fecha_parto,
             pesaje: this.state.pesaje,

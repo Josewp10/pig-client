@@ -49,7 +49,7 @@ export default class controlPreñez extends React.Component {
   listarControlesPrenez = () => {
     this.token = localStorage.getItem("token");
     axios
-      .get("http://vache-server.herokuapp.com/controlPrenez",{ headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/controlPrenez",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -64,7 +64,7 @@ export default class controlPreñez extends React.Component {
   }
 
   eliminarControlPrenez = async (id_control) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/controlPrenez' + id_control,{ headers: { token: this.token } });
+    const res = await axios.delete('https://vache-server.herokuapp.com/controlPrenez' + id_control,{ headers: { token: this.token } });
     console.log(res);
     this.listarControlesPrenez();
   };

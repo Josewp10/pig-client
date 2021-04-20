@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom'
-import { Router } from "react-history-router";
 import { useHistory } from "react-router-dom";
 
 
@@ -50,7 +49,7 @@ const Login = () => {
   const history = useHistory();
   const manejadorLogin = async () => {
     console.log("correcto");
-    const res = await axios.post('http://vache-server.herokuapp.com/login', usuario)
+    const res = await axios.post('https://vache-server.herokuapp.com/login', usuario)
     console.log(res);
     if (res.data.ok) {
       localStorage.setItem("token", res.data.info);

@@ -51,7 +51,7 @@ export default class controlCelos extends React.Component {
   listarControlesCelos = () => {
     this.token = localStorage.getItem("token");
     axios
-      .get("http://vache-server.herokuapp.com/celo",{ headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/celo",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -66,7 +66,7 @@ export default class controlCelos extends React.Component {
   }
 
   eliminarControlCelo = async (id_celo) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/celo/' + id_celo,{ headers: { token: this.token } });
+    const res = await axios.delete('https://vache-server.herokuapp.com/celo/' + id_celo,{ headers: { token: this.token } });
     console.log(res);
     this.listarControlesCelos();
   };

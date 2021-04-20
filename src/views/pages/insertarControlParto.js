@@ -53,7 +53,7 @@ class insertarControlParto extends React.Component {
 
         this.token = localStorage.getItem("token");
         axios
-            .get("http://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -68,7 +68,7 @@ class insertarControlParto extends React.Component {
 
 
         axios
-            .get("http://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -82,7 +82,7 @@ class insertarControlParto extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/novillonaLactante/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -95,7 +95,7 @@ class insertarControlParto extends React.Component {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -109,7 +109,7 @@ class insertarControlParto extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -135,7 +135,7 @@ class insertarControlParto extends React.Component {
         e.preventDefault();
 
 
-        await axios.post('http://vache-server.herokuapp.com/controlPartos', {
+        await axios.post('https://vache-server.herokuapp.com/controlPartos', {
             id_bovino: this.state.id_bovino,
             id_tipo: this.state.id_tipo,
             nombre: this.state.nombre,

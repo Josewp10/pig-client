@@ -42,7 +42,7 @@ class insertarGenealogicos extends React.Component {
         this.token = localStorage.getItem("token");
         //lactantes madres
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -56,7 +56,7 @@ class insertarGenealogicos extends React.Component {
             });
         // toros
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -70,7 +70,7 @@ class insertarGenealogicos extends React.Component {
             });
             // lactantes abuelas
             axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -84,7 +84,7 @@ class insertarGenealogicos extends React.Component {
             });
             // lactantes abuelos
             axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -105,7 +105,7 @@ class insertarGenealogicos extends React.Component {
         e.preventDefault();
 
 
-        await axios.post('http://vache-server.herokuapp.com/genealogicos', {
+        await axios.post('https://vache-server.herokuapp.com/genealogicos', {
             id_tbovino: this.state.id_tbovino,
             id_mama: this.state.id_mama,
             id_papa: this.state.id_papa,

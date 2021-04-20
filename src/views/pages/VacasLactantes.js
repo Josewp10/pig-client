@@ -41,7 +41,7 @@ export default class VacasLactantes extends React.Component {
   listarVacasLactantes= () => {
     this.token = localStorage.getItem("token");
     axios
-        .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
+        .get("https://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
         .then(response => {
             console.log(response)
             this.setState({
@@ -56,7 +56,7 @@ export default class VacasLactantes extends React.Component {
   }
   
   eliminarVacasLactantes= async (chapeta) => {
-  const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
+  const res = await axios.delete('https://vache-server.herokuapp.com/bovinos/' + chapeta);
   console.log(res);
   this.listarVacasLactantes();
   };

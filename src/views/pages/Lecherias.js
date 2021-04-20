@@ -40,7 +40,7 @@ constructor() {
   async componentDidMount() {
     this.token = localStorage.getItem("token");
     axios
-      .get("http://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -53,7 +53,7 @@ constructor() {
       });
 
     axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros",
+      .get("https://vache-server.herokuapp.com/produccionLeche/fechas/registros",
         { id_lecheria: this.state.id_lecheria, fecha_inicio: this.state.fecha_inicio, fecha_fin: this.state.fecha_fin },{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
@@ -68,7 +68,7 @@ constructor() {
       });
 
     axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros",{ headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/produccionLeche/fechas/litros",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({

@@ -50,7 +50,7 @@ class insertarControlesPrenez extends React.Component {
         this.token = localStorage.getItem("token");
 
         axios
-            .get("http://vache-server.herokuapp.com/controlPrenez/noCreados",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/controlPrenez/noCreados",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -65,7 +65,7 @@ class insertarControlesPrenez extends React.Component {
 
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -91,7 +91,7 @@ class insertarControlesPrenez extends React.Component {
 
         e.preventDefault();
 
-        await axios.put('http://vache-server.herokuapp.com/controlPrenez/' + this.state.id_control, {
+        await axios.put('https://vache-server.herokuapp.com/controlPrenez/' + this.state.id_control, {
             fecha_palpacion: this.state.fecha_palpacion,
             confirmacion_palpacion: this.state.confirmacion_palpacion,
             num_parto: this.state.num_parto,
@@ -113,7 +113,7 @@ class insertarControlesPrenez extends React.Component {
 
 
         
-        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario, { headers: { token: this.token } })
+        const celular = await axios.get('https://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario, { headers: { token: this.token } })
             .catch(error => { console.log(error); });
         this.setState({
             celularUser: celular.data.info[0].celular
@@ -126,7 +126,7 @@ class insertarControlesPrenez extends React.Component {
             la fecha de secado para esta vaca debe ser ${"(aca fecha secado)"}. Tenga en cuenta que esta vaca y/o novillona ha sido palpada el dia ${moment(this.state.fecha_palpacion).format('DD-MM-YYYY')}
             y tiene estos numero de parto ${this.state.num_parto} `
         }
-        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje,{ headers: { token: this.token } }).catch(error => { console.log(error); });
+        const twilio = await axios.post('https://vache-server.herokuapp.com/sms', mensaje,{ headers: { token: this.token } }).catch(error => { console.log(error); });
 
         this.setState({
             id_control: "",

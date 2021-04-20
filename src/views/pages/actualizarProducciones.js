@@ -16,23 +16,25 @@ import {
     InputGroupText,
     InputGroup
 } from "reactstrap";
-import TernerasDestetadasHeader from "../../components/Headers/controlCelo.js";
+import TernerasDestetadasHeader from "../../components/Headers/produccion";
 
 
 class actualizarProducciones extends React.Component {
     constructor() {
         super();
         this.state = {
-            id_TProduccion: "",
+            token: "",
+            id_Tproduccion: localStorage.getItem("id_Tproduccion"),
             id_lecheria: "",
             id_bovino: "",
             nombre: "",
             fecha: "",
             cantidad_dia: "",
+            id_usuario: "",
             encargado: "",
             listaProducciones: [],
             lactantes: [],
-            encargado: [],
+            encargados: [],
             lecherias: [],
             notificationModal: false,
             errorModal: false,
@@ -42,18 +44,27 @@ class actualizarProducciones extends React.Component {
 
 
     async componentDidMount() {
-
-        this.state.id_TProduccion = localStorage.getItem("id_Tproducccion");
-        const res = await axios.get('http://vache-server.herokuapp.com/produccionLeche/' + this.state.id_Tproduccion);
-        this.setState({
-            id_bovino: res.data.info[0].id_bovino,
-            id_lecheria: res.data.info[0].id_lecheria,
-            fecha: res.data.info[0].fecha,
-            cantidad_dia: res.data.info[0].cantidad_dia,
-        });
+        this.token = localStorage.getItem("token");  
+        axios
+            .get('https://vache-server.herokuapp.com/produccionLeche/id/' + this.state.id_Tproduccion,{ headers: { token: this.token } })
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    id_Tproduccion: response.data.info[0].id_Tproduccion,
+                    id_bovino: response.data.info[0].id_lactante,
+                    id_lecheria: response.data.info[0].lecheria,
+                    fecha: response.data.info[0].fecha,
+                    cantidad_dia: response.data.info[0].cantidad_dia,
+                    encargado: response.data.info[0].encargado,
+                    nombre: response.data.info[0].nombre,
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
         axios
-            .get("http://vache-server.herokuapp.com/lecherias")
+            .get("https://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -67,7 +78,7 @@ class actualizarProducciones extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -80,11 +91,11 @@ class actualizarProducciones extends React.Component {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
-                    encargado: response.data.info
+                    encargados: response.data.info
                 });
                 console.log("Registro Encargado")
                 console.log(this.state.control);
@@ -100,14 +111,13 @@ class actualizarProducciones extends React.Component {
         e.preventDefault();
 
 
-        const res = await axios.put('http://vache-server.herokuapp.com/produccionLeche/' + this.state.id_Tproduccion, {
+        axios.put('https://vache-server.herokuapp.com/produccionLeche/' + this.state.id_Tproduccion, {
+            id_Tproduccion: this.state.id_Tproduccion,
             id_bovino: this.state.id_bovino,
-            id_lecheria: this.state.id_macho,
-            fecha: this.state.id_hembra,
+            fecha: this.state.fecha,
+            lecheria: this.state.id_lecheria,
             cantidad_dia: this.state.cantidad_dia,
-        }).then((response) => {
-            console.log(this.state.id_macho);
-            console.log("actualizacion" + response)
+        },{ headers: { token: this.token } }).then((response) => {
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {
                     this.setState({ notificationModal: true });
@@ -118,23 +128,25 @@ class actualizarProducciones extends React.Component {
                     this.setState({ errorModal: true });
                 }, 200)
             }
-        }); console.log(res);
+        }).catch(error => {
+            console.log(error);
+        });
 
 
         this.setState({
-            id_TProduccion: "",
+            id_Tproduccion: "",
             id_lecheria: "",
             id_bovino: "",
             nombre: "",
             fecha: "",
             cantidad_dia: "",
+            id_usuario: "",
             encargado: "",
             listaProducciones: [],
             lactantes: [],
-            encargado: [],
+            encargados: [],
             lecherias: [],
         });
-
 
 
     };
@@ -174,10 +186,10 @@ class actualizarProducciones extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     type="select"
                                                     name="id_lecheria"
+                                                    value={this.state.id_lecheria}
                                                     onChange={this.onInputChange}
                                                     required
                                                 >
-                                                    <option value={"Seleccione la lecheria"} onChange={this.onInputChange}>Seleccione la lecheria</option>
                                                     {this.state.lecherias.map(lecherias => (
                                                         <option key={lecherias.id_lecheria} value={lecherias.id_lecheria} onChange={this.onInputChange}>{lecherias.id_lecheria}</option>
                                                     )
@@ -195,10 +207,10 @@ class actualizarProducciones extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     type="select"
                                                     name="id_bovino"
+                                                    value={this.state.id_bovino}
                                                     onChange={this.onInputChange}
                                                     required
-                                                >
-                                                    <option value={"Seleccione la vaca lactante"} onChange={this.onInputChange}>Seleccione la vaca lactante</option>
+                                                >                                      
                                                     {this.state.lactantes.map(lactantes => (
                                                         <option key={lactantes.chapeta} value={lactantes.chapeta} onChange={this.onInputChange}>{lactantes.nombre}</option>
                                                     )
@@ -226,7 +238,7 @@ class actualizarProducciones extends React.Component {
                                                         timeFormat={false}
                                                         value={new Date(this.state.fecha)}
                                                         onChange={e => this.setState({ fecha: e })}
-                                                        name="fecha_inicio"
+                                                        name="fecha"
                                                     />
                                                 </InputGroup>
                                             </FormGroup>
@@ -239,7 +251,7 @@ class actualizarProducciones extends React.Component {
                                                     id="exampleFormControlInput1"
                                                     placeholder="Detalles"
                                                     type="number"
-                                                    value={this.state.detalles}
+                                                    value={this.state.cantidad_dia}
                                                     name="cantidad_dia"
                                                     onChange={this.onInputChange}
                                                     required
@@ -247,6 +259,7 @@ class actualizarProducciones extends React.Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
+                                    {/*
                                     <Row>
                                         <Col md="5">
                                             <span>Encargado</span>
@@ -257,11 +270,11 @@ class actualizarProducciones extends React.Component {
                                                         id="exampleFormControlInput1"
                                                         type="select"
                                                         name="id_usuario"
+                                                        value={this.state.encargado}
                                                         onChange={this.onInputChange}
                                                         required
                                                     >
-                                                        <option value={"Seleccione el encargado de la lecheria"} onChange={this.onInputChange}>Seleccione el encargado de la lecheria</option>
-                                                        {this.state.encargado.map(encargado => (
+                                                        {this.state.encargados.map(encargado => (
                                                             <option key={encargado.id_usuario} value={encargado.id_usuario} onChange={this.onInputChange}>{encargado.nombre}</option>
                                                         )
 
@@ -271,6 +284,7 @@ class actualizarProducciones extends React.Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
+                                   */}
                                     <div>
                                         {
                                             this.state.notificationModal &&
@@ -303,7 +317,7 @@ class actualizarProducciones extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="modal-footer center">
-                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/controlCelo/">
+                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/produccionLechera" >
                                                         Entendido
                                                     </Button>
                                                 </div>

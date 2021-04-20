@@ -51,7 +51,7 @@ class insertarControlesCelo extends React.Component {
     componentDidMount() {
         this.token = localStorage.getItem("token");
         axios
-            .get("http://vache-server.herokuapp.com/celo/" +this.state.id_celo,{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/celo/" +this.state.id_celo,{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -67,7 +67,7 @@ class insertarControlesCelo extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/usuarios/idnombre",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -81,7 +81,7 @@ class insertarControlesCelo extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/", { headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/novillonaLactante/", { headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -94,7 +94,7 @@ class insertarControlesCelo extends React.Component {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2", { headers: { token: this.token } })
+            .get("https://vache-server.herokuapp.com/bovinos/tipo/2", { headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -120,7 +120,7 @@ class insertarControlesCelo extends React.Component {
 
         e.preventDefault();
 
-        await axios.post('http://vache-server.herokuapp.com/celo', {
+        await axios.post('https://vache-server.herokuapp.com/celo', {
             fecha_inicio: this.state.fecha_inicio,
             id_macho: this.state.id_macho,
             id_hembra: this.state.id_hembra,
@@ -141,7 +141,7 @@ class insertarControlesCelo extends React.Component {
 
         });
 
-        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario,{ headers: { token: this.token } })
+        const celular = await axios.get('https://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario,{ headers: { token: this.token } })
             .catch(error => { console.log(error); });
         this.setState({
             celularUser: celular.data.info[0].celular
@@ -153,7 +153,7 @@ class insertarControlesCelo extends React.Component {
             body: `Señor Usuario,se registro un control de celo con fecha de inicio:  ${moment(this.state.fecha_inicio).format('DD-MM-YYYY')} para la vaca con chapeta : ${this.state.id_hembra} y nombre: ${"(aca nombre de la vaca)"}
         estuvo en celo con el toro: ${"(aca nombre del toro)"}, la fecha de la vaca para su posible parto será el dia:  ${moment(this.state.listaControlCelo.fecha_posible_parto).format('DD-MM-YYYY')} `
         }
-        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje,{ headers: { token: this.token } }).catch(error => { console.log(error); });
+        const twilio = await axios.post('https://vache-server.herokuapp.com/sms', mensaje,{ headers: { token: this.token } }).catch(error => { console.log(error); });
 
 
 

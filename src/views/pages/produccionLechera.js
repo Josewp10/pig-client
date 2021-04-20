@@ -50,7 +50,7 @@ export default class produccionLeche extends React.Component {
       fecha_fin: new Date((localStorage.getItem("fecha_fin"))).toISOString()
     });
     const res = await axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString(),{ headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/produccionLeche/fechas/registros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString(),{ headers: { token: this.token } })
     this.setState({
       listaProduccion: res.data.info,
       id_Tproduccion: res.data.info[0].id_Tproduccion,
@@ -63,7 +63,7 @@ export default class produccionLeche extends React.Component {
     console.log(res.data.info)
 
     axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString(),{ headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/produccionLeche/fechas/litros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString(),{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -81,11 +81,21 @@ export default class produccionLeche extends React.Component {
 
 
 
-  eliminarProducciones = async (id_Tproduccion) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/produccionLeche' + id_Tproduccion,{ headers: { token: this.token } });
-    console.log(res);
-    this.listarProduccion();
+  eliminarProducciones = async (id_produccion) => {
+    const res = await axios
+    axios.delete('https://vache-server.herokuapp.com/produccionLeche/' + id_produccion,{ headers: { token: localStorage.getItem("token") } })
+    .then(response => {
+        console.log(response)
+        if (response.status === 200) {
+          window.location.href = "/admin/produccionLechera";
+      }
+    })
+    .catch(error => {
+        console.log(error);
+    });
   };
+
+
 
   toggleModal = state => {
     this.setState({
@@ -167,7 +177,6 @@ export default class produccionLeche extends React.Component {
 
                                 <DropdownItem
                                   href="/admin/actualizarProduccionLeche/"
-                                  key={i} onClick={this.cargarInformacion.bind(this, produccion)}
                                 >
                                   <i className="ni ni-ui-04" />
                             Actualizar
@@ -198,7 +207,7 @@ export default class produccionLeche extends React.Component {
                                     </div>
                                   </div>
                                   <div className="modal-footer">
-                                    <Button className="btn-white" href="/admin/produccionLechera" color="default" type="button" onClick={() => this.eliminarProducciones(localStorage.getItem("id_Tproduccion"))}>
+                                    <Button className="btn-white" color="default" type="button" onClick={() => this.eliminarProducciones(localStorage.getItem("id_Tproduccion"))}>
                                       Eliminar
                                     </Button>
                                     <Button

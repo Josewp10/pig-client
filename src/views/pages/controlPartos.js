@@ -52,7 +52,7 @@ export default class controlPartos extends React.Component {
     this.token = localStorage.getItem("token");
 
     axios
-      .get("http://vache-server.herokuapp.com/controlPartos", { headers: { token: this.token } })
+      .get("https://vache-server.herokuapp.com/controlPartos", { headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -67,7 +67,7 @@ export default class controlPartos extends React.Component {
   }
 
   eliminarControlParto = async (id_parto) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/controlPartos/' + id_parto, { headers: { token: this.token } });
+    const res = await axios.delete('https://vache-server.herokuapp.com/controlPartos/' + id_parto, { headers: { token: this.token } });
     console.log(res);
     this.listarControlesParto();
   };

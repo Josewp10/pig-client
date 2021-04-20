@@ -32,7 +32,7 @@ export default class genealogicos extends React.Component {
     try {
     this.state.id_tbovino = localStorage.getItem("chapeta")
     console.log(this.state.id_tbovino);
-    const res = await axios.get('http://vache-server.herokuapp.com/genealogicos/' + this.state.id_tbovino,{ headers: { token: this.token } });
+    const res = await axios.get('https://vache-server.herokuapp.com/genealogicos/' + this.state.id_tbovino,{ headers: { token: this.token } });
     this.setState({
       Bovino: res.data.info[0].Bovino,
       Mamá: res.data.info[0].Mamá,
