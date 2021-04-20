@@ -26,17 +26,18 @@ export default class controlPartos extends React.Component {
 
   state = {
     listaControlPartos: [],
+    token: "",
     controlParto: {
-      id_parto:"",
-      id_bovino:"",
-      Bovino:"",
-      fecha_parto :"",
-      pesaje:"",
-      observaciones:"",
-      Tipo_Bovino:"",
-      id_Tgenealogico:"",
-      id_usuario:"",
-      Usuario:""
+      id_parto: "",
+      id_bovino: "",
+      Bovino: "",
+      fecha_parto: "",
+      pesaje: "",
+      observaciones: "",
+      Tipo_Bovino: "",
+      id_Tgenealogico: "",
+      id_usuario: "",
+      Usuario: ""
     },
     notificationModal: false,
   }
@@ -48,8 +49,10 @@ export default class controlPartos extends React.Component {
 
 
   listarControlesParto = () => {
+    this.token = localStorage.getItem("token");
+
     axios
-      .get("http://vache-server.herokuapp.com/controlPartos")
+      .get("http://vache-server.herokuapp.com/controlPartos", { headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -62,9 +65,9 @@ export default class controlPartos extends React.Component {
         console.log(error);
       });
   }
-  
+
   eliminarControlParto = async (id_parto) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/controlPartos/' + id_parto);
+    const res = await axios.delete('http://vache-server.herokuapp.com/controlPartos/' + id_parto, { headers: { token: this.token } });
     console.log(res);
     this.listarControlesParto();
   };
@@ -85,7 +88,7 @@ export default class controlPartos extends React.Component {
     localStorage.setItem("Tipo_Bovino", controlParto.Tipo_Bovino);
     localStorage.setItem("id_Tgenealogico", controlParto.id_Tgenealogico);
     localStorage.setItem("id_usuario", controlParto.id_usuario);
-    localStorage.setItem("Usuario ", controlParto.Usuario );
+    localStorage.setItem("Usuario ", controlParto.Usuario);
 
   }
 
@@ -95,20 +98,20 @@ export default class controlPartos extends React.Component {
         <Medicine />
         {/* Page content */}
         <Container className="mt--7" fluid>
-        <Row>
+          <Row>
             <div className="col">
               <Card className="shadow">
-              <CardHeader className="bg-transparent pb-5">
-              <div className="text-right">
-                <Button
-                  className="btn-warning btn-icon mr-4"
-                  to="/admin/insertarControlParto" tag={Link}
-                >
-                   <i className="ni ni-fat-add" />
-                  <span className="btn-inner--text">Añadir</span>
-                </Button>           
-              </div>
-            </CardHeader>
+                <CardHeader className="bg-transparent pb-5">
+                  <div className="text-right">
+                    <Button
+                      className="btn-warning btn-icon mr-4"
+                      to="/admin/insertarControlParto" tag={Link}
+                    >
+                      <i className="ni ni-fat-add" />
+                      <span className="btn-inner--text">Añadir</span>
+                    </Button>
+                  </div>
+                </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
                     <tr>
@@ -123,17 +126,17 @@ export default class controlPartos extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                  {this.state.listaControlPartos.map((controlParto, i) => {
-                        return (
-                          <tr>
-                            <td>{controlParto.Bovino}</td>  
-                            <td>{moment(new Date(controlParto.fecha_parto)).format('DD-MM-YYYY')}</td>
-                            <td>{controlParto.pesaje}</td>
-                            <td>{controlParto.observaciones}</td>
-                            <td>{controlParto.Tipo_Bovino}</td>
-                            <td>{controlParto.Usuario}</td>
-                            <td className="text-right">
-                              <UncontrolledDropdown>
+                    {this.state.listaControlPartos.map((controlParto, i) => {
+                      return (
+                        <tr>
+                          <td>{controlParto.Bovino}</td>
+                          <td>{moment(new Date(controlParto.fecha_parto)).format('DD-MM-YYYY')}</td>
+                          <td>{controlParto.pesaje}</td>
+                          <td>{controlParto.observaciones}</td>
+                          <td>{controlParto.Tipo_Bovino}</td>
+                          <td>{controlParto.Usuario}</td>
+                          <td className="text-right">
+                            <UncontrolledDropdown>
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 role="button"
@@ -178,8 +181,8 @@ export default class controlPartos extends React.Component {
                                     </div>
                                   </div>
                                   <div className="modal-footer">
-                                    <Button className="btn-white"  href="/admin/controlPartos/" color="default" type="button" onClick={() => this.eliminarControlParto(localStorage.getItem("id_parto"))}>
-                                    Eliminar
+                                    <Button className="btn-white" href="/admin/controlPartos/" color="default" type="button" onClick={() => this.eliminarControlParto(localStorage.getItem("id_parto"))}>
+                                      Eliminar
                                     </Button>
                                     <Button
                                       className="text-white ml-auto"
@@ -204,14 +207,14 @@ export default class controlPartos extends React.Component {
                         </tr>
                       );
                     })}
-                </tbody>
-              </Table>
-            </Card>
-          </div>
-        </Row>
-      </Container>
-    </>
-  );
-};
-  
+                  </tbody>
+                </Table>
+              </Card>
+            </div>
+          </Row>
+        </Container>
+      </>
+    );
+  };
+
 }

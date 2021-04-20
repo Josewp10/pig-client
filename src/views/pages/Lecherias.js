@@ -25,6 +25,7 @@ class Lecherias extends React.Component {
 constructor() {
   super();
   this.state = {
+    token: "",
   listafechas: [],
   listalecherias: [],
   litros: [],
@@ -37,9 +38,9 @@ constructor() {
 
 
   async componentDidMount() {
-
+    this.token = localStorage.getItem("token");
     axios
-      .get("http://vache-server.herokuapp.com/lecherias")
+      .get("http://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -53,7 +54,7 @@ constructor() {
 
     axios
       .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros",
-        { id_lecheria: this.state.id_lecheria, fecha_inicio: this.state.fecha_inicio, fecha_fin: this.state.fecha_fin })
+        { id_lecheria: this.state.id_lecheria, fecha_inicio: this.state.fecha_inicio, fecha_fin: this.state.fecha_fin },{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -67,7 +68,7 @@ constructor() {
       });
 
     axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros")
+      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({

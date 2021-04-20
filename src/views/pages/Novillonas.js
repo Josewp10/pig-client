@@ -23,6 +23,7 @@ export default class Novillonas extends React.Component {
 
   state = {
     listaNovillonas: [],
+    token:"",
     Novillona: {
       id_Tbovinos: "",
       chapeta: "",
@@ -31,7 +32,6 @@ export default class Novillonas extends React.Component {
       id_raza: "",
       genetica: "",
       finca: "",
-      token:"",
     },
     notificationModal: false,
   }
@@ -43,6 +43,7 @@ export default class Novillonas extends React.Component {
 
 
   listarNovillonas = () => {
+    this.token = localStorage.getItem("token");
     axios
       .get("http://vache-server.herokuapp.com/bovinos/tipo/3", { headers: { token: this.token } } )
       .then(response => {
@@ -59,7 +60,7 @@ export default class Novillonas extends React.Component {
   }
 
   eliminarNovillonas = async (chapeta) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
+    const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta, { headers: { token: this.token } } );
     console.log(res);
     this.listarNovillonas();
   };

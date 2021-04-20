@@ -25,6 +25,7 @@ export default class Medicamentos extends React.Component {
 
   state = {
     listaMedicamentos: [],
+    token: "",
     Medicamento: {
       codigo: "",
       nombre: "",
@@ -42,8 +43,9 @@ export default class Medicamentos extends React.Component {
   }
 
   listarMedicamentos = () => {
+    this.token = localStorage.getItem("token");
     axios
-      .get("http://vache-server.herokuapp.com/medicamentos")
+      .get("http://vache-server.herokuapp.com/medicamentos",{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -58,7 +60,7 @@ export default class Medicamentos extends React.Component {
   }
 
   eliminarMedicamentos = async (codigo) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/medicamentos/' + codigo);
+    const res = await axios.delete('http://vache-server.herokuapp.com/medicamentos/' + codigo,{ headers: { token: this.token } });
     console.log(res);
     this.listarMedicamentos();
   };

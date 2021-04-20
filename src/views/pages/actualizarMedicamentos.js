@@ -13,6 +13,7 @@ import {
     Button,
     Container,
     Col,
+    Modal,
     InputGroupAddon,
     InputGroupText,
     InputGroup
@@ -25,6 +26,7 @@ class actualizarMedicamentos extends React.Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             codigo: "",
             nombre: "",
             descripcion: "",
@@ -32,12 +34,14 @@ class actualizarMedicamentos extends React.Component {
             fecha_compra: "",
             fecha_vencimiento: "",
             disponibilidad: "",
+            notificationModal: false,
+            errorModal: false,
         };
         this.onInputChange = this.onInputChange.bind(this);
     }
 
     async componentDidMount() {
-
+        this.token = localStorage.getItem("token");
         this.state.codigo = localStorage.getItem("codigo");
         this.state.nombre = localStorage.getItem("nombre");
         this.state.descripcion = localStorage.getItem("descripcion");
@@ -46,7 +50,7 @@ class actualizarMedicamentos extends React.Component {
         this.state.fecha_vencimiento = localStorage.getItem("fecha_vencimiento");
         this.state.disponibilidad = localStorage.getItem("disponibilidad");
         console.log(this.state.codigo);
-        const res = await axios.get('http://vache-server.herokuapp.com/medicamentos/' + this.state.codigo);
+        const res = await axios.get('http://vache-server.herokuapp.com/medicamentos/' + this.state.codigo,{ headers: { token: this.token } });
         this.setState({
             codigo: res.data.info[0].codigo,
             nombre: res.data.info[0].nombre,
@@ -59,6 +63,12 @@ class actualizarMedicamentos extends React.Component {
 
        
     }
+    
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
+    };
 
     onSubmit = async (e) => {
 
@@ -74,10 +84,18 @@ class actualizarMedicamentos extends React.Component {
             fecha_compra: this.state.fecha_compra,
             fecha_vencimiento: this.state.fecha_vencimiento,
             disponibilidad: this.state.disponibilidad,
-        }).then((response) => {
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(response)
-            alert('Medicamento Actualizado');
-            window.location.href = '/admin/medicamentos';
+            if (response.status === 200 && response.data.ok === true) {
+                setTimeout(() => {
+                    this.setState({ notificationModal: true });
+                }, 200)
+            }
+            else {
+                setTimeout(() => {
+                    this.setState({ errorModal: true });
+                }, 200)
+            }
         }); console.log(res);
 
 
@@ -243,6 +261,80 @@ class actualizarMedicamentos extends React.Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
+                                    <div>
+                                        {
+                                            this.state.notificationModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
+                                                isOpen={this.state.notificationModal}
+                                                toggle={() => this.toggleModal("notificationModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Medicamento Actualizado
+                                                        </h4>
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡ Genial !</h4>
+                                                        <p>
+                                                            El Medicamento ha sido actualizado
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="modal-footer center">
+                                                    <Button className="btn-white" text="center" color="default" type="button" href="/admin/medicamentos/">
+                                                        Entendido
+                                                    </Button>
+                                                </div>
+                                            </Modal>
+                                        }
+                                    </div>
+                                    <div>
+                                        {
+                                            this.state.errorModal &&
+                                            <Modal
+                                                className="modal-dialog-centered modal-warning"
+                                                contentClassName="bg-gradient-warning"
+                                                isOpen={this.state.errorModal}
+                                                toggle={() => this.toggleModal("errorModal")}
+                                            >
+                                                <div className="modal-header">
+                                                    <h4 className="modal-title" id="modal-title-notification">
+                                                        Medicamento No Actualizado
+                                                        </h4>
+                                                    <button
+                                                        aria-label="Close"
+                                                        className="close"
+                                                        data-dismiss="modal"
+                                                        type="button"
+                                                    >
+                                                        <span aria-hidden={true}>X</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="py-3 text-center">
+                                                        <i className="ni ni-bell-55 ni-3x" />
+                                                        <h4 className="heading mt-4">¡Ops!</h4>
+                                                        <p>
+                                                            Por Favor Revisa los campos y selecciona correctamente las opciones
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </Modal>
+                                        }
+                                    </div>
                                     <div className="text-center">
                                         <Button
                                             type="submit"

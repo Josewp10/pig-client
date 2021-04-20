@@ -25,6 +25,7 @@ class insertarMedicamentos extends React.Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             codigo: "",
             nombre: "",
             descripcion: "",
@@ -44,7 +45,7 @@ class insertarMedicamentos extends React.Component {
 
 
         e.preventDefault();
-
+        this.token = localStorage.getItem("token");
 
         await axios.post('http://vache-server.herokuapp.com/medicamentos', {
             codigo: this.state.codigo,
@@ -54,12 +55,12 @@ class insertarMedicamentos extends React.Component {
             fecha_compra: this.state.fecha_compra,
             fecha_vencimiento: this.state.fecha_vencimiento,
             disponibilidad: this.state.disponibilidad,
-        }).then((response) => {
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(response);
             window.location.href = '/admin/medicamentos';
         });
 
-        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
+        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario,{ headers: { token: this.token } })
             .catch(error => { console.log(error); });
         this.setState({
             celularUser: celular.data.info[0].celular
@@ -70,7 +71,7 @@ class insertarMedicamentos extends React.Component {
             to: this.state.celularUser,
             body: `Señor Usuario,se registro un control de Medicamentos `
         }
-        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
+        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje,{ headers: { token: this.token } }).catch(error => { console.log(error); });
 
 
 

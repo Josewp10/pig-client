@@ -27,6 +27,7 @@ export default class produccionLeche extends React.Component {
     listaProduccion: [],
     listaLitros: [],
     litros: "",
+    token:"",
     id_lecheria: "",
     fecha_inicio: "",
     fecha_fin: "",
@@ -42,13 +43,14 @@ export default class produccionLeche extends React.Component {
   }
 
   async componentDidMount() {
+    this.token = localStorage.getItem("token");
     this.setState({
       id_lecheria: localStorage.getItem("id_lecheria"),
       fecha_inicio: new Date((localStorage.getItem("fecha_inicio"))).toISOString(),
       fecha_fin: new Date((localStorage.getItem("fecha_fin"))).toISOString()
     });
     const res = await axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString())
+      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/registros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString(),{ headers: { token: this.token } })
     this.setState({
       listaProduccion: res.data.info,
       id_Tproduccion: res.data.info[0].id_Tproduccion,
@@ -61,7 +63,7 @@ export default class produccionLeche extends React.Component {
     console.log(res.data.info)
 
     axios
-      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString())
+      .get("http://vache-server.herokuapp.com/produccionLeche/fechas/litros/" + localStorage.getItem("id_lecheria") + "/" + new Date((localStorage.getItem("fecha_inicio"))).toISOString() + "/" + new Date((localStorage.getItem("fecha_fin"))).toISOString(),{ headers: { token: this.token } })
       .then(response => {
         console.log(response)
         this.setState({
@@ -80,7 +82,7 @@ export default class produccionLeche extends React.Component {
 
 
   eliminarProducciones = async (id_Tproduccion) => {
-    const res = await axios.delete('http://vache-server.herokuapp.com/produccionLeche' + id_Tproduccion);
+    const res = await axios.delete('http://vache-server.herokuapp.com/produccionLeche' + id_Tproduccion,{ headers: { token: this.token } });
     console.log(res);
     this.listarProduccion();
   };

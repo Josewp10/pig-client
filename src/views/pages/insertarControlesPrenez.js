@@ -28,6 +28,7 @@ class insertarControlesPrenez extends React.Component {
 
         super();
         this.state = {
+            token: "",
             id_control: "",
             fecha_palpacion: "",
             confirmacion_palpacion: false,
@@ -46,10 +47,10 @@ class insertarControlesPrenez extends React.Component {
 
     componentDidMount() {
 
-
+        this.token = localStorage.getItem("token");
 
         axios
-            .get("http://vache-server.herokuapp.com/controlPrenez/noCreados")
+            .get("http://vache-server.herokuapp.com/controlPrenez/noCreados",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -64,7 +65,7 @@ class insertarControlesPrenez extends React.Component {
 
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -96,7 +97,7 @@ class insertarControlesPrenez extends React.Component {
             num_parto: this.state.num_parto,
             id_usuario: this.state.id_usuario,
             id_control: this.state.id_control
-        }).then((response) => {
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(response + '--idcontrol' + this.state.id_control + '--palpacion' + this.state.confirmacion_palpacion);
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {
@@ -112,7 +113,7 @@ class insertarControlesPrenez extends React.Component {
 
 
         
-        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario)
+        const celular = await axios.get('http://vache-server.herokuapp.com/usuarios/celular/' + this.state.id_usuario, { headers: { token: this.token } })
             .catch(error => { console.log(error); });
         this.setState({
             celularUser: celular.data.info[0].celular
@@ -125,7 +126,7 @@ class insertarControlesPrenez extends React.Component {
             la fecha de secado para esta vaca debe ser ${"(aca fecha secado)"}. Tenga en cuenta que esta vaca y/o novillona ha sido palpada el dia ${moment(this.state.fecha_palpacion).format('DD-MM-YYYY')}
             y tiene estos numero de parto ${this.state.num_parto} `
         }
-        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje).catch(error => { console.log(error); });
+        const twilio = await axios.post('http://vache-server.herokuapp.com/sms', mensaje,{ headers: { token: this.token } }).catch(error => { console.log(error); });
 
         this.setState({
             id_control: "",

@@ -24,6 +24,7 @@ class actualizarControlPartos extends React.Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             id_bovino: "",
             hembras:[],
             fecha_parto: "",
@@ -42,9 +43,9 @@ class actualizarControlPartos extends React.Component {
 
 
     async componentDidMount() {
-
+        this.token = localStorage.getItem("token");
         this.state.id_parto = localStorage.getItem("id_parto");
-        const res = await axios.get('http://vache-server.herokuapp.com/controlPartos/' + this.state.id_parto);
+        const res = await axios.get('http://vache-server.herokuapp.com/controlPartos/' + this.state.id_parto,{ headers: { token: this.token } });
         this.setState({
             id_bovino: res.data.info[0].id_bovino,
             fecha_parto: res.data.info[0].fecha_parto,
@@ -56,7 +57,7 @@ class actualizarControlPartos extends React.Component {
         });
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -70,7 +71,7 @@ class actualizarControlPartos extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/")
+            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -83,7 +84,7 @@ class actualizarControlPartos extends React.Component {
                 console.log(error);
             });
             axios
-            .get("http://vache-server.herokuapp.com/registroTipos/")
+            .get("http://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -111,7 +112,7 @@ class actualizarControlPartos extends React.Component {
             id_tipo: this.state.id_tipo,
             id_usuario: this.state.id_usuario,
             id_parto: this.state.id_parto,
-        }).then((response) => {
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(this.state.id_macho );
             console.log("actualizacion" + response)
             if (response.status === 200 && response.data.ok === true) {

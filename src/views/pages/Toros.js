@@ -21,6 +21,7 @@ export default class Toros extends React.Component {
 
   state = {
     listaToros: [],
+    token: "",
     Toro: {
       id_Tbovinos: "",
       chapeta: "",
@@ -39,8 +40,9 @@ export default class Toros extends React.Component {
   
   
   listarToros= () => {
+    this.token = localStorage.getItem("token");
     axios
-        .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
+        .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
         .then(response => {
             console.log(response)
             this.setState({
@@ -55,7 +57,7 @@ export default class Toros extends React.Component {
   }
   
   eliminarToros= async (chapeta) => {
-  const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta);
+  const res = await axios.delete('http://vache-server.herokuapp.com/bovinos/' + chapeta,{ headers: { token: this.token } });
   console.log(res);
   this.listarToros();
   };

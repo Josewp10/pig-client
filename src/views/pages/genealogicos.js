@@ -16,6 +16,7 @@ export default class genealogicos extends React.Component {
 
   state = {
     listaGenealogicos: [],
+    token: "",
     Genealogicos: {
       id_tbovino: "",
       Bovino: "",
@@ -27,10 +28,11 @@ export default class genealogicos extends React.Component {
   }
 
   async componentDidMount() {
+    this.token = localStorage.getItem("token");
     try {
     this.state.id_tbovino = localStorage.getItem("chapeta")
     console.log(this.state.id_tbovino);
-    const res = await axios.get('http://vache-server.herokuapp.com/genealogicos/' + this.state.id_tbovino);
+    const res = await axios.get('http://vache-server.herokuapp.com/genealogicos/' + this.state.id_tbovino,{ headers: { token: this.token } });
     this.setState({
       Bovino: res.data.info[0].Bovino,
       Mamá: res.data.info[0].Mamá,

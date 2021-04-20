@@ -19,6 +19,7 @@ class insertarGenealogicos extends React.Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             id_tbovino: "",
             nombre: "",
             id_mama: "",
@@ -38,9 +39,10 @@ class insertarGenealogicos extends React.Component {
 
         this.state.nombre = localStorage.getItem("nombre")
         this.state.id_tbovino = localStorage.getItem("chapeta")
+        this.token = localStorage.getItem("token");
         //lactantes madres
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -54,7 +56,7 @@ class insertarGenealogicos extends React.Component {
             });
         // toros
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -68,7 +70,7 @@ class insertarGenealogicos extends React.Component {
             });
             // lactantes abuelas
             axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -82,7 +84,7 @@ class insertarGenealogicos extends React.Component {
             });
             // lactantes abuelos
             axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -109,7 +111,7 @@ class insertarGenealogicos extends React.Component {
             id_papa: this.state.id_papa,
             id_abuela: this.state.id_abuela,
             id_abuelo: this.state.id_abuelo,
-        }).then((response) => {
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(response);
             window.location.href = '/admin/Bovinos';
         });

@@ -26,6 +26,7 @@ class insertarProduccionLechera extends React.Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             id_TProduccion: "",
             id_lecheria: "",
             id_bovino: "",
@@ -46,9 +47,9 @@ class insertarProduccionLechera extends React.Component {
 
 
     componentDidMount() {
-
+        this.token = localStorage.getItem("token");
         axios
-            .get("http://vache-server.herokuapp.com/lecherias")
+            .get("http://vache-server.herokuapp.com/lecherias",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -62,7 +63,7 @@ class insertarProduccionLechera extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -75,7 +76,7 @@ class insertarProduccionLechera extends React.Component {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -106,7 +107,7 @@ class insertarProduccionLechera extends React.Component {
             id_lecheria: this.state.id_macho,
             fecha: this.state.id_hembra,
             cantidad_dia: this.state.cantidad_dia,
-        }).then((response) => {
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(response);
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {

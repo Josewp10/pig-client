@@ -26,6 +26,7 @@ class insertarControlParto extends React.Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             id_bovino: "",
             id_tipo: "",
             tipos: [],
@@ -50,11 +51,9 @@ class insertarControlParto extends React.Component {
 
     componentDidMount() {
 
-        //this.state.nombre = localStorage.getItem("nombre")
-        //this.state.id_mama = localStorage.getItem("chapeta")
-
+        this.token = localStorage.getItem("token");
         axios
-            .get("http://vache-server.herokuapp.com/registroTipos/")
+            .get("http://vache-server.herokuapp.com/registroTipos/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -69,7 +68,7 @@ class insertarControlParto extends React.Component {
 
 
         axios
-            .get("http://vache-server.herokuapp.com/registroRazas/")
+            .get("http://vache-server.herokuapp.com/registroRazas/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -83,7 +82,7 @@ class insertarControlParto extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/")
+            .get("http://vache-server.herokuapp.com/bovinos/novillonaLactante/",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -96,7 +95,7 @@ class insertarControlParto extends React.Component {
                 console.log(error);
             });
         axios
-            .get("http://vache-server.herokuapp.com/bovinos/tipo/2")
+            .get("http://vache-server.herokuapp.com/bovinos/tipo/2",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -110,7 +109,7 @@ class insertarControlParto extends React.Component {
             });
 
         axios
-            .get("http://vache-server.herokuapp.com/usuarios/NombreId")
+            .get("http://vache-server.herokuapp.com/usuarios/NombreId",{ headers: { token: this.token } })
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -148,18 +147,7 @@ class insertarControlParto extends React.Component {
             id_mama: this.state.id_mama,
             id_papa: this.state.id_papa,
             id_usuario: this.state.id_usuario,
-        }).then((response) => {
-            console.log(this.state.id_bovino);
-            console.log(this.state.id_tipo);
-            console.log(this.state.nombre);
-            console.log(this.state.id_raza);
-            console.log(this.state.finca);
-            console.log(this.state.fecha_parto);
-            console.log(this.state.pesaje);
-            console.log(this.state.observaciones);
-            console.log(this.state.id_mama);
-            console.log(this.state.id_papa);
-            console.log(this.state.id_usuario);
+        },{ headers: { token: this.token } }).then((response) => {
             console.log(response);
             if (response.status === 200 && response.data.ok === true) {
                 setTimeout(() => {

@@ -20,6 +20,7 @@ export default class VacasLactantes extends React.Component {
 
   state = {
     listaVacasLactantes: [],
+    token: "",
     VacaLactante: {
       id_Tbovinos: "",
       chapeta: "",
@@ -38,8 +39,9 @@ export default class VacasLactantes extends React.Component {
   
   
   listarVacasLactantes= () => {
+    this.token = localStorage.getItem("token");
     axios
-        .get("http://vache-server.herokuapp.com/bovinos/tipo/8")
+        .get("http://vache-server.herokuapp.com/bovinos/tipo/8",{ headers: { token: this.token } })
         .then(response => {
             console.log(response)
             this.setState({
