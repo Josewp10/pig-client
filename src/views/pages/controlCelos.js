@@ -68,7 +68,7 @@ export default class controlCelos extends React.Component {
   eliminarControlCelo = async (id_celo) => {
     const res = await axios.delete('https://vache-server.herokuapp.com/celo/' + id_celo,{ headers: { token: this.token } });
     console.log(res);
-    this.listarControlesCelos();
+    window.location.href = "/admin/controlCelo/";
   };
 
   toggleModal = state => {
@@ -177,7 +177,7 @@ export default class controlCelos extends React.Component {
                                     </div>
                                   </div>
                                   <div className="modal-footer">
-                                    <Button className="btn-white"  href="/admin/controlCelo/" color="default" type="button" onClick={() => this.eliminarControlCelo(localStorage.getItem("id_celo"))}>
+                                    <Button className="btn-white" color="default" type="button" onClick={() => this.eliminarControlCelo(localStorage.getItem("id_celo"))}>
                                     Eliminar
                                     </Button>
                                     <Button
